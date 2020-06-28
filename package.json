@@ -1,0 +1,34 @@
+{
+  "name": "fashionwear",
+  "version": "1.0.0",
+  "description": "Pagina dedicada a la venta de ropa ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "node start": "./index.js",
+    "dev": "nodemon ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Osckar07/FashionWear.git"
+  },
+  "keywords": [
+    "pagina",
+    "ropa",
+    "negocios",
+    "tienda",
+    "venta"
+  ],
+  "author": "FashionWear Team developer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Osckar07/FashionWear/issues"
+  },
+  "homepage": "https://github.com/Osckar07/FashionWear#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
