@@ -4,12 +4,11 @@ const express = require("express");
 //Importamos el express-handlebars
 const exphbs = require("express-handlebars");
 
+// Importamos las rutas que estén disponibles
+const routes = require("./routes");
+
 //Crear conexión con la base de datos
 const db = require("./config/db");
-
-// Importamos las rutas que estén disponibles
-const db = require("./routes");
-
 
 //Importar los modelos
 require("./models/Producto");
