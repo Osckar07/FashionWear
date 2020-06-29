@@ -24,6 +24,9 @@ db.sync()
 //Creamos el servidor de express
 const app = express();
 
+// Indicarle al servidor la carpeta de archivos estáticos
+app.use(express.static("public"));
+
 // Mediante handlebars indicamos el template engine a utilizar
 app.engine(
   "hbs",
