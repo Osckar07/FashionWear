@@ -1,0 +1,40 @@
+{
+  "name": "fashionwear",
+  "version": "1.0.0",
+  "description": "Pagina dedicada a la venta de ropa ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "node start": "./index.js",
+    "dev": "nodemon ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Osckar07/FashionWear.git"
+  },
+  "keywords": [
+    "pagina",
+    "ropa",
+    "negocios",
+    "tienda",
+    "venta"
+  ],
+  "author": "FashionWear Team developer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Osckar07/FashionWear/issues"
+  },
+  "homepage": "https://github.com/Osckar07/FashionWear#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mysql2": "^2.1.0",
+    "sequelize": "^6.2.3",
+    "shortid": "^2.2.15",
+    "slug": "^3.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
