@@ -1,8 +1,14 @@
 //Importamos el modulo de express
 const express = require("express");
 
+//Importamos el express-handlebars
+const exphbs = require("express-handlebars");
+
 //Crear conexión con la base de datos
 const db = require("./config/db");
+
+// Importamos las rutas que estén disponibles
+const db = require("./routes");
 
 
 //Importar los modelos
@@ -19,7 +25,21 @@ db.sync()
 //Creamos el servidor de express
 const app = express();
 
-//inicializamos el servidor en el puerto 3000
-app.listen(3000,() =>{
-    console.log("Servidor iniciado")
+// Mediante handlebars indicamos el template engine a utilizar
+app.engine(
+  "hbs",
+  exphbs({
+    defaultLayout: "main",
+    extname: ".hbs",
+  })
+);
+
+app.set("view engine", "hbs");
+
+// Le indicamos a express dónde están las rutas del servidor
+app.use("/", routes());
+
+//inicializamos el servidor en el puerto 5000
+app.listen(5000,() =>{
+    console.log("Servidor iniciado, puerto 5000")
 });
