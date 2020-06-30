@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Pagina dedicada a la venta de ropa ",
   "main": "index.js",
-  "scripts": {    
+  "scripts": {
     "dev": "nodemon ./index.js",
     "start": "node ./index.js"
   },
@@ -30,7 +30,7 @@
     "express": "^4.17.1",
     "express-handlebars": "^4.0.4",
     "mysql2": "^2.1.0",
-    "sequelize": "^6.2.3",
+    "sequelize": "^6.2.3",  
     "shortid": "^2.2.15",
     "slug": "^3.3.0"
   },
