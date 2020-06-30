@@ -1,0 +1,62 @@
+{{!--Formulario de registro--}}
+
+
+    <div class="text-center mt-5">
+        <h1>Crear Usuario</h1>
+        <p>Compra de manera rapida y segura con nosotros</p>
+        <p><hr></p>
+    </div>
+
+    <div class="formUser row">
+        <div class="col-5 m-5">
+            <form class="form-signin" action="">
+                {{!--Nombre Usuario--}}
+                <div class="UserFullName row ml-1 ">
+                    <div class="UserName mr-1">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" id="nombre" placeholder="Juan">
+                </div>
+                <div class="LastName">
+                <label for="apellido">Apellido</label>
+                <input type="text" name="apellido" id="apellido" placeholder="Martinez">
+                </div>
+                </div>
+               
+                {{!--Correo--}}
+                <label for="correo">Correo electronico</label>
+                <input type="email" name="email" id="email" placeholder="userid@gmail.com">
+                <br>
+                {{!--Contraseña--}}
+                <label for="contraseña">Contraseña</label>
+                <input type="password" name="password" id="password" required>                
+               
+            </form>
+            <p class="text-center text-muted">Al crear una cuenta, aceptas nuestras Condiciones de  Uso
+                y admites haber leído nuestro Aviso de Privacidad.</p>
+                
+            <button class="btn btn-lg btn-primary btn-block  mt-5">Crear usuario</button>
+
+            </div>
+
+            {{!--https://www.it-swarm.dev/es/html/como-hacer-una-linea-vertical-en-html/969310959/ hacer linea vertical--}}
+         
+            <div><div class=" vertical-line"></div></div>
+                 
+
+             <div class="FacebookGoogle col-5">
+            <div class="row UserLogo">
+            <img src="img/Logo_Oficial.png" alt="logoFashionWear" class="img-ts rounded mx-auto d-block">
+            </div>
+            <div class="BotonesCrearUsuario">
+               <p>  <button class="btn btn-primary facebook">Facebook</button>
+
+                <button class="btn btn-primary google">Google</button></p>
+            </div>
+            </div>
+
+    </div>
+
+
+</div>
+
+</form>
