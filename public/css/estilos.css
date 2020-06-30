@@ -29,3 +29,77 @@
 h1{
     font-family: 'fuente1';
 }
+
+.formUser label{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    display: block;
+}
+
+.formUser input{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.formUser input[type="text"],
+.formUser input[type="password"],
+.formUser input[type="email"]{
+    border: none;
+    border-bottom: 1px solid rgb(26, 26, 26);
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #000000;
+}
+
+.UserName{
+    width: 220px;
+}
+.LastName input{
+    width: 220px;
+}
+
+div.vertical-line{
+    width: 1px; /* Line width */
+    background-color: rgb(51, 51, 51); /* Line color */
+    height: 100%; /* Override in-line if you want specific height. */
+    float: left; /* Causes the line to float to left of content. 
+      You can instead use position:absolute or display:inline-block
+      if this fits better with your design */
+  }
+
+.FacebookGoogle img{
+    width: 60%;
+}
+
+.BotonesCrearUsuario p{
+    margin-top: 15px;
+    text-align: center;
+}  
+
+.FacebookGoogle .google{
+    background: white;
+    color: black;
+    margin-left: 25px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+@media (max-width:770px){
+   
+    .UserFullName input{
+        width: 100%;
+    }
+
+    div.vertical-line{
+       display: none;
+      }
+
+      .BotonesCrearUsuario p{
+          display: flex;
+        margin-top: 15px;
+        text-align: center;
+    }  
+    
+  }

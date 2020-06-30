@@ -11,7 +11,7 @@ module.exports = function () {
   
   routes.get("/", productosController.inicioProductos);
 
-  routes.get("/crear_cuenta", usuariosController.formularioRegistrarse);
+  routes.get("/crear_usuario", usuariosController.formularioRegistrarse);
 
   return routes;
 };

@@ -2,5 +2,5 @@
 const Usuario = require("../models/Usuario");
 
 exports.formularioRegistrarse = (req, res, next) => {
-    res.render("registrarse");
+    res.render("registrarse", {layout: "auth"});
 };
