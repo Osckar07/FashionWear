@@ -1,0 +1,31 @@
+@font-face {
+    font-family: 'fuente1';
+    src: url('../font/fuente.ttf');
+}
+@font-face {
+    font-family: 'fuente2';
+    src: url('../font/fuente2.ttf');
+}
+
+.botonGeneral {
+    font-family: 'fuente1';
+    background-color: #333333; 
+    color:#FFFFFF; 
+    padding: 6px 48px 4px; 
+    font-size: 15px;
+    -moz-border-radius:0px;
+    -webkit-border-radius:0px;
+    border-radius:3px;
+    -khtml-border-radius:0px;
+}
+
+.nav-link{
+    font-family: 'fuente1';
+    font-size: 17px;
+    padding: 8px 12px;
+    margin-right: 40px;
+}
+
+h1{
+    font-family: 'fuente1';
+}
