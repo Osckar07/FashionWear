@@ -5,6 +5,7 @@ const routes = express.Router();
 // Importar los controladores
 const productosController = require("../controllers/productosController");
 const usuariosController = require("../controllers/usuariosController");
+const authController = require("../controllers/authController");
 
 // Construir las rutas disponibles para el servidor
 module.exports = function () {
@@ -20,6 +21,10 @@ module.exports = function () {
 
   // Ruta para el formulario de iniciar_sesion
   routes.get("/iniciar_sesion", usuariosController.formularioInicioSesion);
+
+  routes.post("/iniciar_sesion", authController.autenticarUsuario);
+
+  routes.get("/cerrar_sesion", authController.cerrarSesion);
 
   return routes;
 };
