@@ -139,10 +139,11 @@ div.vertical-line{
 
 
 .cuadroLogin{
-    width: 380px;
-    height: 500px;
-    border: 1px solid rgb(26, 26, 26);
-
+    width: 450px;
+    height: 540px;
+    border: 1px solid rgba(26, 26, 26, .50);
+    border-radius: 5px;
+    padding: 20px;
 }
 
 .lineaDividir .hr1{
@@ -187,7 +188,7 @@ div.vertical-line{
 	width: 100%;
 	height: 100%;
 	pointer-events: none;
-	border-bottom: 1px solid #000000;
+	border-bottom: 1px solid #888787;
 }
 
 .formdatos .lbl-nombre:after{
@@ -197,7 +198,7 @@ div.vertical-line{
 	bottom: -1px;
 	width: 100%;
 	height: 100%;
-	border-bottom: 3px solid #ba7e17;
+	border-bottom: 3px solid #cca86a;
 	transform: translateX(-100%);
 	transition: all 0.3s ease;
 }
