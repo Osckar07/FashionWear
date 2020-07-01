@@ -29,3 +29,180 @@
 h1{
     font-family: 'fuente1';
 }
+
+.formUser label{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    display: block;
+}
+
+.formUser input{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.formUser input[type="text"],
+.formUser input[type="password"],
+.formUser input[type="email"]{
+    border: none;
+    border-bottom: 1px solid rgb(26, 26, 26);
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #000000;
+}
+
+.UserName{
+    width: 220px;
+}
+.LastName input{
+    width: 220px;
+}
+
+div.vertical-line{
+    width: 1px; /* Line width */
+    background-color: rgb(51, 51, 51); /* Line color */
+    height: 100%; /* Override in-line if you want specific height. */
+    float: left; /* Causes the line to float to left of content. 
+      You can instead use position:absolute or display:inline-block
+      if this fits better with your design */
+  }
+
+.FacebookGoogle img{
+    width: 60%;
+}
+
+.BotonesCrearUsuario p{
+    margin-top: 15px;
+    text-align: center;
+}  
+
+.FacebookGoogle .google{
+    background: white;
+    color: black;
+    margin-left: 25px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+@media (max-width:770px){
+   
+    .UserFullName input{
+        width: 100%;
+    }
+
+    div.vertical-line{
+       display: none;
+      }
+
+      .BotonesCrearUsuario p{
+          display: flex;
+        margin-top: 15px;
+        text-align: center;
+    }  
+    
+  }
+
+  /*nuevo*/
+
+
+.cuadroLogin{
+    width: 380px;
+    height: 500px;
+    border: 1px solid rgb(26, 26, 26);
+
+}
+
+.lineaDividir .hr1{
+    width: 50px;
+    background: black;
+}
+.lineaDividir p{
+    font-size: 10px;
+    text-align: center;
+    color:  rgb(112, 112, 112);
+}
+
+.formlogin{
+    position: relative;
+    overflow: hidden;
+}
+
+.formdatos{
+    margin-left: 20px;
+    width: 90%;
+	height: 50px;
+	max-width: 400px;
+	position: relative;
+	overflow: hidden;
+
+}
+
+.formdatos input{
+    width: 70%;
+	height: 70%;
+	background: none;
+	color: #000000;
+	padding-top: 20px;
+	border: none;
+	outline: 0px;
+}
+
+.formdatos .lbl-nombre{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	border-bottom: 1px solid #000000;
+}
+
+.formdatos .lbl-nombre:after{
+    content: '';
+	position: absolute;
+	left: 0;
+	bottom: -1px;
+	width: 100%;
+	height: 100%;
+	border-bottom: 3px solid #ba7e17;
+	transform: translateX(-100%);
+	transition: all 0.3s ease;
+}
+
+.text-nomb{
+    position: absolute;
+	bottom: 5px;
+	left: 0;
+	transition: all 0.3s ease;
+	color: #000000;
+}
+
+.formdatos input:focus + .lbl-nombre .text-nomb,.formdatos input:valid + .lbl-nombre .text-nomb{
+	transform: translateY(-100%);
+	font-size: 14px;
+	color: #2ecece;color: #000000;
+}
+
+.formdatos input:focus + .lbl-nombre:after, .formdatos input:valid + .lbl-nombre:after{
+	transform: translateX(0%);
+}
+@media only screen and (min-width:320px) and (max-width:768px){
+ .formdatos{
+	width:85%;
+}
+    }
+
+.BotonesInicioSesion .google{
+    background: white;
+    color: black;
+    margin-left: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.BotonesInicioSesion p{
+    text-align: center;
+    margin: 25px;
+}
