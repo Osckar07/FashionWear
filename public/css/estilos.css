@@ -8,15 +8,43 @@
 }
 
 .botonGeneral {
-    font-family: 'fuente1';
+    /* font-family: 'fuente1'; */
     background-color: #333333; 
+    font-weight: 600;
     color:#FFFFFF; 
     padding: 6px 48px 4px; 
-    font-size: 15px;
+    font-size: 17px;
     -moz-border-radius:0px;
     -webkit-border-radius:0px;
     border-radius:3px;
     -khtml-border-radius:0px;
+}
+.btn{
+    background-color: #333333;
+    border-radius: 2px;
+    border-color: #464646;
+    color: white;
+}
+.btn:hover{
+    background-color: #575454;
+    color: white;
+    border-color: #464646;
+}
+.btngoogle{
+    background-color: #ffffff;
+    color: #000000;
+    padding-right: 15px;
+}
+.btngoogle:hover{
+    background-color: rgb(214, 213, 213);
+    color: #000000;
+}
+.btnfacebook{
+    background-color: #3c5896;
+    padding-right: 15px;
+}
+.btnfacebook:hover{
+    background-color: #4c6baf;    
 }
 
 .nav-link{
@@ -24,6 +52,9 @@
     font-size: 17px;
     padding: 8px 12px;
     margin-right: 40px;
+}
+.nav-item a:hover{
+    color: #575454;
 }
 
 h1{
