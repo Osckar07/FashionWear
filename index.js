@@ -4,8 +4,14 @@ const express = require("express");
 //Importamos el express-handlebars
 const exphbs = require("express-handlebars");
 
+// Importar body parser que nos permite acceder al cuerpo de la peticion HTTP
+const bodyParser = require("body-parser");
+
 // Importamos las rutas que estén disponibles
 const routes = require("./routes");
+
+// Importar el passport para permitir el inicio de sesión
+const passport = require("./config/passport");
 
 //Crear conexión con la base de datos
 const db = require("./config/db");
@@ -37,6 +43,12 @@ app.engine(
 );
 
 app.set("view engine", "hbs");
+
+// Habilitar bodyParser para leer los datos enviados por POST
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Crear una instancia de passport y cargar nuestra estrategia
+app.use(passport.initialize());
 
 // Le indicamos a express dónde están las rutas del servidor
 app.use("/", routes());

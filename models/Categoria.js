@@ -13,32 +13,38 @@ const shortid = require("shortid");
 
 //Definimos el modelo
 
-const Categoria = db.define("categoria",{
-    id:{
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+const Categoria = db.define(
+    "categoria",
+    {
+        id:{
+            type: Sequelize.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
+        nombre:{
+            type: Sequelize.STRING
+        },
+        url:{
+            type: Sequelize.STRING
+        }
     },
-    nombre:{
-        type: Sequelize.STRING
-    },
-    url:{
-        type: Sequelize.STRING
-    }
-},{
-    beforeCreate(categoria){
-        console.log("Antes de insertar en la base de datos");
-        const url = slug(categoria.nombre).toLowerCase();
+    {
+        hooks:{    
+            beforeCreate(categoria){
+                console.log("Antes de insertar en la base de datos");
+                const url = slug(categoria.nombre).toLowerCase();
 
-        categoria.url = `${url}_${shortid.generate()}`;
-    },
-    beforeCreate(categoria){
-        console.log("Antes de actualizar la base");
-        const url = slug(categoria.nombre).toLowerCase();
+                categoria.url = `${url}_${shortid.generate()}`;
+            },
+            beforeCreate(categoria){
+                console.log("Antes de actualizar la base");
+                const url = slug(categoria.nombre).toLowerCase();
 
-        categoria.url = `${url}_${shortid.generate()}`;
+                categoria.url = `${url}_${shortid.generate()}`;
+            },
+        },
     }
-});
+);
 
 Categoria.hasOne(Producto);
 
