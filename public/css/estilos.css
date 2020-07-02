@@ -8,15 +8,43 @@
 }
 
 .botonGeneral {
-    font-family: 'fuente1';
+    /* font-family: 'fuente1'; */
     background-color: #333333; 
+    font-weight: 600;
     color:#FFFFFF; 
     padding: 6px 48px 4px; 
-    font-size: 15px;
+    font-size: 17px;
     -moz-border-radius:0px;
     -webkit-border-radius:0px;
     border-radius:3px;
     -khtml-border-radius:0px;
+}
+.btn{
+    background-color: #333333;
+    border-radius: 2px;
+    border-color: #464646;
+    color: white;
+}
+.btn:hover{
+    background-color: #575454;
+    color: white;
+    border-color: #464646;
+}
+.btngoogle{
+    background-color: #ffffff;
+    color: #000000;
+    padding-right: 15px;
+}
+.btngoogle:hover{
+    background-color: rgb(214, 213, 213);
+    color: #000000;
+}
+.btnfacebook{
+    background-color: #3c5896;
+    padding-right: 15px;
+}
+.btnfacebook:hover{
+    background-color: #4c6baf;    
 }
 
 .nav-link{
@@ -24,6 +52,9 @@
     font-size: 17px;
     padding: 8px 12px;
     margin-right: 40px;
+}
+.nav-item a:hover{
+    color: #575454;
 }
 
 h1{
@@ -103,3 +134,107 @@ div.vertical-line{
     }  
     
   }
+
+  /*nuevo*/
+
+
+.cuadroLogin{
+    width: 450px;
+    height: 540px;
+    border: 1px solid rgba(26, 26, 26, .50);
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.lineaDividir .hr1{
+    width: 50px;
+    background: black;
+}
+.lineaDividir p{
+    font-size: 10px;
+    text-align: center;
+    color:  rgb(112, 112, 112);
+}
+
+.formlogin{
+    position: relative;
+    overflow: hidden;
+}
+
+.formdatos{
+    margin-left: 20px;
+    width: 90%;
+	height: 50px;
+	max-width: 400px;
+	position: relative;
+	overflow: hidden;
+
+}
+
+.formdatos input{
+    width: 70%;
+	height: 70%;
+	background: none;
+	color: #000000;
+	padding-top: 20px;
+	border: none;
+	outline: 0px;
+}
+
+.formdatos .lbl-nombre{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	border-bottom: 1px solid #888787;
+}
+
+.formdatos .lbl-nombre:after{
+    content: '';
+	position: absolute;
+	left: 0;
+	bottom: -1px;
+	width: 100%;
+	height: 100%;
+	border-bottom: 3px solid #cca86a;
+	transform: translateX(-100%);
+	transition: all 0.3s ease;
+}
+
+.text-nomb{
+    position: absolute;
+	bottom: 5px;
+	left: 0;
+	transition: all 0.3s ease;
+	color: #000000;
+}
+
+.formdatos input:focus + .lbl-nombre .text-nomb,.formdatos input:valid + .lbl-nombre .text-nomb{
+	transform: translateY(-100%);
+	font-size: 14px;
+	color: #2ecece;color: #000000;
+}
+
+.formdatos input:focus + .lbl-nombre:after, .formdatos input:valid + .lbl-nombre:after{
+	transform: translateX(0%);
+}
+@media only screen and (min-width:320px) and (max-width:768px){
+ .formdatos{
+	width:85%;
+}
+    }
+
+.BotonesInicioSesion .google{
+    background: white;
+    color: black;
+    margin-left: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.BotonesInicioSesion p{
+    text-align: center;
+    margin: 25px;
+}

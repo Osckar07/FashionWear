@@ -11,50 +11,54 @@ const slug = require("slug");
 const shortid = require("shortid");
 
 //Definicion del modelo
-const Producto = db.define("producto",{
-    id:{
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-    },
-    nombre:{
-        type: Sequelize.STRING
-    },
-    descripcion:{
-        type: Sequelize.STRING(140)
-    },
-    tipoProducto:{
-        type: Sequelize.STRING
-    },
-    imagen:{
-        type: Sequelize.STRING
-    },
-    talla:{
-        type: Sequelize.STRING
-    },
-    precio:{
-        type: Sequelize.DOUBLE
-    },
-    url:{
-        type: Sequelize.STRING
-    }
-},{
-    hooks: {
-        //Instalamos dependencias slug shortid
-        beforeCreate(producto){
-            console.log("Antes de insertar en la base de datos");
-            const url = slug(producto.nombre).toLowerCase();
-
-            producto.url = `${url}_${shortid.generate()}`;
+const Producto = db.define(
+    "producto",
+    {
+        id:{
+            type: Sequelize.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
         },
-        beforeUpdate(producto){
-            console.log("Antes de actualizar la base");
-            const url = slug(producto.nombre).toLowerCase();
-
-            producto.url = `${url}_${shortid.generate()}`;
+        nombre:{
+            type: Sequelize.STRING
+        },
+        descripcion:{
+            type: Sequelize.STRING(140)
+        },
+        tipoProducto:{
+            type: Sequelize.STRING
+        },
+        imagen:{
+            type: Sequelize.STRING
+        },
+        talla:{
+            type: Sequelize.STRING
+        },
+        precio:{
+            type: Sequelize.DOUBLE
+        },
+        url:{
+            type: Sequelize.STRING
         }
+    },
+    {
+        hooks: {
+            //Instalamos dependencias slug shortid
+            beforeCreate(producto){
+                console.log("Antes de insertar en la base de datos");
+                const url = slug(producto.nombre).toLowerCase();
+
+                producto.url = `${url}_${shortid.generate()}`;
+            },
+            beforeUpdate(producto){
+                console.log("Antes de actualizar la base");
+                const url = slug(producto.nombre).toLowerCase();
+
+                producto.url = `${url}_${shortid.generate()}`;
+            },
+        },
     }
-});
+);
 
 //Definimos que producto tendra una categoria
 Producto.hasOne(Factura);
