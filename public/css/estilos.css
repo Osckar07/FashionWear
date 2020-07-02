@@ -8,15 +8,43 @@
 }
 
 .botonGeneral {
-    font-family: 'fuente1';
+    /* font-family: 'fuente1'; */
     background-color: #333333; 
+    font-weight: 600;
     color:#FFFFFF; 
     padding: 6px 48px 4px; 
-    font-size: 15px;
+    font-size: 17px;
     -moz-border-radius:0px;
     -webkit-border-radius:0px;
     border-radius:3px;
     -khtml-border-radius:0px;
+}
+.btn{
+    background-color: #333333;
+    border-radius: 2px;
+    border-color: #464646;
+    color: white;
+}
+.btn:hover{
+    background-color: #575454;
+    color: white;
+    border-color: #464646;
+}
+.btngoogle{
+    background-color: #ffffff;
+    color: #000000;
+    padding-right: 15px;
+}
+.btngoogle:hover{
+    background-color: rgb(214, 213, 213);
+    color: #000000;
+}
+.btnfacebook{
+    background-color: #3c5896;
+    padding-right: 15px;
+}
+.btnfacebook:hover{
+    background-color: #4c6baf;    
 }
 
 .nav-link{
@@ -24,6 +52,9 @@
     font-size: 17px;
     padding: 8px 12px;
     margin-right: 40px;
+}
+.nav-item a:hover{
+    color: #575454;
 }
 
 h1{
@@ -108,10 +139,11 @@ div.vertical-line{
 
 
 .cuadroLogin{
-    width: 380px;
-    height: 500px;
-    border: 1px solid rgb(26, 26, 26);
-
+    width: 450px;
+    height: 540px;
+    border: 1px solid rgba(26, 26, 26, .50);
+    border-radius: 5px;
+    padding: 20px;
 }
 
 .lineaDividir .hr1{
@@ -156,7 +188,7 @@ div.vertical-line{
 	width: 100%;
 	height: 100%;
 	pointer-events: none;
-	border-bottom: 1px solid #000000;
+	border-bottom: 1px solid #888787;
 }
 
 .formdatos .lbl-nombre:after{
@@ -166,7 +198,7 @@ div.vertical-line{
 	bottom: -1px;
 	width: 100%;
 	height: 100%;
-	border-bottom: 3px solid #ba7e17;
+	border-bottom: 3px solid #cca86a;
 	transform: translateX(-100%);
 	transition: all 0.3s ease;
 }
