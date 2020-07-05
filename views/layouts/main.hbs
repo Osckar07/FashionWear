@@ -11,18 +11,36 @@
     <link rel="icon" href="img/favicon.png">  
     {{!--Cargar fontawesome--}}
     <script src="https://kit.fontawesome.com/732f53e469.js" crossorigin="anonymous"></script>  
-    <title>Fashion Wear</title>    
+
+    {{!-- Título de la página --}}
+    <title>Fashion Wear</title>  
+
+    {{!-- Este pequeño script servirá para indicar al header qué elemento del nav está activo --}}
+    <script>
+    $(document).ready(function() {
+      $( ".nav-item" ).bind( "click", function(event) {
+          event.preventDefault();
+          var clickedItem = $( this );
+          $( ".nav-item" ).each( function() {
+              $( this ).removeClass( "active" );
+          });
+          clickedItem.addClass( "active" );
+        });
+      });
+    </script>  
+
 </head>
+
 <body class="d-flex flex-column h-100 ">
     {{!-- Barra de navegación de prueba fixed-top--}}
  
- <div class="usuario-info bg-dark row">
+ {{!-- <div class="usuario-info bg-dark row">
      <p class="my-auto mr-auto">Hola! <a href="/iniciar_sesion">Inicia sesión</a> o <a href="/registro">Registrate</a></p>
      <div class="usuario-info-icon">
      <a href=""><i class="fas fa-heart"> Favorito</i></a>
      <a href=""><i class="fas fa-cart-plus">Carrito</i></a>
      </div>
- </div>
+ </div> --}}
 
   <nav class="navbar navbar-expand-lg navbar-light bg-lightshadow shadow" style="border-bottom: #333333;   background: hsla(0, 0%, 98%, 0.801);">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,44 +50,45 @@
     <a class="navbar-brand mr-auto mt-2 mt-lg-0" href="/">
       <img src="/img/logo.png" width="240px" alt="Fashion Wear">
     </a>
-    <ul class="navbar-nav ">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">Inicio<span class="sr-only">(current)</span></a>
+    <ul class="navbar-nav text-center mr-3">
+      <li class="nav-item">
+        <a class="nav-link align-self-center mx-3" href="#">Inicio<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Productos</a>
+        <a class="nav-link align-self-center mx-3" href="#">Productos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" >Sobre nosotros</a>
+        <a class="nav-link align-self-center mx-3" href="#" >Sobre nosotros</a>
       </li>
       
-      {{!-- Si el usuario existe en la autenticación mostrará un drop down --}}
+      {{!-- Si el usuario existe en la autenticación mostrará un drop down menu--}}
       {{#if user}}
         <div class="dropdown text-center align-self-center mx-3">
           <a class="dropdown-toggle dropT"  href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{user.nombre}} {{user.apellido}}
+            <i class="fas fa-user-circle"></i> {{user.nombre}} {{user.apellido}}
           </a>
 
+          {{!-- Opciones dentro del menu, Mi Perfil y Cerrar sesión con su respectiva ruta --}}
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <a class="dropdown-item dropM" href="#">Mi Perfil</a>
-            <a class="dropdown-item dropM" href="/cerrar_sesion">Cerrar Sesión</a>                    
+            <a class="dropdown-item dropM" href="/cerrar_sesion">Cerrar Sesión &nbsp; <i class="fas fa-sign-out-alt"></i> </a>                    
           </div>
         </div>
       
       {{!-- Si el usuario no está autenticado, mostrará los botones de iniciar sesión y registrarse --}}
       {{else}}                  
         <li class="nav-item">
-          <a class="nav-link" href="/iniciar_sesion" >Iniciar sesión</a>
+          <a class="nav-link align-self-center mx-3" href="/iniciar_sesion" >Iniciar sesión</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/registro" >Regístrate</a>
+          <a class="nav-link align-self-center mx-3" href="/registro" >Regístrate</a>
         </li>
       {{/if}}
 
 
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-1" type="search" placeholder="Search" aria-label="Search">
+      <input class="form-control mr-sm-1" type="search" placeholder="Buscar..." aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
     </form>
   </div>
