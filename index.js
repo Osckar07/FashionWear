@@ -17,8 +17,11 @@ const passport = require("./config/passport");
 //Importamos express-session para manejar la sesion de usuario
 const session = require("express-session");
 
-//Importar cookie-parser oara habilitar el manejo de cokies en el sitio
+//Importar cookie-parser oara habilitar el manejp de cokies en el sitio
 const cookieParser = require("cookie-parser");
+
+//importar connect-flash para disponer de los errores en todo el sitio
+const flash = require("connect-flash");
 
 //Crear conexión con la base de datos
 const db = require("./config/db");
@@ -56,6 +59,9 @@ app.set("view engine", "hbs");
 // Habilitar bodyParser para leer los datos enviados por POST
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//Habilitar el uso de connect-flash para compartir mensajes
+app.use(flash());
+
 //Habilitar el uso de cookie-parser
 app.use(cookieParser());
 
@@ -73,9 +79,15 @@ app.use(passport.session());
 
 //Pasar algunos valores mediante el middleware
 app.use((req, res, next)=>{
+  //Pasar el usuario a variables locales de la petición
   res.locals.usuario = { ...req.user} || null;
+  //Pasar los mensajes a las variables locales de la peticón
+  res.locals.mensajes = req.flash();
+
+  //Continuar con el camino del middleware
   next();
 });
+
 
 // Le indicamos a express dónde están las rutas del servidor
 app.use("/", routes());
