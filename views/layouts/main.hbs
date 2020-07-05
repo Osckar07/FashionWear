@@ -8,45 +8,55 @@
     {{!-- Cargamos una hoja de estilos propia --}}
     <link rel="stylesheet" href="css/estilos.css"/>
     {{!-- Para carcar el ícono de pestaña de la página --}}
-    <link rel="icon" href="img/favicon.png">    
+    <link rel="icon" href="img/favicon.png">  
+    {{!--Cargar fontawesome--}}
+    <script src="https://kit.fontawesome.com/732f53e469.js" crossorigin="anonymous"></script>  
     <title>Fashion Wear</title>    
 </head>
 <body class="d-flex flex-column h-100 ">
-    {{!-- Barra de navegación de prueba --}}
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-light shadow fixed-top mb-5" style="border-bottom: #333333;">
-            <a class="navbar-brand"  href="/">
-              <img src="img/logo.png" width="240px" alt="Fashion Wear"> 
-            </a>     
+    {{!-- Barra de navegación de prueba fixed-top--}}
+ 
+ <div class="usuario-info bg-dark row">
+     <p class="my-auto mr-auto">Hola! <a href="/iniciar_sesion">Inicia sesión</a> o <a href="/registro">Registrate</a></p>
+     <div class="usuario-info-icon">
+     <a href=""><i class="fas fa-heart"> Favorito</i></a>
+     <a href=""><i class="fas fa-cart-plus">Carrito</i></a>
+     </div>
+ </div>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link ml-4" style="color: #191919;" href="/">INICIO<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color: #191919;" href="#">OFERTAS<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color: #191919;" href="/iniciar_sesion">MI CUENTA</a>
-                </li>
-
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Nombre del producto" aria-label="Search">
-                    <button class="btn botonGeneral" type="submit">BUSCAR  <img src="img/buscar.png" style="width:15px; margin-bottom:4px; margin-left:5px;" alt=""></button>
-                </form>
-            </div>   
-        </nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-lightshadow" style="border-bottom: #333333;   background: hsla(0, 0%, 98%, 0.801);">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand mr-auto mt-2 mt-lg-0" href="#">
+      <img src="/img/logo.png" width="240px" alt="Fashion Wear">
+    </a>
+    <ul class="navbar-nav ">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Inicio<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Productos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" >Sobre nosotros</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" >Contactanos</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-1" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+    </form>
+  </div>
+</nav>
     </header>
 
     {{!-- Contenido principal --}}
       <main class="flex-shrink-0">
-        <div class="container " style="padding-top: 11%;">
+        <div class="container " style="padding-top: 2%;">
           {{{body}}}
         </div>
       </main>
