@@ -262,3 +262,23 @@ div.vertical-line{
 }
 
 /*Fin de formulario de inicio de sesion*/
+
+/* Drop Menú */
+.dropM:hover{
+    background-color: #e7e5e5;
+}
+
+.dropM:active{
+    color: #191919;
+    background-color: #b3b3b3;
+}
+
+.dropT{
+    background-color: #ffffff; 
+    color:#191919; 
+    text-decoration:none;
+}
+.dropT:hover{
+    text-decoration:none;
+    color: #555454;
+}

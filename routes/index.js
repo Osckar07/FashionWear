@@ -22,8 +22,10 @@ module.exports = function () {
   // Ruta para el formulario de iniciar_sesion
   routes.get("/iniciar_sesion", usuariosController.formularioInicioSesion);
 
+  // Ruta post para autenticar usuario
   routes.post("/iniciar_sesion", authController.autenticarUsuario);
 
+  // Ruta para cerrar la sesión 
   routes.get("/cerrar_sesion", authController.cerrarSesion);
 
   return routes;
