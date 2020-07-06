@@ -84,6 +84,8 @@ const Usuario = db.define(
     }
 );
 
+//Definir que el usuario tiene muchos productos
+Usuario.hasMany(Producto);
 //Definir que el usuario tiene muchas facturas
 Usuario.hasMany(Factura);
 

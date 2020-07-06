@@ -80,7 +80,12 @@ app.use(passport.session());
 //Pasar algunos valores mediante el middleware
 app.use((req, res, next)=>{
   //Pasar el usuario a variables locales de la petición
-  // res.locals.usuario = { ...req.user} || null;
+  res.locals.usuario = { ...req.user} || null;
+
+  res.locals.categoria = { ...req.categoria} || null;
+
+  app.locals.categoria = req.categoria;
+
   app.locals.user = req.user;
   //Pasar los mensajes a las variables locales de la peticón
   res.locals.mensajes = req.flash();
