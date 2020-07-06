@@ -5,6 +5,9 @@ const LocalStrategy = require("passport-local");
 // Importar la referencia al modelo que contiene los datos de autenticación
 const Usuario = require("../models/Usuario");
 
+// Importar el sequelize
+const Sequelize = require("sequelize");
+
 // Definir nuestra estrategia de autencitación
 // Local Strategy --> realizar un login con credenciales propias (user, pass)
 passport.use(
