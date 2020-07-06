@@ -282,3 +282,36 @@ div.vertical-line{
     text-decoration:none;
     color: #555454;
 }
+
+
+/* Página de Inicio */
+.usuario-info{
+    padding: 5px;
+}
+
+.usuario-info p{
+    margin-top: 5px;
+    margin-left: 200px;
+    font-size: 12px;
+    color: white;
+}
+
+.usuario-info-icon{
+    margin-right: 200px;
+}
+
+@media (max-width:770px){
+    .usuario-info p{
+       margin-left: 15px;
+    }
+
+    .usuario-info-icon{
+       margin-right: 15px; 
+    }
+}
+
+.usuario-info-icon a{
+    font-size: 14px;
+    margin: 0px 10px 0px 10px;
+    color: white;
+}
