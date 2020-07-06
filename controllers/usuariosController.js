@@ -32,6 +32,10 @@ exports.registrarse = async (req, res, next) => {
 };
 
 exports.formularioInicioSesion = (req, res, next) =>{
-    // , {layout: "auth"}
-    res.render("iniciar_sesion");
+
+    //Verificar si existe algun mensaje
+    const {mensajes} = res.locals.mensajes;
+
+    console.log(mensajes);
+    res.render("iniciar_sesion", {layout: "auth",mensajes});
 }

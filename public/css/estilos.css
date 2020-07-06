@@ -6,6 +6,22 @@
     font-family: 'fuente2';
     src: url('../font/fuente2.ttf');
 }
+@font-face{
+    font-family: 'fuente3';
+    src: url('../font/Muli-VariableFont_wght.ttf');    
+}
+
+/* inicio NavBar de layout main*/
+
+.navbar{
+    align-items: center;
+}
+
+.navbar a{
+    font-family: 'fuente3';
+}
+
+/*Fin de navBar*/
 
 .botonGeneral {
     /* font-family: 'fuente1'; */
@@ -61,6 +77,8 @@ h1{
     font-family: 'fuente1';
 }
 
+
+/*Formulario crear usuario*/
 .formUser label{
     margin: 0;
     padding: 0;
@@ -128,15 +146,19 @@ div.vertical-line{
       }
 
       .BotonesCrearUsuario p{
-          display: flex;
         margin-top: 15px;
         text-align: center;
     }  
     
   }
 
-  /*nuevo*/
+  /*Fin de formulario crear usuario*/
 
+  /*Formulario inicio de sesion*/
+
+.header-inicio-sesion{
+    margin-bottom: 50px;
+}
 
 .cuadroLogin{
     width: 450px;
@@ -237,4 +259,26 @@ div.vertical-line{
 .BotonesInicioSesion p{
     text-align: center;
     margin: 25px;
+}
+
+/*Fin de formulario de inicio de sesion*/
+
+/* Drop Menú */
+.dropM:hover{
+    background-color: #e7e5e5;
+}
+
+.dropM:active{
+    color: #191919;
+    background-color: #b3b3b3;
+}
+
+.dropT{
+    background-color: #ffffff; 
+    color:#191919; 
+    text-decoration:none;
+}
+.dropT:hover{
+    text-decoration:none;
+    color: #555454;
 }
