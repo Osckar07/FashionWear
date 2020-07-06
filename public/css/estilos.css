@@ -282,3 +282,74 @@ div.vertical-line{
     text-decoration:none;
     color: #555454;
 }
+
+
+/* Página de Inicio */
+.usuario-info{
+    padding: 5px;
+}
+
+.usuario-info p{
+    margin-top: 5px;
+    margin-left: 200px;
+    font-size: 12px;
+    color: white;
+}
+
+.usuario-info-icon{
+    margin-right: 200px;
+}
+
+@media (max-width:770px){
+    .usuario-info p{
+       margin-left: 15px;
+    }
+
+    .usuario-info-icon{
+       margin-right: 15px; 
+    }
+}
+
+.usuario-info-icon a{
+    font-size: 14px;
+    margin: 0px 10px 0px 10px;
+    color: white;
+}
+
+
+.site-hero{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("../img/hero_1.jpg");
+    height: 70vh;
+    background-size: cover;
+    padding-top: 5vh;
+    padding-bottom: 30vh;
+}
+.site-hero h2{
+    font-family: "fuente1";
+    margin-top: 250px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+
+.text-description p{
+    font-size: 15px;
+    margin: 0px 20px 0px 80px;
+}
+
+.site-info h2{
+    font-size: 20px;
+}
+
+.site-info h2 p{
+    font-family: "funte3";
+
+}
+
+.fontinfo i{
+    font-size: 45px;
+}
+
+
+
+/*Fin de inicio*/
