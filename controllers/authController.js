@@ -14,6 +14,17 @@ exports.autenticarUsuario = passport.authenticate("local", {
   failtureFlash: true,
 });
 
+exports.loginFacebook = passport.authenticate('facebook');
+
+exports.loginFacebook = passport.authenticate('facebook', {
+      successRedirect : '/',
+      failureRedirect : '/iniciar_sesion',
+      badRequestMessage: "Debes ingresar tu correo electrónico y tu contraseña",
+      failtureFlash: true
+});
+
+
+
 exports.cerrarSesion = (req, res, next) => {
   // Al cerrar sesión redirigimos al usuario al inicio de sesión
   req.session.destroy(() => {

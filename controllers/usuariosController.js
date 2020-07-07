@@ -39,7 +39,7 @@ exports.formularioInicioSesion = (req, res, next) =>{
     const {mensajes} = res.locals.mensajes;
 
     // console.log(mensajes);
-    res.render("iniciar_sesion", {layout: "main",mensajes});
+    res.render("iniciar_sesion", {layout: "auth",mensajes});
 };
 
 // Función que nos servirá a verificar si al registrarse un usuario admin posee la contraseña maestra para los admin
