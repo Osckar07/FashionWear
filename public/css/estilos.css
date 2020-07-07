@@ -10,6 +10,10 @@
     font-family: 'fuente3';
     src: url('../font/Muli-VariableFont_wght.ttf');    
 }
+@font-face {
+    font-family: 'satisfy';
+    src: url('../font/Satisfy.ttf');
+}
 
 /* inicio NavBar de layout main*/
 
@@ -274,7 +278,8 @@ div.vertical-line{
 }
 
 .dropT{
-    background-color: #ffffff; 
+    /* background-color: hsla(0, 0%, 98%, 0.801);  */
+    background-color: transparent;
     color:#191919; 
     text-decoration:none;
 }
@@ -282,3 +287,97 @@ div.vertical-line{
     text-decoration:none;
     color: #555454;
 }
+
+
+/* Página de Inicio */
+.frase-hero{
+    font-family: "satisfy";
+}
+.usuario-info{
+    padding: 5px;
+}
+
+.usuario-info p{
+    margin-top: 5px;
+    margin-left: 200px;
+    font-size: 12px;
+    color: white;
+}
+
+.usuario-info-icon{
+    margin-right: 200px;
+}
+
+@media (max-width:770px){
+    .usuario-info p{
+       margin-left: 15px;
+    }
+
+    .usuario-info-icon{
+       margin-right: 15px; 
+    }
+}
+
+.usuario-info-icon a{
+    font-size: 14px;
+    margin: 0px 10px 0px 10px;
+    color: white;
+}
+
+.site-hero{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("../img/hero_1.jpg");
+    height: 70vh;    
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    padding-top: 5vh;
+    padding-bottom: 30vh;            
+}
+
+.site-hero::after{
+    content: '';
+    background-color: rgba(255, 255, 255 , .10);
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+}
+
+.site-hero h2{
+    text-align: center;
+    /* position: absolute; */ 
+    font-family: "satisfy";
+    /* font-size: 2.5em; */
+    font-size: 7vh;
+    margin: auto;
+    margin-top: 20%;    
+    color: rgba(255, 255, 255, 0.85);
+
+    
+}
+
+
+.text-description p{
+    font-size: 15px;
+    margin: 0px 20px 0px 80px;
+}
+
+.site-info h2{
+    font-size: 20px;
+}
+
+.site-info h2 p{
+    font-family: "funte3";
+
+}
+
+.fontinfo i{
+    font-size: 45px;
+}
+
+
+
+/*Fin de inicio*/
