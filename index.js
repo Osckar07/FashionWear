@@ -95,7 +95,6 @@ app.use((req, res, next)=>{
 
   res.locals.categoria = { ...req.categoria} || null;
   app.locals.categoria = req.categoria;
-
   app.locals.user = req.user;
   //Pasar los mensajes a las variables locales de la peticón
   res.locals.mensajes = req.flash();
