@@ -42,7 +42,7 @@
      </div>
  </div> --}}
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-lightshadow shadow" style="border-bottom: #333333;   background: hsla(0, 0%, 98%, 0.801);">
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-lightshadow shadow" style="border-bottom: #333333;   background: hsla(0, 0%, 98%, 0.899);">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -95,16 +95,23 @@
       
 
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-1" type="search" placeholder="Buscar..." aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
-    </form>
+    
+    <form class="form-inline my-2 my-lg-0 justify-content-center">
+      <div class="row">
+        <input class="form-control mr-sm-1" type="search" placeholder="Buscar..." aria-label="Search">
+      </div>
+      
+      <div class="row mx-2">
+        <button class="btn btn-outline-success my-2 my-sm-0 " type="submit"><i class="fas fa-search"></i></button>
+      </div>
+      
+    </form>    
   </div>
 </nav>
     </header>
 
     {{!-- Contenido principal --}}
-      <main class="flex-shrink-0">
+      <main class="flex-shrink-0 " style="margin-top: 10%;">
         <div class="container " style="padding-top: 2%;">
           {{{body}}}
         </div>

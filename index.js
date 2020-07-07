@@ -51,6 +51,17 @@ app.engine(
   exphbs({
     defaultLayout: "main",
     extname: ".hbs",
+
+    // Helper que nos ayuda a verificar si el tipo de usuario es admin o no y así esconder ciertas caracteristicas
+    helpers: {
+      verificacion: function(value){
+        if(value == 0){
+          
+        }else{
+          return "hidden"
+        }
+      }
+    }
   })
 );
 

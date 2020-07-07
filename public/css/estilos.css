@@ -278,7 +278,8 @@ div.vertical-line{
 }
 
 .dropT{
-    background-color: #ffffff; 
+    /* background-color: hsla(0, 0%, 98%, 0.801);  */
+    background-color: transparent;
     color:#191919; 
     text-decoration:none;
 }
@@ -331,8 +332,20 @@ div.vertical-line{
     background-size: cover;
     position: relative;
     padding-top: 5vh;
-    padding-bottom: 30vh;
+    padding-bottom: 30vh;            
 }
+
+.site-hero::after{
+    content: '';
+    background-color: rgba(255, 255, 255 , .10);
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+}
+
 .site-hero h2{
     text-align: center;
     /* position: absolute; */ 
@@ -342,6 +355,8 @@ div.vertical-line{
     margin: auto;
     margin-top: 20%;    
     color: rgba(255, 255, 255, 0.85);
+
+    
 }
 
 
