@@ -37,9 +37,8 @@ exports.formularioInicioSesion = (req, res, next) =>{
 
     //Verificar si existe algun mensaje
     const {mensajes} = res.locals.mensajes;
-
     // console.log(mensajes);
-    res.render("iniciar_sesion", {layout: "main",mensajes});
+    res.render("iniciar_sesion", {layout: "auth",mensajes});
 };
 
 // Función que nos servirá a verificar si al registrarse un usuario admin posee la contraseña maestra para los admin
@@ -50,4 +49,18 @@ function verificarTipoUsuario(pass){
         return 1;
     }
 };
+
+exports.iniciarFacebook = (req,res,next) =>{
+    res.locals.usuario =  { ...req.user} || null;
+    console.log("Usiaro es:", res.locals.usuario);
+}
+
+exports.perfil =(req,res,next) =>{
+
+    res.render("usuario", {layout:"main"});
+}
+
+exports.cambiar_contrasena = (req,res,next)=>{
+    res.render("cambiar_contrasena", {layout:"main"});
+}
 

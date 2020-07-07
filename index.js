@@ -78,7 +78,7 @@ app.use(cookieParser());
 
 //Habilitar las sesiones de usuario
 app.use(session({
-  secret: process.env.SESSIONSECRET,
+  secret: process.env.SESSIONSECRECT,
   resave: false,
   saveUninitialized: false
 })
@@ -94,9 +94,7 @@ app.use((req, res, next)=>{
   res.locals.usuario = { ...req.user} || null;
 
   res.locals.categoria = { ...req.categoria} || null;
-
   app.locals.categoria = req.categoria;
-
   app.locals.user = req.user;
   //Pasar los mensajes a las variables locales de la peticón
   res.locals.mensajes = req.flash();
