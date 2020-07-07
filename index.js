@@ -78,7 +78,7 @@ app.use(cookieParser());
 
 //Habilitar las sesiones de usuario
 app.use(session({
-  secret: process.env.SESSIONSECRECT,
+  secret: process.env.SESSIONSECRET,
   resave: false,
   saveUninitialized: false
 })
