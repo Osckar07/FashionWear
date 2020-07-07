@@ -25,7 +25,7 @@ module.exports = function () {
   //Rutas para inicio de sesion con facebook
   routes.get('/registro/facebook',authController.loginFacebook);
   routes.get('/auth/facebook/callback', authController.loginFacebook);
-
+  routes.get('/auth/facebook/callback',usuariosController.iniciarFacebook);
 
   // Ruta post para autenticar usuario
   routes.post("/iniciar_sesion", authController.autenticarUsuario);
@@ -39,6 +39,9 @@ module.exports = function () {
   routes.post("/nuevo_producto", authController.usuarioAutenticado, productosController.nuevoProducto);
 
   routes.get("/productos", productosController.mostrarProductos);  
+
+  routes.get("/perfil/usuario",authController.usuarioAutenticado, usuariosController.perfil); 
+  routes.get("/perfil/usuario/cambiar_contrasena",authController.usuarioAutenticado, usuariosController.cambiar_contrasena);  
 
   return routes;
 };
