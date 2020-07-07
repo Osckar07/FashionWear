@@ -42,7 +42,7 @@ exports.nuevoProducto = async (req, res, next) => {
   // const tipoProducto = combo.options[combo.selectedIndex].text;
   
 
-  console.log(nombre, descripcion, tipoProducto, talla, precio, categoria);
+  // console.log(nombre, descripcion, tipoProducto, talla, precio, categoria);
 
   console.log(req.body);
   
@@ -103,11 +103,18 @@ exports.mostrarProductos = async (req, res, next) => {
   const mensajes = [];
 
   try {
-    const productos = await Producto.findAll({
-      where: {
-        usuarioId: usuario.id,
-      }});
-    return res.render("productos", { productos });
+    if(usuario.tipoUsuario == 0){
+      const productos = await Producto.findAll({
+        where: {
+          usuarioId: usuario.id,
+        }});
+      return res.render("productos", { productos });
+    }
+    else{
+      const productos = await Producto.findAll();
+      return res.render("productos", { productos });
+    }
+    
     }
   catch (error) {
     // Crear el mensaje de error
