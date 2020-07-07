@@ -22,9 +22,18 @@ module.exports = function () {
   // Ruta para el formulario de iniciar_sesion
   routes.get("/iniciar_sesion", usuariosController.formularioInicioSesion);
 
+  // Ruta post para autenticar usuario
   routes.post("/iniciar_sesion", authController.autenticarUsuario);
 
+  // Ruta para cerrar la sesión 
   routes.get("/cerrar_sesion", authController.cerrarSesion);
+
+  // Rutas para producto
+  routes.get("/nuevo_producto", authController.usuarioAutenticado, productosController.formularioNuevoProducto);
+
+  routes.post("/nuevo_producto", authController.usuarioAutenticado, productosController.nuevoProducto);
+
+  routes.get("/productos", productosController.mostrarProductos);  
 
   return routes;
 };

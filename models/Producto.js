@@ -20,10 +20,22 @@ const Producto = db.define(
             autoIncrement: true
         },
         nombre:{
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false,
+            validate: {
+                notEmpty: {
+                    msg: "Debes ingresar el nombre"
+                }            
+            }
         },
         descripcion:{
-            type: Sequelize.STRING(140)
+            type: Sequelize.STRING(140),
+            allowNull: false,
+            validate: {
+                notEmpty: {
+                    msg: "Debes ingresar una descripción"
+                }            
+            }
         },
         tipoProducto:{
             type: Sequelize.STRING

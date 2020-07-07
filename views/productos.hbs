@@ -1,0 +1,26 @@
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h3 class="display-5">Productos en el sistema</h3>
+</div>
+
+<div class="container">  
+  <div class="card-deck mb-3 text-center">
+    {{!-- Mostrar los productos (si existen) --}}
+    {{#if productos}}
+        {{#each productos}}
+            <div class="card mb-4 shadow-sm">
+              <div class="card-header">
+                <h3 class="font-weight-normal">{{dataValues.nombre}}</h3>
+              </div>
+              <div class="card-body">
+                  <h5 class="card-title">{{dataValues.descripcion}}</h5>
+                  <p class="card-text">{{dataValues.tipoProducto}}</p>
+                  <p class="card-text">L. {{dataValues.precio}}</p>
+                  <p class="card-text">Talla: {{dataValues.talla}}</p>
+              </div>
+            </div>
+        {{/each}}
+    {{else}}
+      <h4>No has ingresado productos aún.</h4>
+    {{/if}}
+  </div>
+</div>
