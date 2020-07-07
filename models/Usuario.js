@@ -4,6 +4,10 @@ const Sequelize = require("sequelize");
 const db = require("../config/db");
 //importar modelo factura
 const Factura = require("./Factura");
+
+//importar modelo Producto
+const Producto = require("./Producto");
+
 //importamos bcrypt-nodejs
 const bcrypt = require("bcrypt-nodejs");
 
