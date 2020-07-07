@@ -36,7 +36,7 @@ const Categoria = db.define(
 
                 categoria.url = `${url}_${shortid.generate()}`;
             },
-            beforeCreate(categoria){
+            beforeUpdate(categoria){
                 console.log("Antes de actualizar la base");
                 const url = slug(categoria.nombre).toLowerCase();
 
@@ -46,6 +46,6 @@ const Categoria = db.define(
     }
 );
 
-Categoria.hasOne(Producto);
+Categoria.hasMany(Producto);
 
 module.exports = Categoria;

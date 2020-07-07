@@ -10,6 +10,10 @@
     font-family: 'fuente3';
     src: url('../font/Muli-VariableFont_wght.ttf');    
 }
+@font-face {
+    font-family: 'satisfy';
+    src: url('../font/Satisfy.ttf');
+}
 
 /* inicio NavBar de layout main*/
 
@@ -274,7 +278,8 @@ div.vertical-line{
 }
 
 .dropT{
-    background-color: #ffffff; 
+    /* background-color: hsla(0, 0%, 98%, 0.801);  */
+    background-color: transparent;
     color:#191919; 
     text-decoration:none;
 }
@@ -285,6 +290,9 @@ div.vertical-line{
 
 
 /* Página de Inicio */
+.frase-hero{
+    font-family: "satisfy";
+}
 .usuario-info{
     padding: 5px;
 }
@@ -316,19 +324,39 @@ div.vertical-line{
     color: white;
 }
 
-
 .site-hero{
     background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("../img/hero_1.jpg");
-    height: 70vh;
+    height: 70vh;    
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
+    position: relative;
     padding-top: 5vh;
-    padding-bottom: 30vh;
+    padding-bottom: 30vh;            
 }
+
+.site-hero::after{
+    content: '';
+    background-color: rgba(255, 255, 255 , .10);
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+}
+
 .site-hero h2{
-    font-family: "fuente1";
-    margin-top: 250px;
     text-align: center;
-    color: #FFFFFF;
+    /* position: absolute; */ 
+    font-family: "satisfy";
+    /* font-size: 2.5em; */
+    font-size: 7vh;
+    margin: auto;
+    margin-top: 20%;    
+    color: rgba(255, 255, 255, 0.85);
+
+    
 }
 
 

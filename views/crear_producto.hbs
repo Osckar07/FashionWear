@@ -1,0 +1,63 @@
+<h1 class="mt-3 mb-4 text-center">Ingresar un nuevo producto al sistema</h1>
+
+{{!-- Mostrar los mensajes en caso de existir --}}
+{{>ourMessages}}
+
+<form class="m-auto" style="width: 80%;" method="POST" action="/nuevo_producto">
+  <div class="form-group">
+    <label for="nombre">Nombre del producto</label>
+    <input type="text" class="form-control" id="nombre" name="nombre" >
+  </div>
+  <div class="form-group">
+    <label for="nombre">Descripción</label>
+    <input type="text" class="form-control" id="descripcion" name="descripcion" >
+  </div>
+  
+  <label for="tipoProducto">Categoría</label>
+  <div class="input-group mb-3" >
+    <select class="custom-select" id="inputGroupSelect01" name="categoria" required>
+      <option value="" >Seleccione...</option>
+      {{#if categoria}}
+        {{#each categoria}}
+          <option value="{{dataValues.id}}">{{dataValues.nombre}}</option>
+        {{/each}}  
+      {{/if}}    
+    </select>
+    
+    
+  </div>
+
+  <label for="tipoProducto">Tipo de Producto</label>
+  <div class="input-group mb-3">
+    <select class="custom-select" id="inputGroupSelect02" name="tipoProducto" required >
+      <option value="" >Seleccione...</option>
+      <option value="Camisa">Camisa</option>
+      <option value="Pantalon">Pantalón</option>
+      <option value="Zapatos">Zapatos</option>
+      <option value="Accesorios">Accesorios</option>
+      <option value="Otros">Otros</option>      
+    </select>
+  </div>
+
+  <label for="Talla">Talla</label>
+  <div class="input-group mb-3">
+    <select class="custom-select" id="inputGroupSelect03" name="talla" required >
+      <option value="" >Seleccione...</option>
+      <option value="XS">XS</option>
+      <option value="S">S</option>
+      <option value="M">M</option>
+      <option value="L">L</option>
+      <option value="XL">XL</option>
+      <option value="XXL">XXL</option>
+    </select>
+    
+  </div>  
+  <div class="form-group">
+    <label for="precio">Precio</label> <br>
+    <span>L.</span>&nbsp;<input style="display: inline-block; width:20%;" type="number" min="0.01" step="0.01" max="10000" value="0.00" class="form-control" id="precio" name="precio">
+  </div>
+  <p class="text-center"><button type="submit" class="btn ">Agregar Producto</button></p>
+  
+</form>
+
+
