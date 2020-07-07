@@ -94,7 +94,6 @@ app.use((req, res, next)=>{
   res.locals.usuario = { ...req.user} || null;
 
   res.locals.categoria = { ...req.categoria} || null;
-
   app.locals.categoria = req.categoria;
 
   app.locals.user = req.user;

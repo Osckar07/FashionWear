@@ -22,6 +22,11 @@ module.exports = function () {
   // Ruta para el formulario de iniciar_sesion
   routes.get("/iniciar_sesion", usuariosController.formularioInicioSesion);
 
+  //Rutas para inicio de sesion con facebook
+  routes.get('/registro/facebook',authController.loginFacebook);
+  routes.get('/auth/facebook/callback', authController.loginFacebook);
+
+
   // Ruta post para autenticar usuario
   routes.post("/iniciar_sesion", authController.autenticarUsuario);
 
