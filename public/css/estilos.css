@@ -158,13 +158,36 @@ div.vertical-line{
 
   /*Fin de formulario crear usuario*/
 
-  /*Formulario inicio de sesion*/
+/*Formulario inicio de sesion*/
 
-.header-inicio-sesion{
-    margin-bottom: 50px;
+.hero_Login{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #00000079;
+    background-size: cover;
+    background-position: center;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.267), rgba(0, 0, 0, 0.267)),url("../img/bg_inicioSesion.jpg");
 }
 
+.icono_Login a{
+    margin-left: 30px; 
+    color: white;
+    text-decoration: none;
+}
+
+
+.conten_header-inicio-sesion{
+    margin-bottom: 60px;
+    height: 30px;
+    color: white;
+    font-size: 15px;
+    margin-bottom: 70px;
+}
+
+
 .cuadroLogin{
+    background: rgba(255, 255, 255, 0.651);
     width: 450px;
     height: 540px;
     border: 1px solid rgba(26, 26, 26, .50);
@@ -266,6 +289,7 @@ div.vertical-line{
 }
 
 /*Fin de formulario de inicio de sesion*/
+
 
 /* Drop Menú */
 .dropM:hover{
