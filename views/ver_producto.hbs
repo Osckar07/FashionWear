@@ -1,0 +1,12 @@
+
+{{!-- Mostrar los mensajes en caso de existir --}}
+{{>ourMessages}}
+
+<a {{verificacion user.tipoUsuario}} href="/producto/actualizar_producto/{{producto.url}}"></i> &nbsp; Actualizar Producto</a>
+
+<h1>{{producto.nombre}}</h1>
+<p>{{producto.descripcion}}</p>
+<p>{{producto.tipoProducto}}</p>
+<p>{{producto.talla}}</p>
+<p>{{producto.precio}}</p>
+<p>{{producto.usuarioId}}</p>
