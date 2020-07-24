@@ -9,7 +9,6 @@ const authController = require("../controllers/authController");
 
 // Construir las rutas disponibles para el servidor
 module.exports = function () {
-  
   // Ruta principal
   routes.get("/", productosController.inicioProductos);
 
@@ -23,25 +22,64 @@ module.exports = function () {
   routes.get("/iniciar_sesion", usuariosController.formularioInicioSesion);
 
   //Rutas para inicio de sesion con facebook
-  routes.get('/registro/facebook',authController.loginFacebook);
-  routes.get('/auth/facebook/callback', authController.loginFacebook);
-  routes.get('/auth/facebook/callback',usuariosController.iniciarFacebook);
+  routes.get("/registro/facebook", authController.loginFacebook);
+  routes.get("/auth/facebook/callback", authController.loginFacebook);
+  routes.get("/auth/facebook/callback", usuariosController.iniciarFacebook);
 
   // Ruta post para autenticar usuario
   routes.post("/iniciar_sesion", authController.autenticarUsuario);
 
-  // Ruta para cerrar la sesión 
+  // Ruta para cerrar la sesión
   routes.get("/cerrar_sesion", authController.cerrarSesion);
 
   // Rutas para producto
-  routes.get("/nuevo_producto", authController.usuarioAutenticado, productosController.formularioNuevoProducto);
+  routes.get(
+    "/nuevo_producto",
+    authController.usuarioAutenticado,
+    productosController.formularioNuevoProducto
+  );
 
-  routes.post("/nuevo_producto", authController.usuarioAutenticado, productosController.nuevoProducto);
+  routes.post(
+    "/nuevo_producto",
+    authController.usuarioAutenticado,
+    productosController.nuevoProducto
+  );
 
-  routes.get("/productos", productosController.mostrarProductos);  
+  routes.get("/productos", productosController.mostrarProductos);
 
-  routes.get("/perfil/usuario",authController.usuarioAutenticado, usuariosController.perfil); 
-  routes.get("/perfil/usuario/cambiar_contrasena",authController.usuarioAutenticado, usuariosController.cambiar_contrasena);  
+  routes.get(
+    "/productos_admin",
+    authController.usuarioAutenticado,
+    productosController.mostrarProductosAdmin
+  );
+
+  routes.get(
+    "/perfil/usuario",
+    authController.usuarioAutenticado,
+    usuariosController.perfil
+  );
+  routes.get(
+    "/perfil/usuario/cambiar_contrasena",
+    authController.usuarioAutenticado,
+    usuariosController.cambiar_contrasena
+  );
+
+  routes.get(
+    "/producto/:url",    
+    productosController.obtenerProductoPorUrl
+  );
+  
+  routes.get(
+    "/producto/actualizar_producto/:url",  
+    authController.usuarioAutenticado,  
+    productosController.modificarProducto
+  );
+
+  routes.post(
+    "/producto/actualizar_producto/:id",
+    authController.usuarioAutenticado,
+    productosController.actualizarProducto
+  );
 
   return routes;
 };
