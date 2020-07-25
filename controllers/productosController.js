@@ -141,7 +141,7 @@ exports.mostrarProductosAdmin = async (req, res, next) => {
         usuarioId: usuario.id,
       },
     });
-    return res.render("productos", { productos });
+    return res.render("productos", {layout:"userEnter", productos });
   } catch (error) {
     // Crear el mensaje de error
     mensajes.push({
@@ -149,7 +149,7 @@ exports.mostrarProductosAdmin = async (req, res, next) => {
       type: "alert-warning",
     });
 
-    res.render("productos", mensajes);
+    res.render("productos", {layout:"userEnter", mensajes});
   }
 };
 
@@ -299,4 +299,8 @@ exports.eliminarProducto = async (req, res, next) => {
     // Si el Producto no se puede eliminar
     return next();
   }
+};
+
+exports.miTienda = (req, res, next) =>{
+  res.render("userEnter", {layout:"auth"});
 };
