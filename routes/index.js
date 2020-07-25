@@ -47,10 +47,26 @@ module.exports = function () {
 
   routes.get("/productos", productosController.mostrarProductos);
 
+  //ruta para productosEmpresa
   routes.get(
     "/productos_admin",
     authController.usuarioAutenticado,
     productosController.mostrarProductosAdmin
+  );
+
+
+  //ruta para EmpresaDatos
+  routes.get(
+  "/perfil/mi_tienda",
+  authController.usuarioAutenticado,
+  usuariosController.userEnter
+  );
+
+  //ruta para dashboard
+  routes.get(
+    "/perfil/mi_tienda/dashboard",
+    authController.usuarioAutenticado,
+    usuariosController.dashboard
   );
 
   routes.get(
