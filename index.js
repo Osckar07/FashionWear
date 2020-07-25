@@ -36,8 +36,8 @@ require("./models/Factura");
 
 //Realizar la conexión a la base de datos
 db.sync()
-  .then(()=>console.log("Conectado con el servidor de DB"))
-  .catch(error=> console.log(error));
+  .then(() => console.log("Conectado con el servidor de DB"))
+  .catch((error) => console.log(error));
 
 //Creamos el servidor de express
 const app = express();
@@ -54,14 +54,19 @@ app.engine(
 
     // Helper que nos ayuda a verificar si el tipo de usuario es admin o no y así esconder ciertas caracteristicas
     helpers: {
-      verificacion: function(value){
-        if(value == 0){
-          
-        }else{
-          return "hidden"
+      verificacion: function (value) {
+        if (value == 0) {
+        } else {
+          return "hidden";
         }
-      }
-    }
+      },
+      verificacionNormal: function (value) {
+        if (value == 1) {
+        } else {
+          return "hidden";
+        }
+      },
+    },
   })
 );
 
@@ -77,11 +82,12 @@ app.use(flash());
 app.use(cookieParser());
 
 //Habilitar las sesiones de usuario
-app.use(session({
-  secret: process.env.SESSIONSECRET,
-  resave: false,
-  saveUninitialized: false
-})
+app.use(
+  session({
+    secret: process.env.SESSIONSECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
 );
 
 // Crear una instancia de passport y cargar nuestra estrategia
@@ -89,11 +95,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Pasar algunos valores mediante el middleware
-app.use((req, res, next)=>{
+app.use((req, res, next) => {
   //Pasar el usuario a variables locales de la petición
-  res.locals.usuario = { ...req.user} || null;
+  res.locals.usuario = { ...req.user } || null;
 
-  res.locals.categoria = { ...req.categoria} || null;
+  res.locals.categoria = { ...req.categoria } || null;
   app.locals.categoria = req.categoria;
   app.locals.user = req.user;
   //Pasar los mensajes a las variables locales de la peticón
@@ -103,11 +109,10 @@ app.use((req, res, next)=>{
   next();
 });
 
-
 // Le indicamos a express dónde están las rutas del servidor
 app.use("/", routes());
 
 //inicializamos el servidor en el puerto 5000
-app.listen(5000,() =>{
-    console.log("Servidor iniciado, puerto 5000")
+app.listen(5000, () => {
+  console.log("Servidor iniciado, puerto 5000");
 });

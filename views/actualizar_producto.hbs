@@ -1,0 +1,58 @@
+{{!-- Mostrar los mensajes en caso de existir --}}
+{{>ourMessages}}
+
+<form class="m-auto" style="width: 80%;" method="POST" action="/producto/actualizar_producto/{{producto.id}}">
+    <div class="form-group">
+        <label for="nombre">Nombre del producto</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" value="{{producto.nombre}}">
+    </div>
+    <div class="form-group">
+        <label for="nombre">Descripción</label>
+        <input type="text" class="form-control" id="descripcion" name="descripcion" value="{{producto.descripcion}}">
+    </div>
+
+    <label for="tipoProducto">Categoría</label>
+    <div class="input-group mb-3">
+        <select class="custom-select" id="inputGroupSelect01" name="categoria" required>
+            <option value="{{categoria.id}}">{{categoria.nombre}}</option>
+            {{#if categoria}}
+            {{#each categoria}}
+            <option value="{{dataValues.id}}">{{dataValues.nombre}}</option>
+            {{/each}}
+            {{/if}}
+        </select>
+    </div>
+
+    <label for="tipoProducto">Tipo de Producto</label>
+    <div class="input-group mb-3">
+        <select class="custom-select" id="inputGroupSelect02" name="tipoProducto" required>
+            <option value="{{producto.tipoProducto}}">{{producto.tipoProducto}}</option>
+            <option value="Camisa">Camisa</option>
+            <option value="Pantalon">Pantalón</option>
+            <option value="Zapatos">Zapatos</option>
+            <option value="Accesorios">Accesorios</option>
+            <option value="Otros">Otros</option>
+        </select>
+    </div>
+
+    <label for="Talla">Talla</label>
+    <div class="input-group mb-3">
+        <select class="custom-select" id="inputGroupSelect03" name="talla" required>
+            <option value="{{producto.talla}}">{{producto.talla}}</option>
+            <option value="XS">XS</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+        </select>
+
+    </div>
+    <div class="form-group">
+        <label for="precio">Precio</label> <br>
+        <span>L.</span>&nbsp;<input style="display: inline-block; width:20%;" type="number" min="0.01" step="0.01"
+            max="10000" class="form-control" id="precio" name="precio" value="{{producto.precio}}">
+    </div>
+    <p class="text-center"><button type="submit" class="btn ">Actualizar Producto</button></p>
+
+</form>
