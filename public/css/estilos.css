@@ -1007,6 +1007,20 @@ section { padding: 120px 0; }
 
 /*Inicio Productos Admin*/
 /********************* Shopping Demo-6 **********************/
+.btn-crearProducto{
+  margin-bottom: 10px;
+  text-align: center;
+}
+.btn-crearProducto p{
+  margin: 0;
+  text-align: center;
+}
+
+.btn-crearProducto i{
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
 .product-grid6,.product-grid6 .product-image6{overflow:hidden}
 .product-grid6{font-family:'Open Sans',sans-serif;text-align:center;position:relative;transition:all .5s ease 0s}
 .product-grid6:hover{box-shadow:0 0 10px rgba(0,0,0,.3)}
