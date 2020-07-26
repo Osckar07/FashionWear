@@ -1,34 +1,42 @@
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-  <h3 class="display-5">Productos en el sistema</h3>
-</div>
-
- 
-  <div class="card-deck mb-3 text-center">
-    {{!-- Mostrar los productos (si existen) --}}
+<div class="container">
     {{#if productos}}
-        {{#each productos}}
+    {{#each productos}}
+    <div class="row">
         <div class="col-md-3 col-sm-6">
-            <div class="product-grid6">
-                <div class="product-image6">
+            <h3>{{dataValues.usuarioId}}</h3>
+            <div class="product-grid7">
+                <div class="product-image7">
                     <a href="#">
-                        <img class="pic-1" src="http://bestjquery.com/tutorial/product-grid/demo10/images/img-1.jpg">
+                        <img class="pic-1" src="http://bestjquery.com/tutorial/product-grid/demo8/images/img-1.jpg">
+                        <img class="pic-2" src="http://bestjquery.com/tutorial/product-grid/demo8/images/img-2.jpg">
                     </a>
+                    <ul class="social">
+                        <li><a href="" class="fa fa-search"></a></li>
+                        <li><a href="" class="fa fa-shopping-bag"></a></li>
+                        <li><a href="" class="fa fa-shopping-cart"></a></li>
+                    </ul>
+                    <span class="product-new-label">New</span>
                 </div>
                 <div class="product-content">
                     <h3 class="title"><a href="#">{{dataValues.nombre}}</a></h3>
-                    <div class="price">L. {{dataValues.precio}}.00
-                        <span>$14.00</span>
+                    <ul class="rating">
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                    </ul>
+                    <div class="price">Lps.{{dataValues.precio}}.00
+                        <span>$20.00</span>
                     </div>
                 </div>
-                <ul class="social">
-                    <li><a href="" data-tip="Editar"><i class="fas fa-edit mt-3"></i></a></li>
-                    <li><a href="" data-tip="Eliminar"><i class="fas fa-trash-alt mt-3"></i></a></li>
-                </ul>
             </div>
         </div>
 
-        {{/each}}
+    </div>
+    {{/each}}
     {{else}}
-      <h4>No has ingresado productos aún.</h4>
+    <h4>No has ingresado productos aún.</h4>
     {{/if}}
-  </div>
+</div>
+<hr>

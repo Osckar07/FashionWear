@@ -75,12 +75,13 @@
 
           {{!-- Opciones dentro del menu, Mi Perfil y Cerrar sesión con su respectiva ruta --}}
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item dropM" href="/perfil/mi_tienda/dashboard"><i
-                class="fas fa-plus"></i> &nbsp; Tienda</a>
+            <a {{verificacion user.tipoUsuario}} class="dropdown-item dropM" href="/perfil/mi_tienda/dashboard">
+                <i class="fas fa-store-alt"></i> &nbsp; Tienda</a>
         {{!--    <a {{verificacion user.tipoUsuario}} class="dropdown-item dropM" href="/productos_admin"><i
                 class="fas fa-tshirt"></i></i> &nbsp; Mis Productos</a> --}}
 
-            <a class="dropdown-item dropM" href="/perfil/mi_tienda"><i class="far fa-user"></i> &nbsp; Mi Perfil</a>
+            <a {{verificacion user.tipoUsuario}} class="dropdown-item dropM" href="/perfil/mi_tienda"><i class="far fa-user"></i> &nbsp; Mi Perfil</a>
+            <a class="dropdown-item dropM" href="#"><i class="far fa-user"></i> &nbsp; Mi Perfil</a>
             <a class="dropdown-item dropM" href="/cerrar_sesion"> &nbsp; &nbsp; &nbsp; Cerrar Sesión &nbsp; &nbsp;<i
                 class="fas fa-sign-out-alt"></i> </a>
           </div>
