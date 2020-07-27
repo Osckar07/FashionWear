@@ -283,6 +283,8 @@ exports.actualizarProducto = async (req, res, next) => {
   }
 };
 
+//Se instalo axios sweetalert12
+
 // Eliminar un Producto
 exports.eliminarProducto = async (req, res, next) => {
   // Obtener la URL del Producto por destructuring query

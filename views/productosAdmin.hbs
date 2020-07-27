@@ -34,8 +34,8 @@
                     </div>
                 </div>
                 <ul class="social">
-                    <li><a href="/producto/actualizar_producto/{{dataValues.url}}" data-tip="Editar"><i class="fas fa-edit mt-3"></i></a></li>
-                    <li><a href="" data-tip="Eliminar"><i class="fas fa-trash-alt mt-3"></i></a></li>
+                    <li><a href="/producto/actualizar_producto/{{dataValues.url}}" data-tip="Editar"><i class="fas fa-edit"></i></a></li>
+                    <li> <button name="eliminar-producto" data-producto-url={{dataValues.url}} type="button" data-tip="Eliminar"><i class="fas fa-trash-alt "></i></button></li>
                 </ul>
             </div>
         </div>
@@ -44,4 +44,3 @@
     {{else}}
       <h4>No has ingresado productos aún.</h4>
     {{/if}}
-  </div>
