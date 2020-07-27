@@ -2,6 +2,7 @@
 const Producto = require("../models/Producto");
 const Categoria = require("../models/Categoria");
 const Usuario = require("../models/Usuario");
+const { userEnter } = require("./usuariosController");
 
 // Muestra todos los productos
 exports.inicioProductos = (req, res, next) => {
@@ -14,7 +15,7 @@ exports.formularioNuevoProducto = async (req, res, next) => {
   // Traeremos de la base de datos todas las categorias disponibles, servirán para realacionarla con el producto
   try {
     const categoria = await Categoria.findAll();
-    return res.render("crear_producto", { categoria });
+    return res.render("crear_producto", { layout:"userEnter", categoria });
   } catch (error) {
     // Crear el mensaje de error
     mensajes.push({
@@ -22,7 +23,7 @@ exports.formularioNuevoProducto = async (req, res, next) => {
       type: "alert-warning",
     });
 
-    res.render("inicio", mensajes);
+    res.render("productosAdmin", mensajes);
   }
 };
 
@@ -79,8 +80,8 @@ exports.nuevoProducto = async (req, res, next) => {
     });
   } else {
     try {
-      categoriaId = categoria;
-      console.log(categoriaId);
+      categoriumId = categoria
+      console.log(categoriumId);
       // Insertar el producto a la base de datos
       await Producto.create({
         nombre,
@@ -89,15 +90,15 @@ exports.nuevoProducto = async (req, res, next) => {
         talla,
         precio,
         usuarioId: usuario.id,
-        categoriaId: categoria,
+        categoriumId,
       });
-      console.log(nombre, descripcion, tipoProducto, talla, precio);
+      console.log(nombre, descripcion, tipoProducto, talla, precio, categoriumId);
       mensajes.push({
         error: "Producto almacenado satisfactoriamente.",
         type: "alert-success",
       });
 
-      res.redirect("/");
+      res.redirect("productos_admin");
     } catch (error) {
       mensajes.push({
         error:
@@ -141,7 +142,7 @@ exports.mostrarProductosAdmin = async (req, res, next) => {
         usuarioId: usuario.id,
       },
     });
-    return res.render("productos", { productos });
+    return res.render("productosAdmin", {layout:"userEnter", productos });
   } catch (error) {
     // Crear el mensaje de error
     mensajes.push({
@@ -149,7 +150,7 @@ exports.mostrarProductosAdmin = async (req, res, next) => {
       type: "alert-warning",
     });
 
-    res.render("productos", mensajes);
+    res.render("productosAdmin", {layout:"userEnter", mensajes});
   }
 };
 
@@ -184,21 +185,20 @@ exports.modificarProducto = async (req, res, next) => {
       },
     });
 
+
     const categoria = await Categoria.findAll();     
 
-    res.render("actualizar_producto", {
+    res.render("actualizar_producto", { layout:"userEnter",
       producto: producto.dataValues, categoria
     });
   } catch (error) {
     console.log("-------error_____-----");
     
-    res.redirect("/productos");
+    res.redirect("/productosAdmin");
   }
 };
 
 exports.actualizarProducto = async (req, res, next) => {
-  const cat = res.locals.categoria;
-
   // Validar que el input del formulario tenga valor
   // Para acceder a los valores y asignarlos en un solo paso
   // vamos a utilizar destructuring.
@@ -243,9 +243,12 @@ exports.actualizarProducto = async (req, res, next) => {
   if (mensajes.length) {
     // Enviar valores correctos si la actualización falla
     const producto = await Producto.findByPk(req.params.id);
+    const categori = await Categoria.findAll();    
 
-    res.render("ver_producto", {
+
+    res.render("actualizar_producto", { layout:"userEnter",
       producto: producto.dataValues,
+      categoria: categori,
       mensajes,
     });
   } else {
@@ -269,7 +272,7 @@ exports.actualizarProducto = async (req, res, next) => {
       );
 
       // Redirigir hacia el home de productos
-      res.redirect("/productos");
+      res.redirect("/productos_admin");
     } catch (error) {
       mensajes.push({
         error:
@@ -279,6 +282,8 @@ exports.actualizarProducto = async (req, res, next) => {
     }
   }
 };
+
+//Se instalo axios sweetalert12
 
 // Eliminar un Producto
 exports.eliminarProducto = async (req, res, next) => {
@@ -299,4 +304,8 @@ exports.eliminarProducto = async (req, res, next) => {
     // Si el Producto no se puede eliminar
     return next();
   }
+};
+
+exports.miTienda = (req, res, next) =>{
+  res.render("userEnter", {layout:"auth"});
 };

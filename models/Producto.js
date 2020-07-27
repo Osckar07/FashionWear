@@ -69,7 +69,7 @@ const Producto = db.define(
         const url = slug(producto.nombre).toLowerCase();
 
         producto.url = `${url}_${shortid.generate()}`;
-      },
+      }
     },
   }
 );

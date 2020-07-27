@@ -57,10 +57,17 @@ exports.iniciarFacebook = (req,res,next) =>{
 
 exports.perfil =(req,res,next) =>{
 
-    res.render("usuario", {layout:"main"});
+    res.render("usuario", {layout:"auth"});
 }
 
 exports.cambiar_contrasena = (req,res,next)=>{
     res.render("cambiar_contrasena", {layout:"main"});
 }
 
+exports.userEnter =(req,res,next)=>{
+    res.render("empresaDatos", {layout: "userEnter"});
+}
+
+exports.dashboard = (req,res, next) =>{
+    res.render("dashboard", {layout:"userEnter"});
+}
