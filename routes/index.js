@@ -98,6 +98,11 @@ module.exports = function () {
     authController.usuarioAutenticado,
     productosController.actualizarProducto
   );
+  
+  // routes.post(
+  //   "/buscar_producto",  
+  //   productosController.buscarProducto
+  // );
 
   return routes;
 };
