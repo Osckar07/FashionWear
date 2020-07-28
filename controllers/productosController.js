@@ -116,9 +116,7 @@ exports.mostrarProductos = async (req, res, next) => {
   const mensajes = [];
 
   try {
-    const productos = await Producto.findAll();
-
-    console.log(productos);
+    const productos = await Producto.findAll();    
 
     return res.render("productos", { productos });
   } catch (error) {
@@ -168,8 +166,8 @@ exports.obtenerProductoPorUrl = async (req, res, next) => {
     });
 
     res.render("ver_producto", {
-      producto: producto.dataValues,
-    });
+      producto: producto.dataValues
+    });    
   } catch (error) {
     res.redirect("/");
   }
@@ -283,8 +281,6 @@ exports.actualizarProducto = async (req, res, next) => {
   }
 };
 
-//Se instalo axios sweetalert12
-
 // Eliminar un Producto
 exports.eliminarProducto = async (req, res, next) => {
   // Obtener la URL del Producto por destructuring query
@@ -308,4 +304,32 @@ exports.eliminarProducto = async (req, res, next) => {
 
 exports.miTienda = (req, res, next) =>{
   res.render("userEnter", {layout:"auth"});
+};
+
+// buscar productos
+exports.buscarProductos = async (req, res, next) => {
+  // Obtener el usuario actual
+  const usuario = res.locals.usuario;
+  const mensajes = [];
+
+  const { parametroBusqueda } = req.body;
+
+  try {
+    const productos = await Producto.findAll({
+      where:{
+        nombre: {
+          [Op.like]: `%${parametroBusqueda}`,
+        }        
+      }
+    });    
+
+    return res.render("productos", { productos });
+  } catch (error) {
+    // Crear el mensaje de error
+    mensajes.push({
+      error: "Error al obtener los productos. Favor reintentar.",
+      type: "alert-warning",
+    });
+    res.render("productos", mensajes);
+  }
 };
