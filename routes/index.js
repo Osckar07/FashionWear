@@ -54,12 +54,11 @@ module.exports = function () {
     productosController.mostrarProductosAdmin
   );
 
-
   //ruta para EmpresaDatos
   routes.get(
-  "/perfil/mi_tienda",
-  authController.usuarioAutenticado,
-  usuariosController.userEnter
+    "/perfil/mi_tienda",
+    authController.usuarioAutenticado,
+    usuariosController.userEnter
   );
 
   //ruta para dashboard
@@ -80,15 +79,18 @@ module.exports = function () {
     usuariosController.cambiar_contrasena
   );
 
+  routes.get("/producto/:url", productosController.obtenerProductoPorUrl);
+
   routes.get(
-    "/producto/:url",    
-    productosController.obtenerProductoPorUrl
-  );
-  
-  routes.get(
-    "/producto/actualizar_producto/:url",  
-    authController.usuarioAutenticado,  
+    "/producto/actualizar_producto/:url",
+    authController.usuarioAutenticado,
     productosController.modificarProducto
+  );
+
+  routes.delete(
+    "/producto/eliminar_producto/:url",
+    authController.usuarioAutenticado,
+    productosController.eliminarProducto
   );
 
   routes.post(

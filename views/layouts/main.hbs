@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   {{!-- Cargamos una hoja de estilos propia --}}
-  <link rel="stylesheet" href="css/estilos.css" />
+  <link rel="stylesheet" href="/css/estilos.css" />
   {{!-- Para cargar el ícono de pestaña de la página --}}
   <link rel="icon" href="img/favicon.png">
   {{!--Cargar fontawesome--}}
@@ -45,7 +45,7 @@
  </div> --}}
 
   <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-lightshadow shadow"
-    style="border-bottom: #333333;   background: hsla(0, 0%, 98%, 0.899);">
+    style="border-bottom: #333333; background: hsla(0, 0%, 8%, 0.918);">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
       aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -56,19 +56,19 @@
       </a>
       <ul class="navbar-nav text-center mr-3">
         <li class="nav-item">
-          <a class="nav-link align-self-center mx-3" href="/">Inicio<span class="sr-only">(current)</span></a>
+          <a class="nav-link align-self-center mx-3" style="color: white;" href="/">Inicio<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link align-self-center mx-3" href="/productos">Productos</a>
+          <a class="nav-link align-self-center mx-3" style="color: white;"  href="/productos">Productos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link align-self-center mx-3" href="#">Sobre nosotros</a>
+          <a class="nav-link align-self-center mx-3" style="color: white;"  href="#">Sobre nosotros</a>
         </li>
 
         {{!-- Si el usuario existe en la autenticación mostrará un drop down menu--}}
         {{#if user}}
         <div class="dropdown text-center align-self-center mx-3">
-          <a class="dropdown-toggle dropT" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+          <a class="dropdown-toggle dropT"  style="color: white;"  href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-user-circle"></i> {{user.nombre}} {{user.apellido}}
           </a>
@@ -81,7 +81,8 @@
                 class="fas fa-tshirt"></i></i> &nbsp; Mis Productos</a> --}}
 
             <a {{verificacion user.tipoUsuario}} class="dropdown-item dropM" href="/perfil/mi_tienda"><i class="far fa-user"></i> &nbsp; Mi Perfil</a>
-            <a class="dropdown-item dropM" href="#"><i class="far fa-user"></i> &nbsp; Mi Perfil</a>
+            {{!-- <a {{verificacion user.tipoUsuario}} class="dropdown-item dropM" href="/perfil/mi_tienda"><i class="far fa-user"></i> &nbsp; Mi Perfil</a> --}}
+            {{!-- <a class="dropdown-item dropM" href="#"><i class="far fa-user"></i> &nbsp; Mi Perfil</a> --}}
             <a class="dropdown-item dropM" href="/cerrar_sesion"> &nbsp; &nbsp; &nbsp; Cerrar Sesión &nbsp; &nbsp;<i
                 class="fas fa-sign-out-alt"></i> </a>
           </div>
@@ -96,10 +97,10 @@
         {{!-- Si el usuario no está autenticado, mostrará los botones de iniciar sesión y registrarse --}}
         {{else}}
         <li class="nav-item">
-          <a class="nav-link align-self-center mx-3" href="/iniciar_sesion">Iniciar sesión</a>
+          <a class="nav-link align-self-center mx-3" style="color: white;" href="/iniciar_sesion">Iniciar sesión</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link align-self-center mx-3" href="/registro">Regístrate</a>
+          <a class="nav-link align-self-center mx-3" style="color: white;" href="/registro">Regístrate</a>
         </li>
         {{/if}}
 
@@ -147,6 +148,9 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
     integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
     crossorigin="anonymous"></script>
+
+    {{!-- Script bundle con webpack --}}
+    <script src="/dist/bundle.js"></script>
 </body>
 
 </html>

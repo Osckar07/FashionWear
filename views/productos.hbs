@@ -1,9 +1,10 @@
-<div class="container">
+<div class="container contenedor-inicioProductos">
     {{#if productos}}
     {{#each productos}}
     <div class="row">
-        <div class="col-md-3 col-sm-6">
-            <h3>{{dataValues.usuarioId}}</h3>
+        {{!-- col-md-3 col-sm-6 --}}
+        <div class="cont-prod" >
+            {{!-- <h3>{{dataValues.usuarioId}}</h3> --}}
             <div class="product-grid7">
                 <div class="product-image7">
                     <a href="#">
@@ -15,10 +16,11 @@
                         <li><a href="" class="fa fa-shopping-bag"></a></li>
                         <li><a href="" class="fa fa-shopping-cart"></a></li>
                     </ul>
-                    <span class="product-new-label">New</span>
+                    {{!-- <span class="product-new-label">{{dataValues.tipoProducto}}</span> --}}
+                    <span class="product-new-label">{{dataValues.usuarioId}}</span>
                 </div>
                 <div class="product-content">
-                    <h3 class="title"><a href="#">{{dataValues.nombre}}</a></h3>
+                    <h3 class="title"><a href="/producto/{{dataValues.url}}">{{dataValues.nombre}}</a></h3>
                     <ul class="rating">
                         <li class="fa fa-star"></li>
                         <li class="fa fa-star"></li>
@@ -27,10 +29,11 @@
                         <li class="fa fa-star"></li>
                     </ul>
                     <div class="price">Lps.{{dataValues.precio}}.00
-                        <span>$20.00</span>
+                        {{!-- <span>$20.00</span> --}}
                     </div>
                 </div>
             </div>
+            <p class="text-center mt-3"><a class="btn " href="/producto/{{dataValues.url}}">Comprar</a></p>
         </div>
 
     </div>

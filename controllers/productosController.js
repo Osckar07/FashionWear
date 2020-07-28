@@ -168,8 +168,8 @@ exports.obtenerProductoPorUrl = async (req, res, next) => {
     });
 
     res.render("ver_producto", {
-      producto: producto.dataValues,
-    });
+      producto: producto.dataValues
+    });    
   } catch (error) {
     res.redirect("/");
   }
