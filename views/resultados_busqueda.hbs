@@ -1,3 +1,8 @@
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-5">Resultados de tu búsqueda</h1>
+  {{!-- <p class="lead">Buscaste productos que contengan <strong>{{parametroBusqueda}}</strong></p> --}}
+</div>
+
 <div class="container contenedor-inicioProductos">
     {{#if productos}}
     {{#each productos}}
@@ -39,7 +44,7 @@
     </div>
     {{/each}}
     {{else}}
-    <h4>No has ingresado productos aún.</h4>
+    <h4 class="text-center">¡No se han encontrado productos que coincidan con tu búsqueda!</h4>
     {{/if}}
 </div>
 <hr>

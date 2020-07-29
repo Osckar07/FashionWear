@@ -1,12 +1,15 @@
-
 {{!-- Mostrar los mensajes en caso de existir --}}
-{{>ourMessages}}
+{{!-- {{>ourMessages}} --}}
+<div class="container">
+    {{!-- <a {{verificacion user.tipoUsuario}} href="/producto/actualizar_producto/{{producto.url}}"></i> &nbsp; Actualizar
+        Producto</a> --}}
 
-<a {{verificacion user.tipoUsuario}} href="/producto/actualizar_producto/{{producto.url}}"></i> &nbsp; Actualizar Producto</a>
+    <h1>{{producto.nombre}}</h1>
+    <p>{{producto.descripcion}}</p>
+    <p>{{producto.tipoProducto}}</p>
+    <p>{{producto.talla}}</p>
+    <p>{{producto.precio}}</p>
+    <p>{{producto.usuarioId}}</p>
 
-<h1>{{producto.nombre}}</h1>
-<p>{{producto.descripcion}}</p>
-<p>{{producto.tipoProducto}}</p>
-<p>{{producto.talla}}</p>
-<p>{{producto.precio}}</p>
-<p>{{producto.usuarioId}}</p>
+    <p class="text-center mt-3"><a class="btn" href="/producto/comprar_producto/{{dataValues.url}}">Comprar</a></p>
+</div>

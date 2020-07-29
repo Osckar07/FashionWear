@@ -3,6 +3,8 @@ const Producto = require("../models/Producto");
 const Categoria = require("../models/Categoria");
 const Usuario = require("../models/Usuario");
 const { userEnter } = require("./usuariosController");
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 // Muestra todos los productos
 exports.inicioProductos = (req, res, next) => {
@@ -116,9 +118,7 @@ exports.mostrarProductos = async (req, res, next) => {
   const mensajes = [];
 
   try {
-    const productos = await Producto.findAll();
-
-    console.log(productos);
+    const productos = await Producto.findAll();    
 
     return res.render("productos", { productos });
   } catch (error) {
@@ -168,8 +168,8 @@ exports.obtenerProductoPorUrl = async (req, res, next) => {
     });
 
     res.render("ver_producto", {
-      producto: producto.dataValues,
-    });
+      producto: producto.dataValues
+    });    
   } catch (error) {
     res.redirect("/");
   }
@@ -283,8 +283,6 @@ exports.actualizarProducto = async (req, res, next) => {
   }
 };
 
-//Se instalo axios sweetalert12
-
 // Eliminar un Producto
 exports.eliminarProducto = async (req, res, next) => {
   // Obtener la URL del Producto por destructuring query
@@ -308,4 +306,37 @@ exports.eliminarProducto = async (req, res, next) => {
 
 exports.miTienda = (req, res, next) =>{
   res.render("userEnter", {layout:"auth"});
+};
+
+// buscar productos
+exports.buscarProducto = async (req, res, next) => {
+  // Obtener el usuario actual
+  const usuario = res.locals.usuario;
+  const mensajes = [];
+
+  const { parametroBusqueda } = req.body;
+  console.log(req.body);
+
+  try {
+    await Producto.findAll({
+      where:{
+        nombre: {
+          [Op.like]: `%${parametroBusqueda}%`,
+        },      
+      },
+    }).then(function (productos){
+      productos = productos.map(function (producto) {        
+        return producto;
+      });
+      // Renderizar solo si la promesa se cumple
+      res.render("resultados_busqueda", { productos, parametroBusqueda });
+    });
+  } catch (error) {
+    // Crear el mensaje de error
+    mensajes.push({
+      error: "Error al obtener los productos. Favor reintentar.",
+      type: "alert-warning",
+    });
+    res.render("productos", mensajes);
+  }  
 };
