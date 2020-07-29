@@ -35,6 +35,7 @@
     "express": "^4.17.1",
     "express-handlebars": "^4.0.4",
     "express-session": "^1.17.1",
+    "express-validator": "^6.6.0",
     "html-to-text": "^5.1.1",
     "juice": "^7.0.0",
     "mysql2": "^2.1.0",
