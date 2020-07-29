@@ -1,6 +1,8 @@
 // Importar express router
 const express = require("express");
 const routes = express.Router();
+// Importar express-validator
+const { body } = require("express-validator");
 
 // Importar los controladores
 const productosController = require("../controllers/productosController");
@@ -32,23 +34,70 @@ module.exports = function () {
   // Ruta para cerrar la sesión
   routes.get("/cerrar_sesion", authController.cerrarSesion);
 
+  // Rutas para resetar pass
+  routes.get(
+    "/form_resetear_contrasena",    
+    usuariosController.formResetearContrasena
+  );
+
+  routes.post("/restablecer_password", authController.enviarToken);
+
+  routes.get("/resetear_password/:token", authController.validarToken);
+
+  routes.post(
+    "/resetear_password/:token",
+    authController.actualizarPassword
+  );
+
   // Rutas para producto
   routes.get(
     "/nuevo_producto",
-    authController.usuarioAutenticado,
+    authController.usuarioAutenticado,    
     productosController.formularioNuevoProducto
   );
 
   routes.post(
     "/nuevo_producto",
     authController.usuarioAutenticado,
+    // Sanitización
+    body("nombre").notEmpty().trim().escape(),
+    body("descripcion").notEmpty().trim().escape(),
     productosController.nuevoProducto
   );
 
-  routes.get("/productos", productosController.mostrarProductos);
+  routes.get("/productos", productosController.mostrarProductos); 
 
-  //ruta para productosEmpresa
+  routes.get("/producto/:url", productosController.obtenerProductoPorUrl);
+
   routes.get(
+    "/producto/actualizar_producto/:url",
+    authController.usuarioAutenticado,
+    productosController.modificarProducto
+  );
+
+  routes.delete(
+    "/producto/eliminar_producto/:url",
+    authController.usuarioAutenticado,
+    productosController.eliminarProducto
+  );
+
+  routes.post(
+    "/producto/actualizar_producto/:id",
+    authController.usuarioAutenticado,
+    // Sanitización
+    body("nombre").notEmpty().trim().escape(),    
+    productosController.actualizarProducto
+  );
+  
+  routes.post(
+    "/buscar_producto",
+    // Sanitización
+    body("nombre").notEmpty().trim().escape(),
+    productosController.buscarProducto
+  );
+
+   //ruta para productosEmpresa
+   routes.get(
     "/productos_admin",
     authController.usuarioAutenticado,
     productosController.mostrarProductosAdmin
@@ -78,31 +127,6 @@ module.exports = function () {
     authController.usuarioAutenticado,
     usuariosController.cambiar_contrasena
   );
-
-  routes.get("/producto/:url", productosController.obtenerProductoPorUrl);
-
-  routes.get(
-    "/producto/actualizar_producto/:url",
-    authController.usuarioAutenticado,
-    productosController.modificarProducto
-  );
-
-  routes.delete(
-    "/producto/eliminar_producto/:url",
-    authController.usuarioAutenticado,
-    productosController.eliminarProducto
-  );
-
-  routes.post(
-    "/producto/actualizar_producto/:id",
-    authController.usuarioAutenticado,
-    productosController.actualizarProducto
-  );
-  
-  // routes.post(
-  //   "/buscar_producto",  
-  //   productosController.buscarProducto
-  // );
 
   return routes;
 };

@@ -71,3 +71,7 @@ exports.userEnter =(req,res,next)=>{
 exports.dashboard = (req,res, next) =>{
     res.render("dashboard", {layout:"userEnter"});
 }
+
+exports.formResetearContrasena = (req,res, next) =>{
+    res.render("restablecer_contrasena", { layout: "auth" });
+}
