@@ -84,9 +84,16 @@ module.exports = function () {
     usuariosController.formResetearContrasena
   );
 
-  routes.post("/restablecer_contrasena", authController.enviarToken);
+  routes.post("/restablecer_password", authController.enviarToken);
 
-  routes.get("/resetear_contrasena/:token", authController.validarToken);
+  routes.get("/resetear_password/:token", authController.validarToken);
+
+  routes.post(
+    "/resetear_password/:token",
+    authController.actualizarPassword
+  );
+  
+  // Productos
 
   routes.get("/producto/:url", productosController.obtenerProductoPorUrl);
 
