@@ -3,6 +3,8 @@ const Producto = require("../models/Producto");
 const Categoria = require("../models/Categoria");
 const Usuario = require("../models/Usuario");
 const { userEnter } = require("./usuariosController");
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 // Muestra todos los productos
 exports.inicioProductos = (req, res, next) => {
@@ -307,23 +309,28 @@ exports.miTienda = (req, res, next) =>{
 };
 
 // buscar productos
-exports.buscarProductos = async (req, res, next) => {
+exports.buscarProducto = async (req, res, next) => {
   // Obtener el usuario actual
   const usuario = res.locals.usuario;
   const mensajes = [];
 
   const { parametroBusqueda } = req.body;
+  console.log(req.body);
 
   try {
-    const productos = await Producto.findAll({
+    await Producto.findAll({
       where:{
         nombre: {
-          [Op.like]: `%${parametroBusqueda}`,
-        }        
-      }
-    });    
-
-    return res.render("productos", { productos });
+          [Op.like]: `%${parametroBusqueda}%`,
+        },      
+      },
+    }).then(function (productos){
+      productos = productos.map(function (producto) {        
+        return producto;
+      });
+      // Renderizar solo si la promesa se cumple
+      res.render("resultados_busqueda", { productos, parametroBusqueda });
+    });
   } catch (error) {
     // Crear el mensaje de error
     mensajes.push({
@@ -331,5 +338,5 @@ exports.buscarProductos = async (req, res, next) => {
       type: "alert-warning",
     });
     res.render("productos", mensajes);
-  }
+  }  
 };

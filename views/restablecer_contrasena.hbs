@@ -1,0 +1,74 @@
+<style>
+    .container {
+        margin: 0%;
+        margin-left: 0%;
+        padding: 0%;
+        max-width: 100%;
+    }
+
+    .row {
+        margin-right: 0%;
+    }
+
+    .footer {
+        display: none;
+    }
+</style>
+
+<div class="hero_Login">
+    <div class="content_HeroLogin">
+        {{!--Parte superior del login--}}
+
+        <div class=" row conten_header-inicio-sesion  bg-dark">
+
+            <div class="icono_Login mt-1">
+                <a href="/"><i class="fas fa-home"></i> Inicio</a>
+            </div>
+
+            <div class="ml-auto mt-1">
+                <p class="mr-5 animate__animated animate__backInDown">¿Aún no tiene cuenta? <a
+                        href="/registro">Regístrese</a></p>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="cuadroLogin mx-auto mb-2 pt-4">
+                <div class="cuadroContent resCon text-center">
+                    <h1 class="mt-4 mb-2">Restablezca su contraseña</h1>                    
+                </div>
+
+                <div>
+                    <form class="form-signin formlogin" action="/restablecer_password" method="POST">
+                        {{!--Alertas
+                            {{>messages}}--}}
+                        <div class="formdatos mt-4">
+                            <input type="email" name="email" id="email" required>
+                            <label class="lbl-nombre">
+                                <span class="text-nomb">
+                                    Correo electrónico
+                                </span>
+                            </label>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <a href="/iniciar_sesion">Ir al inicio de sesión</a>
+                        </div>                        
+
+                        <p class="text-center"> <button class="btn btn-block"
+                                style="width: 90%; margin:auto; margin-bottom:8%; margin-top:9%" type="submit">Restablecer</button></p>
+                    </form>
+                    
+                </div>
+            </div>
+
+        </div>
+
+        {{!-- Pie de página --}}
+        <footer class="mt-5 py-3 text-center">
+            <div class="container">
+                <span class="text-white">© Fashion Wear - Invictus Development 2020</span>
+            </div>
+        </footer>
+    </div>
+</div>

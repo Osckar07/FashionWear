@@ -78,6 +78,15 @@ module.exports = function () {
     authController.usuarioAutenticado,
     usuariosController.cambiar_contrasena
   );
+  
+  routes.get(
+    "/form_resetear_contrasena",    
+    usuariosController.formResetearContrasena
+  );
+
+  routes.post("/restablecer_contrasena", authController.enviarToken);
+
+  routes.get("/resetear_contrasena/:token", authController.validarToken);
 
   routes.get("/producto/:url", productosController.obtenerProductoPorUrl);
 
@@ -99,10 +108,10 @@ module.exports = function () {
     productosController.actualizarProducto
   );
   
-  // routes.post(
-  //   "/buscar_producto",  
-  //   productosController.buscarProducto
-  // );
+  routes.post(
+    "/buscar_producto",  
+    productosController.buscarProducto
+  );
 
   return routes;
 };
