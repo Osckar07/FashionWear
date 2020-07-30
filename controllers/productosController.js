@@ -185,12 +185,22 @@ exports.obtenerProductoPorUrl = async (req, res, next) => {
         url: req.params.url,
       },
     });
+    const tienda = await Usuario.findOne({
+      where: {
+        id: producto.usuarioId,
+      },
+    });    
+    const cat = await Categoria.findOne({
+      where: {
+        id: producto.categoriumId,
+      },
+    }); 
 
     res.render("ver_producto", {
-      producto: producto.dataValues
+      producto: producto.dataValues, tienda: tienda.dataValues, cat: cat.dataValues
     });    
   } catch (error) {
-    res.redirect("/");
+    res.redirect("/productos");
   }
 };
 

@@ -84,15 +84,15 @@ module.exports = function () {
   routes.post(
     "/producto/actualizar_producto/:id",
     authController.usuarioAutenticado,
-    // Sanitización
-    body("nombre").notEmpty().trim().escape(),    
+    body("nombre").notEmpty().trim().escape(),   
+    body("descripcion").notEmpty().trim().escape(),  
     productosController.actualizarProducto
   );
   
   routes.post(
     "/buscar_producto",
     // Sanitización
-    body("nombre").notEmpty().trim().escape(),
+    body("parametroBusqueda").notEmpty().trim().escape(),
     productosController.buscarProducto
   );
 
