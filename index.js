@@ -28,6 +28,19 @@ const db = require("./config/db");
 
 //Instalamos cookie-parser, connect-flash: permite pasar mensajes de error y express-session
 
+const path = require("path");
+const multer = require('multer');
+const {
+  v4: uuidv4
+} = require('uuid');
+
+const storage = multer.diskStorage({
+  destination: path.join(__dirname, '../public/img/image'),
+  filename: (req, file, cb) => {
+    cb(null, `${uuidv4()}${path.extname(file.originalname)}`.toLowerCase());
+  }
+});
+
 //Importar los modelos
 require("./models/Producto");
 require("./models/Categoria");
@@ -55,14 +68,12 @@ app.engine(
     // Helper que nos ayuda a verificar si el tipo de usuario es admin o no y así esconder ciertas caracteristicas
     helpers: {
       verificacion: function (value) {
-        if (value == 0) {
-        } else {
+        if (value == 0) {} else {
           return "hidden";
         }
       },
       verificacionNormal: function (value) {
-        if (value == 1) {
-        } else {
+        if (value == 1) {} else {
           return "hidden";
         }
       },
@@ -73,7 +84,9 @@ app.engine(
 app.set("view engine", "hbs");
 
 // Habilitar bodyParser para leer los datos enviados por POST
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 //Habilitar el uso de connect-flash para compartir mensajes
 app.use(flash());
@@ -94,12 +107,19 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+//console.log(req.file);
+
 //Pasar algunos valores mediante el middleware
 app.use((req, res, next) => {
   //Pasar el usuario a variables locales de la petición
-  res.locals.usuario = { ...req.user } || null;
+  res.locals.usuario = {
+    ...req.user
+  } || null;
 
-  res.locals.categoria = { ...req.categoria } || null;
+  res.locals.categoria = {
+    ...req.categoria
+  } || null;
   app.locals.categoria = req.categoria;
   app.locals.user = req.user;
   //Pasar los mensajes a las variables locales de la peticón
@@ -108,6 +128,22 @@ app.use((req, res, next) => {
   //Continuar con el camino del middleware
   next();
 });
+
+app.use(multer({
+  storage,
+  fileFilter: function (req, file, cb) {
+
+    var filetypes = /jpeg|jpg|png|gif/;
+    var mimetype = filetypes.test(file.mimetype);
+    var extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+
+    if (mimetype && extname) {
+      return cb(null, true);
+    }
+    mensajes="Error: File upload only supports the following filetypes - " + filetypes;
+  }
+}).single('image'));
+
 
 // Le indicamos a express dónde están las rutas del servidor
 app.use("/", routes());
