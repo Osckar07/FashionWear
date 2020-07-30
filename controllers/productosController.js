@@ -5,6 +5,16 @@ const Usuario = require("../models/Usuario");
 const { userEnter } = require("./usuariosController");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
+const path = require("path");
+const cloudinary = require("cloudinary");
+const fs = require("fs-extra");
+const { fips } = require("crypto");
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 // Muestra todos los productos
 exports.inicioProductos = (req, res, next) => {
@@ -30,6 +40,9 @@ exports.formularioNuevoProducto = async (req, res, next) => {
 };
 
 exports.nuevoProducto = async (req, res, next) => {
+
+  console.log(req.file);
+
   // Obtener el usuario actual
   const usuario = res.locals.usuario;
   const cat = res.locals.categoria;
@@ -77,11 +90,15 @@ exports.nuevoProducto = async (req, res, next) => {
 
   // Si hay errores
   if (mensajes.length) {
-    res.render("crear_producto", {
+    res.render("crear_producto", { 
+      categoria,
+      layout: "userEnter",
       mensajes,
     });
   } else {
     try {
+      const result = await cloudinary.v2.uploader.upload(req.file.path, (error, resulado)=>{console.log(resulado, error)});
+      console.log(result);
       categoriumId = categoria
       console.log(categoriumId);
       // Insertar el producto a la base de datos
@@ -89,11 +106,13 @@ exports.nuevoProducto = async (req, res, next) => {
         nombre,
         descripcion,
         tipoProducto,
+        imagen: result.url,
         talla,
         precio,
         usuarioId: usuario.id,
         categoriumId,
       });
+      await fs.unlink(req.file.path);
       console.log(nombre, descripcion, tipoProducto, talla, precio, categoriumId);
       mensajes.push({
         error: "Producto almacenado satisfactoriamente.",

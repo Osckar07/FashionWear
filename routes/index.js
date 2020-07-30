@@ -4,7 +4,7 @@ const routes = express.Router();
 // Importar express-validator
 const { body } = require("express-validator");
 
-// Importar los controladores
+// Importar los controladoresa
 const productosController = require("../controllers/productosController");
 const usuariosController = require("../controllers/usuariosController");
 const authController = require("../controllers/authController");
