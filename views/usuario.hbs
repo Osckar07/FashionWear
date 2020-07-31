@@ -1,4 +1,4 @@
-<style>
+{{!-- <style>
   .container {
         margin: 0%;
         margin-left: 0%;
@@ -8,64 +8,66 @@
 </style>
 
 
-<div class="paddingUsuario">
-    
-<div  class="perfilUsuario">
-    <h2>Mi perfil</h2>
-    
-        <ul class="nav nav-tabs">
+<div class="paddingUsuario"> --}}
+
+<div class="perfilUsuario mt-3">
+    <h2 class="mb-4">Mi Perfil</h2>
+
+    <ul class="nav nav-tabs">
         <li class="nav-item">
             <a class="nav-link active" href="#">Información Basica</a>
+        </li>        
+        <li class="nav-item">
+            <a class="nav-link" href="/perfil/usuario/actualizar_informacion">Actualizar Información</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/perfil/usuario/cambiar_contrasena">Contraseña</a>
+            <a class="nav-link" href="/perfil/usuario/cambiar_contrasena">Cambiar contraseña</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Dirreccion de entrega</a>
-        </li>
-        <li class="nav-item">
+        {{!-- <li class="nav-item">
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-        </ul>
+        </li> --}}
+    </ul>
 
-        <div class="mostrarDatosGenerales mt-4">
+    <div class="mostrarDatosGenerales mt-4">
         <form>
-        <div class="form-group row">
-            <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
-            <div class="col-sm-10">
-            <input type="text" readonly class="form-control-plaintext" id="nombre" value="{{user.nombre}}">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
-            <div class="col-sm-10">
-            <input type="text" readonly class="form-control-plaintext" id="apellido" value="{{user.apellido}}">
-            </div>
-        </div>
+            <img src="{{user.imagen}}" alt="perfil">
             <div class="form-group row">
-            <label for="email" class="col-sm-2 col-form-label">Correo Electronico</label>
-            <div class="col-sm-10">
-            <input type="email" readonly class="form-control-plaintext" id="email" value="{{user.email}}">
+                <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="nombre"
+                        value="{{user.nombre}} {{user.apellido}}">
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label for="password" class="col-sm-2 col-form-label">Contraseña</label>
-            <div class="col-sm-8">
-            <input type="password" class="form-control" id="Contrasena_actual" placeholder="*********" disabled >
-            </div>
-            <button class="btn btn-primary"><a style="color: white; text-decoration: none;" href="/perfil/usuario/cambiar_contrasena">Cambiar Contraseña</a></button>
-        </div>
-        </div>
             <div class="form-group row">
-            <label for="direccion" class="col-sm-2 col-form-label">Direccion de entrega</label>
-            <div class="col-sm-8">
-            <input type="direccion" readonly class="form-control-plaintext" id="direccion" >
+                <label for="email" class="col-sm-2 col-form-label">Correo Electronico</label>
+                <div class="col-sm-10 mt-2">
+                    <p>{{user.email}}</p>
+                    {{!-- <input type="email" readonly class="form-control-plaintext" id="email" value="{{user.email}}"> --}}
+                </div>
             </div>
-            <button class="btn btn-primary pl-4 pr-3">Cambiar dirección</button>
+
+    </div>
+    <div class="form-group row">
+        <label for="direccion" class="col-sm-2 col-form-label">Teléfono: </label>
+        <div class="col-sm-8 mt-2">
+            <p class="text-muted" >Aún no ha llenado esta información</p>
         </div>
+    </div>
+    <div class="form-group row">
+        <label for="direccion" class="col-sm-2 col-form-label">Direccion de entrega</label>
+        <div class="col-sm-8 mt-2">
+            <p class="text-muted">Aún no ha llenado esta información</p>
         </div>
-                                                                                                                                                                          
+    </div>
+    <div class="form-group row mt-5">
+        <button class="btn btn-primary mx-5"><a style="color: white; text-decoration: none;"
+                href="/perfil/usuario/actualizar_informacion">Actualizar Información</a></button>
+        <button class="btn btn-primary mx-5"><a style="color: white; text-decoration: none;"
+                href="/perfil/usuario/cambiar_contrasena">Cambiar Contraseña</a></button>
+
+    </div>
 </div>
 
 </div>
 
+{{!-- </div> --}}

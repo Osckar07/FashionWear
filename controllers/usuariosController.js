@@ -57,7 +57,7 @@ exports.iniciarFacebook = (req,res,next) =>{
 
 exports.perfil =(req,res,next) =>{
 
-    res.render("usuario", {layout:"auth"});
+    res.render("usuario");
 }
 
 exports.cambiar_contrasena = (req,res,next)=>{
@@ -74,4 +74,17 @@ exports.dashboard = (req,res, next) =>{
 
 exports.formResetearContrasena = (req,res, next) =>{
     res.render("restablecer_contrasena", { layout: "auth" });
+}
+
+exports.perfilUsuarioNormal = (req,res,next) =>{    
+
+    res.render("perfil_usuario");
+}
+
+exports.actualizarInfoUsuario = async (req,res,next) =>{    
+    const usuario = res.locals.usuario;
+
+    const { email, telefono, direccion } = req.body;
+
+    res.render("perfil_usuario");
 }

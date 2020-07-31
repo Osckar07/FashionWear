@@ -53,6 +53,7 @@ module.exports = function () {
   routes.get(
     "/nuevo_producto",
     authController.usuarioAutenticado,    
+    authController.usuarioAdmin,
     productosController.formularioNuevoProducto
   );
 
@@ -62,6 +63,7 @@ module.exports = function () {
     // Sanitización
     body("nombre").notEmpty().trim().escape(),
     body("descripcion").notEmpty().trim().escape(),
+    authController.usuarioAdmin,
     productosController.nuevoProducto
   );
 
@@ -72,12 +74,14 @@ module.exports = function () {
   routes.get(
     "/producto/actualizar_producto/:url",
     authController.usuarioAutenticado,
+    authController.usuarioAdmin,
     productosController.modificarProducto
   );
 
   routes.delete(
     "/producto/eliminar_producto/:url",
     authController.usuarioAutenticado,
+    authController.usuarioAdmin,
     productosController.eliminarProducto
   );
 
@@ -85,7 +89,8 @@ module.exports = function () {
     "/producto/actualizar_producto/:id",
     authController.usuarioAutenticado,
     body("nombre").notEmpty().trim().escape(),   
-    body("descripcion").notEmpty().trim().escape(),  
+    body("descripcion").notEmpty().trim().escape(),
+    authController.usuarioAdmin,  
     productosController.actualizarProducto
   );
   
@@ -100,6 +105,7 @@ module.exports = function () {
    routes.get(
     "/productos_admin",
     authController.usuarioAutenticado,
+    authController.usuarioAdmin,
     productosController.mostrarProductosAdmin
   );
 
@@ -107,6 +113,7 @@ module.exports = function () {
   routes.get(
     "/perfil/mi_tienda",
     authController.usuarioAutenticado,
+    authController.usuarioAdmin,
     usuariosController.userEnter
   );
 
@@ -114,6 +121,7 @@ module.exports = function () {
   routes.get(
     "/perfil/mi_tienda/dashboard",
     authController.usuarioAutenticado,
+    authController.usuarioAdmin,
     usuariosController.dashboard
   );
 
@@ -126,6 +134,25 @@ module.exports = function () {
     "/perfil/usuario/cambiar_contrasena",
     authController.usuarioAutenticado,
     usuariosController.cambiar_contrasena
+  );
+
+  routes.post(
+    "/perfil/usuario/cambiar_contrasena",
+    authController.usuarioAutenticado,
+    authController.cambiarContrasenaUsuario
+  );
+
+  // ruta para perfil de usuario normal  
+  routes.get(
+    "/perfil/usuario/actualizar_informacion",
+    authController.usuarioAutenticado,
+    usuariosController.perfilUsuarioNormal
+  );
+
+  routes.post(
+    "/perfil/usuario/actualizar_informacion",
+    authController.usuarioAutenticado,
+    usuariosController.actualizarInfoUsuario
   );
 
   return routes;
