@@ -10,6 +10,7 @@ const cloudinary = require("cloudinary");
 const fs = require("fs-extra");
 const { fips } = require("crypto");
 
+// Configuración para cloudinary
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API,
@@ -18,18 +19,19 @@ cloudinary.config({
 
 // Muestra todos los productos
 exports.inicioProductos = (req, res, next) => {
-  res.render("inicio");
+  const usuario = res.locals.usuario;  
+
+  // Hará la verificación respectiva si el usuario es admin o no, para su posterior uso
+  res.render("inicio", { admin: usuario.tipoUsuario == 0 ? true : false });
 };
 
-exports.formularioNuevoProducto = async (req, res, next) => {
-  // const talla = [XS, S, M, L, XL, XXL, XXXL];
-
-  // Traeremos de la base de datos todas las categorias disponibles, servirán para realacionarla con el producto
+exports.formularioNuevoProducto = async (req, res, next) => {  
+  
   try {
+    // Traeremos de la base de datos todas las categorias disponibles, servirán para realacionarla con el producto
     const categoria = await Categoria.findAll();
     return res.render("crear_producto", { layout:"userEnter", categoria });
-  } catch (error) {
-    // Crear el mensaje de error
+  } catch (error) {    
     mensajes.push({
       error: "Error al obtener las categorias. Favor reintentar.",
       type: "alert-warning",
@@ -185,12 +187,22 @@ exports.obtenerProductoPorUrl = async (req, res, next) => {
         url: req.params.url,
       },
     });
+    const tienda = await Usuario.findOne({
+      where: {
+        id: producto.usuarioId,
+      },
+    });    
+    const cat = await Categoria.findOne({
+      where: {
+        id: producto.categoriumId,
+      },
+    }); 
 
     res.render("ver_producto", {
-      producto: producto.dataValues
+      producto: producto.dataValues, tienda: tienda.dataValues, cat: cat.dataValues
     });    
   } catch (error) {
-    res.redirect("/");
+    res.redirect("/productos");
   }
 };
 

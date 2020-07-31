@@ -1,5 +1,8 @@
+
+{{#if productos}}
+
 <div class="container contenedor-inicioProductos">
-    {{#if productos}}
+    
     {{#each productos}}
     <div class="row">
         {{!-- col-md-3 col-sm-6 --}}
@@ -9,7 +12,7 @@
                 <div class="product-image7">
                     <a href="#">
                         <img class="pic-1" src="{{dataValues.imagen}}">
-                        <img class="pic-2" src="http://bestjquery.com/tutorial/product-grid/demo8/images/img-2.jpg">
+                        <img class="pic-2" src="{{dataValues.imagen}}">
                     </a>
                     <ul class="social">
                         <li><a href="" class="fa fa-search"></a></li>
@@ -38,8 +41,10 @@
 
     </div>
     {{/each}}
-    {{else}}
-    <h4>No has ingresado productos aún.</h4>
-    {{/if}}
+    
 </div>
+{{else}}
+    <h4 class="mt-5 text-center">Ocurrió un problema al cargar los productos</h4>
+    <p class="mt-3 text-center"><a href="">Contáctate</a>  con el personal de FashionWear</p>
+    {{/if}}
 <hr>

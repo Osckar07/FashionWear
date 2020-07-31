@@ -50,6 +50,16 @@ exports.usuarioAutenticado = (req, res, next) => {
   return res.redirect("/iniciar_sesion");
 };
 
+exports.usuarioAdmin = (req, res, next) => {
+  // Si el usuario es admin
+  if (req.user.tipoUsuario == 0) {
+    return next();
+  }
+
+  // Si el usuario no es admin
+  return res.redirect("/iniciar_sesion");
+};
+
 // Genera un token para restablecer la contraseña
 exports.enviarToken = async (req, res, next) => {
   // Verificar si existe el usuario
@@ -162,5 +172,57 @@ exports.actualizarPassword = async (req, res, next) => {
   }
   else{
     console.log(req.body.password, req.body.cpassword);
+  }
+};
+
+exports.cambiarContrasenaUsuario = async (req, res, next) => {
+  const usuario = res.locals.usuario;
+
+  const {
+    // contrasena_actual,
+    contrasena_nueva,
+    confirmar_contrasena,
+  } = req.body;
+
+  // if(contrasena_actual_encyp != usuario.password){
+  //   console.log("no pasa");
+  // }
+  if (contrasena_nueva != confirmar_contrasena) {
+    req.flash("error", "Las contraseñas no coinciden");
+    res.redirect("/perfil/usuario/cambiar_contrasena");
+  }
+  if (contrasena_nueva == confirmar_contrasena) {
+    try {
+      console.log("antes de guardar");
+      const contrasena_nueva_hash = bcrypt.hashSync(
+        contrasena_nueva,
+        bcrypt.genSaltSync(10)
+      );
+      await Usuario.update(
+        {
+          password: contrasena_nueva_hash,
+        },
+        {
+          where: {
+            id: usuario.id,
+          },
+        }
+      );
+
+      req.flash("success", "¡Contraseña actualizada exitosamente!");
+
+      // Swal.fire("¡Éxito!", "¡Contraseña actualizada exitosamente!", "success");
+      // console.log("despues de swal");
+
+      setTimeout(() => {
+        res.redirect("/cerrar_sesion");
+        // window.location.href = "/cerrar_sesion";
+      }, 3000);
+
+      // res.redirect("/cerrar_sesion");
+    } catch (error) {
+      req.flash("error", "Ha ocurrido un error en el servidor");
+      res.redirect("/perfil/usuario/cambiar_contrasena");
+    }
   }
 };
