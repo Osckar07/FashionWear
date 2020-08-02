@@ -115,7 +115,7 @@ module.exports = function () {
     authController.usuarioAutenticado,
     authController.usuarioAdmin,
     usuariosController.userEnter
-  );
+  );    
 
   //ruta para dashboard
   routes.get(
@@ -153,7 +153,7 @@ module.exports = function () {
     "/perfil/usuario/actualizar_informacion",
     authController.usuarioAutenticado,
     usuariosController.actualizarInfoUsuario
-  );
+  );   
 
   return routes;
 };

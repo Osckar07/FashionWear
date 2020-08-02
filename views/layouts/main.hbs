@@ -71,27 +71,28 @@
         <div class="dropdown text-center align-self-center mx-3">
           <a class="dropdown-toggle dropT" style="color: white;" href="#" role="button" id="dropdownMenuLink"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-user-circle"></i> {{user.nombre}} {{user.apellido}}
+            <img width="25px" src="{{user.imagen}}" alt=""> {{user.nombre}} {{user.apellido}}
           </a>
+          {{!-- <i class="fas fa-user-circle"></i> --}}
 
           {{!-- Opciones dentro del menu, Mi Perfil y Cerrar sesión con su respectiva ruta --}}
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             {{!-- lo siguiente se cumplira solo si el usuario es admin --}}
             {{#if admin}}
-              <a class="dropdown-item dropM" href="/perfil/mi_tienda/dashboard">
-                <i class="fas fa-store-alt"></i> &nbsp; Tienda</a>
-              {{!--    <a {{verificacion user.tipoUsuario}} class="dropdown-item dropM" href="/productos_admin"><i
+            <a class="dropdown-item dropM" href="/perfil/mi_tienda/dashboard">
+              <i class="fas fa-store-alt"></i> &nbsp; Tienda</a>
+            {{!--    <a {{verificacion user.tipoUsuario}} class="dropdown-item dropM" href="/productos_admin"><i
                   class="fas fa-tshirt"></i></i> &nbsp; Mis Productos</a> --}}
 
-              <a class="dropdown-item dropM" href="/perfil/mi_tienda"><i class="far fa-user"></i> &nbsp; Mi Perfil</a>
-              {{!-- <a {{verificacion user.tipoUsuario}} class="dropdown-item dropM" href="/perfil/mi_tienda"><i class="far fa-user"></i> &nbsp; Mi Perfil</a> --}}
-              {{!-- <a class="dropdown-item dropM" href="#"><i class="far fa-user"></i> &nbsp; Mi Perfil</a> --}}
+            <a class="dropdown-item dropM" href="/perfil/usuario"><i class="far fa-user"></i> &nbsp; Mi Perfil</a>
+            {{!-- <a {{verificacion user.tipoUsuario}} class="dropdown-item dropM" href="/perfil/mi_tienda"><i class="far fa-user"></i> &nbsp; Mi Perfil</a> --}}
+            {{!-- <a class="dropdown-item dropM" href="#"><i class="far fa-user"></i> &nbsp; Mi Perfil</a> --}}
             {{else}}
-              <a class="dropdown-item dropM" href="/perfil/usuario"><i class="far fa-user"></i> &nbsp; Mi Perfil</a>
+            <a class="dropdown-item dropM" href="/perfil/usuario"><i class="far fa-user"></i> &nbsp; Mi Perfil</a>
             {{/if}}
             <a class="dropdown-item dropM" href="/cerrar_sesion"> &nbsp; &nbsp; &nbsp; Cerrar Sesión &nbsp; &nbsp;<i
                 class="fas fa-sign-out-alt"></i> </a>
-            </div>
+          </div>
 
         </div>
 
@@ -130,6 +131,18 @@
   </nav>
   </header>
 
+  {{#if user}}
+  {{#if infoIncompletaMensaje }}
+  <div class=" btn container fixed-bottom" style="height:13%; background-color: hsla(0, 0%, 8%, 0.918); display: flex; flex-direction: row; align-items: center;">
+    <div class="container mx-auto" style="display: flex; flex-direction: row; justify-content:center; ">
+      <p class="my-auto pr-3">Tienes alguna información incompleta, revisa tu perfil</p>
+      <a class="btn" style="background-color: #78e08f; color:black;" href="/perfil/usuario">Ir a mi perfil</a>
+    </div>
+
+  </div>
+  {{/if}}
+  {{/if}}
+
   {{!-- Contenido principal --}}
   <main class="flex-shrink-0 " style="margin-top: 8%;">
     <div class="container " style="padding-top: 2%;">
@@ -159,6 +172,14 @@
 
   {{!-- Script bundle con webpack --}}
   <script src="/dist/bundle.js"></script>
+
+  <script>
+    document.getElementById('inputGroupFile01').onchange = function () {
+      console.log(this.value);
+      document.getElementById('archivo').innerHTML = document.getElementById('inputGroupFile01').files[0].name;
+    }
+  </script>
+
 </body>
 
 </html>

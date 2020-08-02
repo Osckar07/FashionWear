@@ -22,7 +22,7 @@ exports.inicioProductos = (req, res, next) => {
   const usuario = res.locals.usuario;  
 
   // Hará la verificación respectiva si el usuario es admin o no, para su posterior uso
-  res.render("inicio", { admin: usuario.tipoUsuario == 0 ? true : false });
+  res.render("inicio", { admin: usuario.tipoUsuario == 0 ? true : false, infoIncompletaMensaje: usuario.telefono == null || usuario.direccion == null ? true : false });
 };
 
 exports.formularioNuevoProducto = async (req, res, next) => {  
@@ -43,7 +43,10 @@ exports.formularioNuevoProducto = async (req, res, next) => {
 
 exports.nuevoProducto = async (req, res, next) => {
 
-  console.log(req.file);
+  console.log(req.files);  
+
+  const imagenes = req.files;
+  const urls = []
 
   // Obtener el usuario actual
   const usuario = res.locals.usuario;
@@ -58,6 +61,7 @@ exports.nuevoProducto = async (req, res, next) => {
     tipoProducto,
     talla,
     precio,
+    cantidad,
     categoria,
   } = req.body;
   const mensajes = [];
@@ -83,7 +87,7 @@ exports.nuevoProducto = async (req, res, next) => {
       type: "alert-danger",
     });
   }
-  if (!tipoProducto || !talla || !precio || !categoria) {
+  if (!tipoProducto || !talla || !precio || !cantidad|| !categoria) {
     mensajes.push({
       error: "Debes completar todos los campos",
       type: "alert-danger",
@@ -99,22 +103,35 @@ exports.nuevoProducto = async (req, res, next) => {
     });
   } else {
     try {
-      const result = await cloudinary.v2.uploader.upload(req.file.path, (error, resulado)=>{console.log(resulado, error)});
-      console.log(result);
+          
+    for (const img of imagenes) {
+      const { path } = img;
+      const newPath = await cloudinary.v2.uploader.upload(path, (error, resulado)=>{console.log(resulado, error)});
+      urls.push(newPath)
+      fs.unlinkSync(path)
+      console.log("pasa");
+    }
+      // const result = await cloudinary.v2.uploader.upload(req.file[0].path, (error, resulado)=>{console.log(resulado, error)});
+      // const result2 = await cloudinary.v2.uploader.upload(req.file[1].path, (error, resulado)=>{console.log(resulado, error)});
+      console.log(urls);
       categoriumId = categoria
       console.log(categoriumId);
+      const urlimg1 = urls[0].url;
+      const urlimg2 = urls[1].url;
       // Insertar el producto a la base de datos
       await Producto.create({
         nombre,
         descripcion,
         tipoProducto,
-        imagen: result.url,
+        imagen: urlimg1,
+        imagen2: urlimg2,
         talla,
         precio,
+        cantidad,
         usuarioId: usuario.id,
         categoriumId,
       });
-      await fs.unlink(req.file.path);
+      // await fs.unlink(req.file.path);      
       console.log(nombre, descripcion, tipoProducto, talla, precio, categoriumId);
       mensajes.push({
         error: "Producto almacenado satisfactoriamente.",
@@ -141,7 +158,7 @@ exports.mostrarProductos = async (req, res, next) => {
   try {
     const productos = await Producto.findAll();    
 
-    return res.render("productos", { productos });
+    return res.render("productos", { productos, admin: usuario.tipoUsuario == 0 ? true : false, infoIncompletaMensaje: usuario.telefono == null || usuario.direccion == null ? true : false });
   } catch (error) {
     // Crear el mensaje de error
     mensajes.push({
@@ -199,7 +216,7 @@ exports.obtenerProductoPorUrl = async (req, res, next) => {
     }); 
 
     res.render("ver_producto", {
-      producto: producto.dataValues, tienda: tienda.dataValues, cat: cat.dataValues
+      producto: producto.dataValues, tienda: tienda.dataValues, cat: cat.dataValues, admin: usuario.tipoUsuario == 0 ? true : false, prodPer: producto.usuarioId == usuario.id ? true : false
     });    
   } catch (error) {
     res.redirect("/productos");
@@ -217,10 +234,16 @@ exports.modificarProducto = async (req, res, next) => {
     });
 
 
-    const categoria = await Categoria.findAll();     
+    const categoria = await Categoria.findOne({
+      where:{
+        id: producto.categoriumId,
+      }
+    });     
+    
+    const cat = await Categoria.findAll();
 
     res.render("actualizar_producto", { layout:"userEnter",
-      producto: producto.dataValues, categoria
+      producto: producto.dataValues, categoria: categoria.dataValues, cat
     });
   } catch (error) {
     console.log("-------error_____-----");
@@ -239,8 +262,13 @@ exports.actualizarProducto = async (req, res, next) => {
     tipoProducto,
     talla,
     precio,
+    cantidad,
     categoria,
   } = req.body;
+
+  const imagenes = req.files;
+
+  const urls = [];
 
   // Obtener la información del usuario actual
   const usuario = res.locals.usuario;
@@ -285,6 +313,21 @@ exports.actualizarProducto = async (req, res, next) => {
   } else {
     // No existen errores ni mensajes
     try {
+
+      for (const img of imagenes) {
+        const { path } = img;
+        const newPath = await cloudinary.v2.uploader.upload(path, (error, resulado)=>{console.log(resulado, error)});
+        urls.push(newPath)
+        fs.unlinkSync(path)        
+      }
+        // const result = await cloudinary.v2.uploader.upload(req.file[0].path, (error, resulado)=>{console.log(resulado, error)});
+        // const result2 = await cloudinary.v2.uploader.upload(req.file[1].path, (error, resulado)=>{console.log(resulado, error)});
+        console.log(urls);
+        categoriumId = categoria
+        console.log(categoriumId);
+        const urlimg1 = urls[0].url;
+        const urlimg2 = urls[1].url;
+
       await Producto.update(
         {
           nombre,
@@ -292,8 +335,11 @@ exports.actualizarProducto = async (req, res, next) => {
           tipoProducto,
           talla,
           precio,
+          imagen: urlimg1,
+          imagen2: urlimg2,
+          cantidad,
           usuarioId: usuario.id,
-          categoriaId: categoria,
+          categoriumId: categoria,
         },
         {
           where: {
@@ -360,7 +406,7 @@ exports.buscarProducto = async (req, res, next) => {
         return producto;
       });
       // Renderizar solo si la promesa se cumple
-      res.render("resultados_busqueda", { productos, parametroBusqueda });
+      res.render("resultados_busqueda", { productos, parametroBusqueda, admin: usuario.tipoUsuario == 0 ? true : false });
     });
   } catch (error) {
     // Crear el mensaje de error

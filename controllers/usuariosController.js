@@ -30,10 +30,13 @@ exports.registrarse = async (req, res, next) => {
 
   console.log("tipo de usuario", tipoUsuario);
 
+  const imagen = "https://res.cloudinary.com/rivera84/image/upload/v1596177774/usuario_default_aymrvo.png";
+
   // Intentar crear el usuario
   try {
     await Usuario.create({
       tipoUsuario,
+      imagen,
       nombre,
       apellido,
       email,
@@ -75,16 +78,28 @@ exports.iniciarFacebook = (req, res, next) => {
   console.log("Usiaro es:", res.locals.usuario);
 };
 
-exports.perfil = (req, res, next) => {
-  res.render("usuario");
+exports.perfil = async (req, res, next) => {
+  const usuario = res.locals.usuario;
+  const us = await Usuario.findOne({
+    where:{
+      id: usuario.id
+    },
+  });
+  res.render("usuario", { us: us.dataValues, admin: us.tipoUsuario == 0 ? true : false, infoIncompleta: us.telefono == null || us.direccion == null ? true : false });
 };
 
 exports.cambiar_contrasena = (req, res, next) => {
   res.render("cambiar_contrasena", { layout: "main" });
 };
 
-exports.userEnter = (req, res, next) => {
-  res.render("empresaDatos", { layout: "userEnter" });
+exports.userEnter = async (req, res, next) => {
+  const usuario = res.locals.usuario;
+  const us = await Usuario.findOne({
+    where:{
+      id: usuario.id
+    },
+  });  
+  res.render("usuario", { layout: "userEnter", us: us.dataValues, admin: us.tipoUsuario == 0 ? true : false, infoIncompleta: us.telefono == null || us.direccion == null ? true : false });
 };
 
 exports.dashboard = (req, res, next) => {
@@ -95,8 +110,14 @@ exports.formResetearContrasena = (req, res, next) => {
   res.render("restablecer_contrasena", { layout: "auth" });
 };
 
-exports.perfilUsuarioNormal = (req, res, next) => {
-  res.render("perfil_usuario");
+exports.perfilUsuarioNormal = async (req, res, next) => {
+  const usuario = res.locals.usuario;
+  const us = await Usuario.findOne({
+    where:{
+      id: usuario.id
+    },
+  });
+  res.render("perfil_usuario", { us: us.dataValues });
 };
 
 exports.actualizarInfoUsuario = async (req, res, next) => {
@@ -104,6 +125,8 @@ exports.actualizarInfoUsuario = async (req, res, next) => {
 
   const { email, telefono, direccion } = req.body;
   const mensajes = [];
+  const urls = [];
+  const imagenes = req.files;
 
   if (!telefono || !direccion) {
     mensajes.push({
@@ -118,19 +141,35 @@ exports.actualizarInfoUsuario = async (req, res, next) => {
     });
   } else {
     try {
-        console.log(req.file);
-      const result = await cloudinary.v2.uploader.upload(
-        req.file.path,
-        (error, resulado) => {
-          console.log(resulado, error);
-        }
-      );
-      console.log(result);
 
-      // Insertar el producto a la base de datos
+      for (const img of imagenes) {
+        const { path } = img;
+        const newPath = await cloudinary.v2.uploader.upload(path, (error, resulado)=>{console.log(resulado, error)});
+        urls.push(newPath)
+        fs.unlinkSync(path)
+        console.log("pasa");
+      }
+      const urlimg1 = urls[0].url;
+
+      if(!urlimg1){
+        await Usuario.update(
+          {              
+              telefono,
+              direccion,
+          },
+          {
+            where: {
+              id: usuario.id,
+            },
+          }
+        );
+      } else{
+        // Insertar el producto a la base de datos
       await Usuario.update(
         {
-            imagen: result.url,
+            imagen: urlimg1,
+            telefono,
+            direccion,
         },
         {
           where: {
@@ -138,15 +177,18 @@ exports.actualizarInfoUsuario = async (req, res, next) => {
           },
         }
       );
-
-      console.log(req.file.path);
-      
-      await fs.unlink(req.file.path);
+      }      
 
       mensajes.push({
-        error: "Producto almacenado satisfactoriamente.",
+        error: "Información actualizada satisfactoriamente.",
         type: "alert-success",
       });
+
+      // const us = await Usuario.findOne({
+      //   where:{
+      //     id: usuario.id
+      //   },
+      // });
 
       res.redirect("/perfil/usuario");
     } catch (error) {
@@ -156,7 +198,6 @@ exports.actualizarInfoUsuario = async (req, res, next) => {
         type: "alert-warning",
       });
     }
-  }
-
-  //   res.render("perfil_usuario");
+  }  
 };
+
