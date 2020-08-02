@@ -44,6 +44,12 @@ const Usuario = db.define(
         },
       },
     },
+    telefono: {
+      type: Sequelize.STRING(15),      
+    },
+    direccion: {
+      type: Sequelize.STRING(150),      
+    },
     email: {
       type: Sequelize.STRING(50),
       allowNull: false,

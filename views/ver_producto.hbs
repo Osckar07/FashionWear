@@ -16,7 +16,7 @@
                 <div class="product-image7 mx-auto" style="width: 100%;">
                     <a href="#">
                         <img class="pic-1" src="{{producto.imagen}}">
-                        <img class="pic-2" src="{{producto.imagen}}">
+                        <img class="pic-2" src="{{producto.imagen2}}">
                     </a>
                     {{!-- <span class="product-new-label">{{dataValues.tipoProducto}}</span> --}}
 
@@ -42,8 +42,14 @@
                 <li class="fa fa-star"></li>
             </ul>
         </div>
+        {{#if admin}}
+        {{#if prodPer}}
+        <p class="text-center mt-4 mr-5"><a class="btn" href="/producto/actualizar_producto/{{producto.url}}"><i class="fas fa-edit"></i>&nbsp; Editar</a></p>
+        {{/if}}
+        {{else}}        
         <p class="text-center mt-4 mr-5"><a class="btn" href="#"><i class="fa fa-shopping-cart"></i> &nbsp; Agregar al carrito</a></p>
         <p class="text-center mt-4 mr-5"><a class="btn" href="#"> <i class="fas fa-shopping-bag"></i> &nbsp; Comprar</a></p>
+        {{/if}}
     </div>
 
 </div>

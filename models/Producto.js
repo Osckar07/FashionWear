@@ -45,6 +45,12 @@ const Producto = db.define(
     imagen: {
       type: Sequelize.STRING,
     },
+    imagen2: {
+      type: Sequelize.STRING,
+    },
+    cantidad: {
+      type: Sequelize.INTEGER,
+    },
     talla: {
       type: Sequelize.STRING,
     },
