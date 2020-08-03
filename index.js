@@ -77,6 +77,14 @@ app.engine(
           return "hidden";
         }
       },
+      verificarTienda: function (us, usp){
+        console.log(us, usp);
+        if(us == usp){
+          return true;
+        }else{
+          return false;
+        }
+      },
     },
   })
 );

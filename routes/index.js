@@ -160,8 +160,13 @@ module.exports = function () {
     "/inicio/tienda",
     authController.usuarioAutenticado,
     usuariosController.enterUsuario
-  )
+  );
 
+  /*ruta ver el perfil del vendedor */
+  routes.get(
+    "/inicio/tienda/:url",    
+    usuariosController.enterUsuario
+  )
   
 
   return routes;
