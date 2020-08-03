@@ -202,5 +202,47 @@ exports.actualizarInfoUsuario = async (req, res, next) => {
 };
 
 exports.enterUsuario = async(req,res, next) =>{
-  res.render("enterUsuario", {layout:"main"});
-}
+
+  const usuario = res.locals.usuario;
+
+  try {
+    // Obtener el producto mediante la URL
+    const tienda = await Usuario.findOne({
+      where: {
+        url: req.params.url,
+      },
+    });
+    const productos = await Producto.findAll({
+      where: {
+        usuarioId: tienda.id,
+      },
+    });       
+    
+    console.log(tienda);
+
+    const productosArray = [];
+
+    productos.map((producto) => {
+      productosArray.push({
+        id: producto.dataValues.id,
+        nombre: producto.dataValues.nombre,
+        descripcion: producto.dataValues.descripcion,
+        imagen: producto.dataValues.imagen,
+        imagen2: producto.dataValues.imagen2,
+        precio: producto.dataValues.precio,
+        talla: producto.dataValues.talla,
+        cantidad: producto.dataValues.cantidad,        
+        url: producto.dataValues.url, 
+      });
+    });
+    console.log(productosArray);
+    // productos: productosArray,
+
+    res.render("enterUsuario", {
+      tienda: tienda.dataValues, productos: productosArray
+    });    
+  } catch (error) {
+    res.send(error);
+    // res.redirect("/productos");
+  }
+};

@@ -11,6 +11,11 @@ const Producto = require("./Producto");
 //importamos bcrypt-nodejs
 const bcrypt = require("bcrypt-nodejs");
 
+//Importamos slug
+const slug = require("slug");
+//Importamos shortid
+const shortid = require("shortid");
+
 //Definicion del modelo
 const Usuario = db.define(
   "usuario",
@@ -50,6 +55,9 @@ const Usuario = db.define(
     direccion: {
       type: Sequelize.STRING(150),      
     },
+    url: {
+      type: Sequelize.STRING,
+    },
     email: {
       type: Sequelize.STRING(50),
       allowNull: false,
@@ -87,7 +95,18 @@ const Usuario = db.define(
           usuario.password,
           bcrypt.genSaltSync(13)
         );
-      },
+        console.log("Antes de insertar en la base de datos");
+        const url = slug(usuario.nombre).toLowerCase();
+
+        usuario.url = `${url}_${shortid.generate()}`;
+
+      },              
+      beforeUpdate(usuario) {
+        console.log("Antes de actualizar la base");
+        const url = slug(usuario.nombre).toLowerCase();
+
+        usuario.url = `${url}_${shortid.generate()}`;
+      }
     },
   }
 );

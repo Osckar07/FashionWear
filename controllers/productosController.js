@@ -14,39 +14,70 @@ const { fips } = require("crypto");
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API,
-  api_secret: process.env.CLOUDINARY_API_SECRET
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 // Muestra todos los productos
-exports.inicioProductos = (req, res, next) => {
-  const usuario = res.locals.usuario;  
+exports.inicioProductos = async (req, res, next) => {
+  const usuario = res.locals.usuario;
 
-  // Hará la verificación respectiva si el usuario es admin o no, para su posterior uso
-  res.render("inicio", { admin: usuario.tipoUsuario == 0 ? true : false, infoIncompletaMensaje: usuario.telefono == null || usuario.direccion == null ? true : false });
-};
-
-exports.formularioNuevoProducto = async (req, res, next) => {  
-  
-  try {
-    // Traeremos de la base de datos todas las categorias disponibles, servirán para realacionarla con el producto
-    const categoria = await Categoria.findAll();
-    return res.render("crear_producto", { layout:"userEnter", categoria });
-  } catch (error) {    
-    mensajes.push({
-      error: "Error al obtener las categorias. Favor reintentar.",
-      type: "alert-warning",
+  if (usuario.id != null) {
+    console.log("dentrp de if");
+    const us = await Usuario.findOne({
+      where: {
+        id: usuario.id,
+      },
     });
 
-    res.render("productosAdmin", mensajes);
+    // Hará la verificación respectiva si el usuario es admin o no, para su posterior uso
+    res.render("inicio", { layout: "main",
+      us: us.dataValues,
+      admin: us.tipoUsuario == 0 ? true : false,
+      infoIncompletaMensaje:
+        us.telefono == null || us.direccion == null ? true : false,
+    });
+  } else {
+    // Hará la verificación respectiva si el usuario es admin o no, para su posterior uso
+    res.render("inicio", {
+      admin: usuario.tipoUsuario == 0 ? true : false,
+      infoIncompletaMensaje:
+        usuario.telefono == null || usuario.direccion == null ? true : false,
+    });
+  }
+};
+
+exports.formularioNuevoProducto = async (req, res, next) => {
+  const usuario = res.locals.usuario;
+  const mensajes = [];
+
+  if (usuario.telefono == null || usuario.direccion == null) {
+    mensajes.push({
+      error:
+        "Para ingresar un producto, primero debes completar todos tus datos.",
+      type: "alert-danger",
+    });
+    res.render("productosAdmin", { layout: "userEnter", mensajes });
+  } else {
+    try {
+      // Traeremos de la base de datos todas las categorias disponibles, servirán para realacionarla con el producto
+      const categoria = await Categoria.findAll();
+      return res.render("crear_producto", { layout: "userEnter", categoria });
+    } catch (error) {
+      mensajes.push({
+        error: "Error al obtener las categorias. Favor reintentar.",
+        type: "alert-warning",
+      });
+
+      res.render("productosAdmin", mensajes);
+    }
   }
 };
 
 exports.nuevoProducto = async (req, res, next) => {
-
-  console.log(req.files);  
+  console.log(req.files);
 
   const imagenes = req.files;
-  const urls = []
+  const urls = [];
 
   // Obtener el usuario actual
   const usuario = res.locals.usuario;
@@ -87,7 +118,7 @@ exports.nuevoProducto = async (req, res, next) => {
       type: "alert-danger",
     });
   }
-  if (!tipoProducto || !talla || !precio || !cantidad|| !categoria) {
+  if (!tipoProducto || !talla || !precio || !cantidad || !categoria) {
     mensajes.push({
       error: "Debes completar todos los campos",
       type: "alert-danger",
@@ -96,25 +127,29 @@ exports.nuevoProducto = async (req, res, next) => {
 
   // Si hay errores
   if (mensajes.length) {
-    res.render("crear_producto", { 
+    res.render("crear_producto", {
       categoria,
       layout: "userEnter",
       mensajes,
     });
   } else {
     try {
-          
-    for (const img of imagenes) {
-      const { path } = img;
-      const newPath = await cloudinary.v2.uploader.upload(path, (error, resulado)=>{console.log(resulado, error)});
-      urls.push(newPath)
-      fs.unlinkSync(path)
-      console.log("pasa");
-    }
+      for (const img of imagenes) {
+        const { path } = img;
+        const newPath = await cloudinary.v2.uploader.upload(
+          path,
+          (error, resulado) => {
+            console.log(resulado, error);
+          }
+        );
+        urls.push(newPath);
+        fs.unlinkSync(path);
+        console.log("pasa");
+      }
       // const result = await cloudinary.v2.uploader.upload(req.file[0].path, (error, resulado)=>{console.log(resulado, error)});
       // const result2 = await cloudinary.v2.uploader.upload(req.file[1].path, (error, resulado)=>{console.log(resulado, error)});
       console.log(urls);
-      categoriumId = categoria
+      categoriumId = categoria;
       console.log(categoriumId);
       const urlimg1 = urls[0].url;
       const urlimg2 = urls[1].url;
@@ -131,8 +166,15 @@ exports.nuevoProducto = async (req, res, next) => {
         usuarioId: usuario.id,
         categoriumId,
       });
-      // await fs.unlink(req.file.path);      
-      console.log(nombre, descripcion, tipoProducto, talla, precio, categoriumId);
+      // await fs.unlink(req.file.path);
+      console.log(
+        nombre,
+        descripcion,
+        tipoProducto,
+        talla,
+        precio,
+        categoriumId
+      );
       mensajes.push({
         error: "Producto almacenado satisfactoriamente.",
         type: "alert-success",
@@ -153,12 +195,33 @@ exports.nuevoProducto = async (req, res, next) => {
 exports.mostrarProductos = async (req, res, next) => {
   // Obtener el usuario actual
   const usuario = res.locals.usuario;
-  const mensajes = [];
+  const mensajes = [];  
 
   try {
-    const productos = await Producto.findAll();    
-
-    return res.render("productos", { productos, admin: usuario.tipoUsuario == 0 ? true : false, infoIncompletaMensaje: usuario.telefono == null || usuario.direccion == null ? true : false });
+    if (usuario.id != null) {
+      const us = await Usuario.findOne({
+        where: {
+          id: usuario.id,
+        },
+      });
+      const productos = await Producto.findAll();
+      
+      return res.render("productos", {
+        productos,
+        us: us.dataValues,        
+        admin: usuario.tipoUsuario == 0 ? true : false,
+        infoIncompletaMensaje:
+          us.telefono == null || us.direccion == null ? true : false,
+      });
+    } else{
+      const productos = await Producto.findAll();
+      return res.render("productos", {
+        productos,
+        admin: usuario.tipoUsuario == 0 ? true : false,
+        infoIncompletaMensaje:
+        usuario.telefono == null || usuario.direccion == null ? true : false,
+      });
+    }
   } catch (error) {
     // Crear el mensaje de error
     mensajes.push({
@@ -180,7 +243,7 @@ exports.mostrarProductosAdmin = async (req, res, next) => {
         usuarioId: usuario.id,
       },
     });
-    return res.render("productosAdmin", {layout:"userEnter", productos });
+    return res.render("productosAdmin", { layout: "userEnter", productos });
   } catch (error) {
     // Crear el mensaje de error
     mensajes.push({
@@ -188,7 +251,7 @@ exports.mostrarProductosAdmin = async (req, res, next) => {
       type: "alert-warning",
     });
 
-    res.render("productosAdmin", {layout:"userEnter", mensajes});
+    res.render("productosAdmin", { layout: "userEnter", mensajes });
   }
 };
 
@@ -208,16 +271,20 @@ exports.obtenerProductoPorUrl = async (req, res, next) => {
       where: {
         id: producto.usuarioId,
       },
-    });    
+    });
     const cat = await Categoria.findOne({
       where: {
         id: producto.categoriumId,
       },
-    }); 
+    });
 
     res.render("ver_producto", {
-      producto: producto.dataValues, tienda: tienda.dataValues, cat: cat.dataValues, admin: usuario.tipoUsuario == 0 ? true : false, prodPer: producto.usuarioId == usuario.id ? true : false
-    });    
+      producto: producto.dataValues,
+      tienda: tienda.dataValues,
+      cat: cat.dataValues,
+      admin: usuario.tipoUsuario == 0 ? true : false,
+      prodPer: producto.usuarioId == usuario.id ? true : false,
+    });
   } catch (error) {
     res.redirect("/productos");
   }
@@ -233,21 +300,23 @@ exports.modificarProducto = async (req, res, next) => {
       },
     });
 
-
     const categoria = await Categoria.findOne({
-      where:{
+      where: {
         id: producto.categoriumId,
-      }
-    });     
-    
+      },
+    });
+
     const cat = await Categoria.findAll();
 
-    res.render("actualizar_producto", { layout:"userEnter",
-      producto: producto.dataValues, categoria: categoria.dataValues, cat
+    res.render("actualizar_producto", {
+      layout: "userEnter",
+      producto: producto.dataValues,
+      categoria: categoria.dataValues,
+      cat,
     });
   } catch (error) {
     console.log("-------error_____-----");
-    
+
     res.redirect("/productosAdmin");
   }
 };
@@ -302,10 +371,10 @@ exports.actualizarProducto = async (req, res, next) => {
   if (mensajes.length) {
     // Enviar valores correctos si la actualización falla
     const producto = await Producto.findByPk(req.params.id);
-    const categori = await Categoria.findAll();    
+    const categori = await Categoria.findAll();
 
-
-    res.render("actualizar_producto", { layout:"userEnter",
+    res.render("actualizar_producto", {
+      layout: "userEnter",
       producto: producto.dataValues,
       categoria: categori,
       mensajes,
@@ -313,20 +382,24 @@ exports.actualizarProducto = async (req, res, next) => {
   } else {
     // No existen errores ni mensajes
     try {
-
       for (const img of imagenes) {
         const { path } = img;
-        const newPath = await cloudinary.v2.uploader.upload(path, (error, resulado)=>{console.log(resulado, error)});
-        urls.push(newPath)
-        fs.unlinkSync(path)        
+        const newPath = await cloudinary.v2.uploader.upload(
+          path,
+          (error, resulado) => {
+            console.log(resulado, error);
+          }
+        );
+        urls.push(newPath);
+        fs.unlinkSync(path);
       }
-        // const result = await cloudinary.v2.uploader.upload(req.file[0].path, (error, resulado)=>{console.log(resulado, error)});
-        // const result2 = await cloudinary.v2.uploader.upload(req.file[1].path, (error, resulado)=>{console.log(resulado, error)});
-        console.log(urls);
-        categoriumId = categoria
-        console.log(categoriumId);
-        const urlimg1 = urls[0].url;
-        const urlimg2 = urls[1].url;
+      // const result = await cloudinary.v2.uploader.upload(req.file[0].path, (error, resulado)=>{console.log(resulado, error)});
+      // const result2 = await cloudinary.v2.uploader.upload(req.file[1].path, (error, resulado)=>{console.log(resulado, error)});
+      console.log(urls);
+      categoriumId = categoria;
+      console.log(categoriumId);
+      const urlimg1 = urls[0].url;
+      const urlimg2 = urls[1].url;
 
       await Producto.update(
         {
@@ -381,8 +454,8 @@ exports.eliminarProducto = async (req, res, next) => {
   }
 };
 
-exports.miTienda = (req, res, next) =>{
-  res.render("userEnter", {layout:"auth"});
+exports.miTienda = (req, res, next) => {
+  res.render("userEnter", { layout: "auth" });
 };
 
 // buscar productos
@@ -392,21 +465,29 @@ exports.buscarProducto = async (req, res, next) => {
   const mensajes = [];
 
   const { parametroBusqueda } = req.body;
-  console.log(req.body);
 
   try {
     await Producto.findAll({
-      where:{
-        nombre: {
-          [Op.like]: `%${parametroBusqueda}%`,
-        },      
+      where: {
+        [Op.or]: {
+          nombre: {
+            [Op.like]: `%${parametroBusqueda}%`,
+          },
+          descripcion: {
+            [Op.like]: `%${parametroBusqueda}%`,
+          },
+        },
       },
-    }).then(function (productos){
-      productos = productos.map(function (producto) {        
+    }).then(function (productos) {
+      productos = productos.map(function (producto) {
         return producto;
       });
       // Renderizar solo si la promesa se cumple
-      res.render("resultados_busqueda", { productos, parametroBusqueda, admin: usuario.tipoUsuario == 0 ? true : false });
+      res.render("resultados_busqueda", {
+        productos,
+        parametroBusqueda,
+        admin: usuario.tipoUsuario == 0 ? true : false,
+      });
     });
   } catch (error) {
     // Crear el mensaje de error
@@ -415,5 +496,5 @@ exports.buscarProducto = async (req, res, next) => {
       type: "alert-warning",
     });
     res.render("productos", mensajes);
-  }  
+  }
 };
