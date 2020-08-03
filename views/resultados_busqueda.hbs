@@ -1,10 +1,11 @@
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-  <h1 class="display-5">Resultados de tu búsqueda</h1>
+  <h1 class="display-5">Resultados de tu búsqueda con "{{parametroBusqueda}}" </h1>
   {{!-- <p class="lead">Buscaste productos que contengan <strong>{{parametroBusqueda}}</strong></p> --}}
 </div>
 
+{{#if productos}}
+
 <div class="container contenedor-inicioProductos">
-    {{#if productos}}
     {{#each productos}}
     <div class="row">
         {{!-- col-md-3 col-sm-6 --}}
@@ -13,8 +14,8 @@
             <div class="product-grid7">
                 <div class="product-image7">
                     <a href="#">
-                        <img class="pic-1" src="http://bestjquery.com/tutorial/product-grid/demo8/images/img-1.jpg">
-                        <img class="pic-2" src="http://bestjquery.com/tutorial/product-grid/demo8/images/img-2.jpg">
+                        <img class="pic-1" src="{{dataValues.imagen}}">
+                        <img class="pic-2" src="{{dataValues.imagen}}">
                     </a>
                     <ul class="social">
                         <li><a href="" class="fa fa-search"></a></li>
@@ -40,11 +41,12 @@
             </div>
             <p class="text-center mt-3"><a class="btn " href="/producto/{{dataValues.url}}">Comprar</a></p>
         </div>
-
     </div>
     {{/each}}
-    {{else}}
-    <h4 class="text-center">¡No se han encontrado productos que coincidan con tu búsqueda!</h4>
-    {{/if}}
 </div>
+{{else}}
+    <div class="container">
+        <h4 class="text-center">¡No se han encontrado productos que coincidan con tu búsqueda!</h4>
+    </div>
+{{/if}}
 <hr>

@@ -142,7 +142,7 @@ app.use(multer({
     }
     mensajes="Error: File upload only supports the following filetypes - " + filetypes;
   }
-}).single('image'));
+}).array('image', 2));
 
 
 // Le indicamos a express dónde están las rutas del servidor
