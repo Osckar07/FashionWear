@@ -201,3 +201,6 @@ exports.actualizarInfoUsuario = async (req, res, next) => {
   }  
 };
 
+exports.enterUsuario = async(req,res, next) =>{
+  res.render("enterUsuario", {layout:"main"});
+}

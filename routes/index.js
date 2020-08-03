@@ -155,5 +155,14 @@ module.exports = function () {
     usuariosController.actualizarInfoUsuario
   );   
 
+  /*ruta enterUsario */
+  routes.get(
+    "/inicio/tienda",
+    authController.usuarioAutenticado,
+    usuariosController.enterUsuario
+  )
+
+  
+
   return routes;
 };
