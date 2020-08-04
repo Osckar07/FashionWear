@@ -1,46 +1,162 @@
-{{!--Hero--}}
-<section class="site-hero">
+<style>
+    .container {
+        margin: 0%;
+        margin-left: 0%;
+        padding: 0%;
+        max-width: 100%;
+    }
 
-<div>
-  <h2>La moda desvanece, solo el estilo sigue siendo el mismo. <br> -Coco Chanel-</h2>
-</div>
+    .row {
+        margin-right: 0%;
+    }
+
+    .footer {
+        display: none;
+    }
+</style>
+
+
+
+{{!--Hero--}}
+
+<section class="site-hero p-0 mb-3 ml-5 mr-5">
+
+    <div class="imgs row ">
+
+        <div class="col-lg-6 p-0 img1">
+            <a href="">
+                <figure class=" imghvr-shutter-in-out-diag-1" style=>
+                    <img src="/img/img1.jpg">
+                    <figcaption class="row">
+                        <p class="ih-zoom-in ih-delay-xl mx-auto my-auto">
+                            Visita nuestra sección para caballeros
+                        </p>
+                    </figcaption>
+                </figure>
+            </a>
+        </div>
+        <div class="col-lg-6 p-0 img2">
+            <a href="">
+                <figure class="imghvr-shutter-in-out-diag-1">
+                    <img src="/img/img2.jpg">
+                    <figcaption class="row">
+                        <p class="ih-zoom-in ih-delay-xl mx-auto my-auto">
+                            Visita nuestra sección para damas
+                        </p>
+                    </figcaption>
+                </figure>
+            </a>
+        </div>
+    </div>
+
 </section>
+{{!--Fin Hero--}}
+
 
 {{!--Como comprar info--}}
-  <div class="row">
-    <div  style="background: rgba(255, 255, 255, 0.411);">
-              <div class="site-info mt-3">
-                 <div class="container">
-        <div class="row">
-          <div class="col-md-6 col-lg-4 d-lg-flex mb-4 mb-lg-0 pl-4">
-            <div class="mr-4 fontinfo">
-              <i class="fas fa-shipping-fast"></i>
+<div class="row ml-5 mr-5">
+    <div style="background: rgba(255, 255, 255, 0.411);">
+        <div class="site-info mt-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-lg-4 d-lg-flex mb-4 mb-lg-0 pl-4">
+                        <div class="mr-4 fontinfo">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <div class="text-info">
+                            <h2 class="text-uppercase">Envio rapido</h2>
+                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at
+                                iaculis quam. Integer accumsan tincidunt fringilla.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 d-lg-flex mb-4 mb-lg-0 pl-4">
+                        <div class="mr-4 fontinfo">
+                            <i class="fas fa-undo-alt"></i>
+                        </div>
+                        <div class="text-info">
+                            <h2 class="text-uppercase">Reembolso</h2>
+                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at
+                                iaculis quam. Integer accumsan tincidunt fringilla.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 d-lg-flex mb-4 mb-lg-0 pl-4">
+                        <div class="mr-4 fontinfo">
+                            <i class="fas fa-info"></i>
+                        </div>
+                        <div class="text-info">
+                            <h2 class="text-uppercase">Soporte 24hrs</h2>
+                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at
+                                iaculis quam. Integer accumsan tincidunt fringilla.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="text-info">
-              <h2 class="text-uppercase">Envio rapido</h2>
-              <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan tincidunt fringilla.</p>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 d-lg-flex mb-4 mb-lg-0 pl-4">
-            <div class="mr-4 fontinfo">
-              <i class="fas fa-undo-alt"></i>
-            </div>
-             <div class="text-info">
-              <h2 class="text-uppercase">Reembolso</h2>
-              <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan tincidunt fringilla.</p>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 d-lg-flex mb-4 mb-lg-0 pl-4">
-            <div class="mr-4 fontinfo">
-              <i class="fas fa-info"></i>
-            </div>
-            <div class="text-info">
-              <h2 class="text-uppercase">Soporte 24hrs</h2>
-              <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan tincidunt fringilla.</p>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
+</div>
+
+{{!-- fin Como comprar info--}}
+
+
+{{!-- Swiper --}}
+<div class="ml-5 mr-5 mt-3">
+
+    <h3>Nuevos productos</h3>
+    <hr>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+
+            {{#if productos}}
+            {{#each productos}}
+            {{!-- col-md-3 col-sm-6 --}}
+            <div class="cont-prod swiper-slide">
+                <div class="product-grid7">
+                    <div class="product-image7">
+                        <a href="#">
+                            <img class="pic-1" src="{{dataValues.imagen}}">
+                            <img class="pic-2" src="http://bestjquery.com/tutorial/product-grid/demo8/images/img-2.jpg">
+                        </a>
+                        <ul class="social">
+                            <li><a href="" class="fa fa-search"></a></li>
+                            <li><a href="" class="fa fa-shopping-bag"></a></li>
+                            <li><a href="" class="fa fa-shopping-cart"></a></li>
+                        </ul>
+                        <span class="product-new-label">{{dataValues.usuarioId}}</span>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="title"><a href="/producto/{{dataValues.url}}">{{dataValues.nombre}}</a></h3>
+                        <ul class="rating">
+                            <li class="fa fa-star"></li>
+                            <li class="fa fa-star"></li>
+                            <li class="fa fa-star"></li>
+                            <li class="fa fa-star"></li>
+                            <li class="fa fa-star"></li>
+                        </ul>
+                        <div class="price">Lps.{{dataValues.precio}}.00
+                            {{!-- <span>$20.00</span> --}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mx-auto">
+                            <a class="btn " href="/producto/{{dataValues.url}}">Comprar</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            {{/each}}
+            {{else}}
+            <h4>No has ingresado productos aún.</h4>
+            {{/if}}
+
+
+        </div>
+        {{!-- Add Pagination --}}
+        <div class="swiper-pagination"></div>
+        {{!-- Add Arrows --}}
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
     </div>
-  </div>
+</div>
+{{!-- Fin Swiper --}}

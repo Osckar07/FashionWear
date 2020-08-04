@@ -1,0 +1,61 @@
+{{#if productos}}
+
+<div class="container contenedor-inicioProductos">
+
+    {{#each productos}}
+    <div class="row">
+        {{!-- col-md-3 col-sm-6 --}}
+        <div class="cont-prod">
+            {{!-- <h3>{{dataValues.usuarioId}}</h3> --}}
+            <div class="product-grid7">
+                <div class="product-image7">
+                    <a href="#">
+                        <img class="pic-1" src="{{dataValues.imagen}}">
+                        <img class="pic-2" src="{{dataValues.imagen2}}">
+                    </a>
+                    <ul class="social">
+                        <li><a href="" class="fa fa-search"></a></li>
+                        <li><a href="" class="fa fa-shopping-bag"></a></li>
+                        <li><a href="" class="fa fa-shopping-cart"></a></li>
+                    </ul>
+                    {{!-- <span class="product-new-label">{{dataValues.tipoProducto}}</span> --}}
+                    {{!-- <span class="product-new-label">{{dataValues.usuarioId}}</span> --}}
+                </div>
+                <div class="product-content">
+                    <h3 class="title"><a href="/producto/{{dataValues.url}}">{{dataValues.nombre}}</a></h3>
+                    <ul class="rating">
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                    </ul>
+                    <div class="price">L. {{dataValues.precio}}.00
+                        {{!-- <span>$20.00</span> --}}
+                    </div>
+                </div>
+            </div>
+            <form action="/pago/stripe" method="POST">
+                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="pk_test_51HAs8tLntSoRQvoLFq2hkbmQVcuFo1w7nf8Yr9MlEOi5dQYpKEHMG9a7nQ3RFA4a1Oi6KDLR3MmEOURLLNBzesk000LylTBhpe"
+                    data-name="FashionWear" data-image="/img/Logo_Oficial.png" data-locale="auto"
+                    data-amount="{{ORDER_AMOUNT}}" data-currency="usd">
+                </script>
+                <script>
+                    document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
+                </script>
+                <button type="submit" class="btn btn-dark btn-block">
+                    Comprar <i class="fas fa-shopping-cart"></i>
+                </button>
+            </form>
+        </div>
+
+    </div>
+    {{/each}}
+
+</div>
+{{else}}
+<h4 class="mt-5 text-center">Ocurrió un problema al cargar los productos</h4>
+<p class="mt-3 text-center"><a href="">Contáctate</a> con el personal de FashionWear</p>
+{{/if}}
+<hr>
