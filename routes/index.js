@@ -184,5 +184,10 @@ module.exports = function () {
     carritoController.eliminarproductoCarrito
   );
 
+  routes.post("/pago/stripe",
+  authController.usuarioAutenticado,
+  productosController.stripe);
+
+
   return routes;
 };
