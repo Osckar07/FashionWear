@@ -19,6 +19,8 @@
   {{!-- Título de la página --}}
   <title>Fashion Wear</title>
 
+  <script src="/JS/carrito.js"></script>
+
   {{!-- Este pequeño script servirá para indicar al header qué elemento del nav está activo --}}
   <script>
     $(document).ready(function () {
@@ -32,6 +34,24 @@
       });
     });
   </script>
+
+
+  {{!-- script para el carrito --}}
+  <script src="/JS/carrito.js"></script>
+
+  <style>
+    /* Set the border color */
+
+    .custom-toggler.navbar-toggler {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Setting the stroke to green using rgb values (0, 128, 0) */
+
+    .custom-toggler .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(187, 126, 23, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+    }
+  </style>
 
 </head>
 
@@ -48,8 +68,9 @@
 
   <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-lightshadow shadow-lg"
     style="border-bottom: #333333; background: hsla(0, 0%, 8%, 0.918);">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
-      aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse"
+      data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
+      aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
@@ -91,6 +112,7 @@
             {{!-- <a class="dropdown-item dropM" href="#"><i class="far fa-user"></i> &nbsp; Mi Perfil</a> --}}
             {{else}}
             <a class="dropdown-item dropM" href="/perfil/usuario"><i class="far fa-user"></i> &nbsp; Mi Perfil</a>
+            <a class="dropdown-item dropM" href="/mi_carrito"><i class="fa fa-shopping-cart"></i>&nbsp; Mi Carrito</a>
             {{/if}}
             <a class="dropdown-item dropM" href="/cerrar_sesion"> &nbsp; &nbsp; &nbsp; Cerrar Sesión &nbsp; &nbsp;<i
                 class="fas fa-sign-out-alt"></i> </a>
@@ -135,7 +157,8 @@
 
   {{#if user}}
   {{#if infoIncompletaMensaje }}
-  <div class=" btn container fixed-bottom" style="height:13%; background-color: hsla(0, 0%, 8%, 0.918); display: flex; flex-direction: row; align-items: center;">
+  <div class=" btn container fixed-bottom"
+    style="height:13%; background-color: hsla(0, 0%, 8%, 0.918); display: flex; flex-direction: row; align-items: center;">
     <div class="container mx-auto" style="display: flex; flex-direction: row; justify-content:center; ">
       <p class="my-auto pr-3">Tienes alguna información incompleta, revisa tu perfil</p>
       <a class="btn" style="background-color: #78e08f; color:black;" href="/perfil/usuario">Ir a mi perfil</a>

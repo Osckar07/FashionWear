@@ -28,9 +28,8 @@ exports.registrarse = async (req, res, next) => {
 
   const tipoUsuario = verificarTipoUsuario(password);
 
-  console.log("tipo de usuario", tipoUsuario);
-
-  const imagen = "https://res.cloudinary.com/rivera84/image/upload/v1596177774/usuario_default_aymrvo.png";
+  const imagen =
+    "https://res.cloudinary.com/rivera84/image/upload/v1596177774/usuario_default_aymrvo.png";
 
   // Intentar crear el usuario
   try {
@@ -45,7 +44,6 @@ exports.registrarse = async (req, res, next) => {
     // Redireccionar el usuario al formulario de inicio de sesión
     res.redirect("iniciar_sesion");
   } catch (error) {
-    //console.log(tipoUsuario, nombre, apellido, email, password);
     // res.render("registrarse");
     res.render(
       "registrarse",
@@ -60,7 +58,6 @@ exports.registrarse = async (req, res, next) => {
 exports.formularioInicioSesion = (req, res, next) => {
   //Verificar si existe algun mensaje
   const { mensajes } = res.locals.mensajes;
-  // console.log(mensajes);
   res.render("iniciar_sesion", { layout: "auth", mensajes });
 };
 
@@ -75,17 +72,21 @@ function verificarTipoUsuario(pass) {
 
 exports.iniciarFacebook = (req, res, next) => {
   res.locals.usuario = { ...req.user } || null;
-  console.log("Usiaro es:", res.locals.usuario);
+  console.log("Usuario es:", res.locals.usuario);
 };
 
 exports.perfil = async (req, res, next) => {
   const usuario = res.locals.usuario;
   const us = await Usuario.findOne({
-    where:{
-      id: usuario.id
+    where: {
+      id: usuario.id,
     },
   });
-  res.render("usuario", { us: us.dataValues, admin: us.tipoUsuario == 0 ? true : false, infoIncompleta: us.telefono == null || us.direccion == null ? true : false });
+  res.render("usuario", {
+    us: us.dataValues,
+    admin: us.tipoUsuario == 0 ? true : false,
+    infoIncompleta: us.telefono == null || us.direccion == null ? true : false,
+  });
 };
 
 exports.cambiar_contrasena = (req, res, next) => {
@@ -95,11 +96,16 @@ exports.cambiar_contrasena = (req, res, next) => {
 exports.userEnter = async (req, res, next) => {
   const usuario = res.locals.usuario;
   const us = await Usuario.findOne({
-    where:{
-      id: usuario.id
+    where: {
+      id: usuario.id,
     },
-  });  
-  res.render("usuario", { layout: "userEnter", us: us.dataValues, admin: us.tipoUsuario == 0 ? true : false, infoIncompleta: us.telefono == null || us.direccion == null ? true : false });
+  });
+  res.render("usuario", {
+    layout: "userEnter",
+    us: us.dataValues,
+    admin: us.tipoUsuario == 0 ? true : false,
+    infoIncompleta: us.telefono == null || us.direccion == null ? true : false,
+  });
 };
 
 exports.dashboard = (req, res, next) => {
@@ -113,8 +119,8 @@ exports.formResetearContrasena = (req, res, next) => {
 exports.perfilUsuarioNormal = async (req, res, next) => {
   const usuario = res.locals.usuario;
   const us = await Usuario.findOne({
-    where:{
-      id: usuario.id
+    where: {
+      id: usuario.id,
     },
   });
   res.render("perfil_usuario", { us: us.dataValues });
@@ -141,21 +147,24 @@ exports.actualizarInfoUsuario = async (req, res, next) => {
     });
   } else {
     try {
-
       for (const img of imagenes) {
         const { path } = img;
-        const newPath = await cloudinary.v2.uploader.upload(path, (error, resulado)=>{console.log(resulado, error)});
-        urls.push(newPath)
-        fs.unlinkSync(path)
-        console.log("pasa");
+        const newPath = await cloudinary.v2.uploader.upload(
+          path,
+          (error, resulado) => {
+            console.log(resulado, error);
+          }
+        );
+        urls.push(newPath);
+        fs.unlinkSync(path);
       }
       const urlimg1 = urls[0].url;
 
-      if(!urlimg1){
+      if (!urlimg1) {
         await Usuario.update(
-          {              
-              telefono,
-              direccion,
+          {
+            telefono,
+            direccion,
           },
           {
             where: {
@@ -163,21 +172,21 @@ exports.actualizarInfoUsuario = async (req, res, next) => {
             },
           }
         );
-      } else{
+      } else {
         // Insertar el producto a la base de datos
-      await Usuario.update(
-        {
+        await Usuario.update(
+          {
             imagen: urlimg1,
             telefono,
             direccion,
-        },
-        {
-          where: {
-            id: usuario.id,
           },
-        }
-      );
-      }      
+          {
+            where: {
+              id: usuario.id,
+            },
+          }
+        );
+      }
 
       mensajes.push({
         error: "Información actualizada satisfactoriamente.",
@@ -198,11 +207,10 @@ exports.actualizarInfoUsuario = async (req, res, next) => {
         type: "alert-warning",
       });
     }
-  }  
+  }
 };
 
-exports.enterUsuario = async(req,res, next) =>{
-
+exports.enterUsuario = async (req, res, next) => {
   const usuario = res.locals.usuario;
 
   try {
@@ -216,9 +224,7 @@ exports.enterUsuario = async(req,res, next) =>{
       where: {
         usuarioId: tienda.id,
       },
-    });       
-    
-    console.log(tienda);
+    });
 
     const productosArray = [];
 
@@ -231,16 +237,22 @@ exports.enterUsuario = async(req,res, next) =>{
         imagen2: producto.dataValues.imagen2,
         precio: producto.dataValues.precio,
         talla: producto.dataValues.talla,
-        cantidad: producto.dataValues.cantidad,        
-        url: producto.dataValues.url, 
+        cantidad: producto.dataValues.cantidad,
+        url: producto.dataValues.url,
       });
     });
-    console.log(productosArray);
-    // productos: productosArray,
+
+    const us = await Usuario.findOne({
+      where: {
+        id: usuario.id,
+      },
+    });
 
     res.render("enterUsuario", {
-      tienda: tienda.dataValues, productos: productosArray
-    });    
+      tienda: tienda.dataValues,
+      us: us.dataValues,
+      productos: productosArray,
+    });
   } catch (error) {
     res.send(error);
     // res.redirect("/productos");

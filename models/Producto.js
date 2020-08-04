@@ -5,6 +5,8 @@ const db = require("../config/db");
 //Importamos modelo factura
 const Factura = require("./Factura");
 
+const Carrito = require("./Carrito");
+
 // const Categoria = require("./Categoria");
 
 //Importamos slug
@@ -84,5 +86,7 @@ const Producto = db.define(
 
 //Definimos que producto tendra una categoria
 Producto.hasOne(Factura);
+
+Producto.hasMany(Carrito);
 
 module.exports = Producto;

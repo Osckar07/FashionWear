@@ -8,6 +8,7 @@ const { body } = require("express-validator");
 const productosController = require("../controllers/productosController");
 const usuariosController = require("../controllers/usuariosController");
 const authController = require("../controllers/authController");
+const carritoController = require("../controllers/carritoController");
 
 // Construir las rutas disponibles para el servidor
 module.exports = function () {
@@ -36,7 +37,7 @@ module.exports = function () {
 
   // Rutas para resetar pass
   routes.get(
-    "/form_resetear_contrasena",    
+    "/form_resetear_contrasena",
     usuariosController.formResetearContrasena
   );
 
@@ -44,15 +45,12 @@ module.exports = function () {
 
   routes.get("/resetear_password/:token", authController.validarToken);
 
-  routes.post(
-    "/resetear_password/:token",
-    authController.actualizarPassword
-  );
+  routes.post("/resetear_password/:token", authController.actualizarPassword);
 
   // Rutas para producto
   routes.get(
     "/nuevo_producto",
-    authController.usuarioAutenticado,    
+    authController.usuarioAutenticado,
     authController.usuarioAdmin,
     productosController.formularioNuevoProducto
   );
@@ -67,9 +65,13 @@ module.exports = function () {
     productosController.nuevoProducto
   );
 
-  routes.get("/productos", productosController.mostrarProductos); 
+  routes.get("/productos", productosController.mostrarProductos);
 
   routes.get("/producto/:url", productosController.obtenerProductoPorUrl);
+
+  routes.get("/productos/damas", productosController.productosDama);
+
+  routes.get("/productos/caballeros", productosController.productosCaballero);
 
   routes.get(
     "/producto/actualizar_producto/:url",
@@ -88,12 +90,12 @@ module.exports = function () {
   routes.post(
     "/producto/actualizar_producto/:id",
     authController.usuarioAutenticado,
-    body("nombre").notEmpty().trim().escape(),   
+    body("nombre").notEmpty().trim().escape(),
     body("descripcion").notEmpty().trim().escape(),
-    authController.usuarioAdmin,  
+    authController.usuarioAdmin,
     productosController.actualizarProducto
   );
-  
+
   routes.post(
     "/buscar_producto",
     // Sanitización
@@ -101,8 +103,8 @@ module.exports = function () {
     productosController.buscarProducto
   );
 
-   //ruta para productosEmpresa
-   routes.get(
+  //ruta para productosEmpresa
+  routes.get(
     "/productos_admin",
     authController.usuarioAutenticado,
     authController.usuarioAdmin,
@@ -115,7 +117,7 @@ module.exports = function () {
     authController.usuarioAutenticado,
     authController.usuarioAdmin,
     usuariosController.userEnter
-  );    
+  );
 
   //ruta para dashboard
   routes.get(
@@ -142,7 +144,7 @@ module.exports = function () {
     authController.cambiarContrasenaUsuario
   );
 
-  // ruta para perfil de usuario normal  
+  // ruta para perfil de usuario normal
   routes.get(
     "/perfil/usuario/actualizar_informacion",
     authController.usuarioAutenticado,
@@ -153,7 +155,7 @@ module.exports = function () {
     "/perfil/usuario/actualizar_informacion",
     authController.usuarioAutenticado,
     usuariosController.actualizarInfoUsuario
-  );   
+  );
 
   /*ruta enterUsario */
   routes.get(
@@ -163,11 +165,35 @@ module.exports = function () {
   );
 
   /*ruta ver el perfil del vendedor */
+  routes.get("/inicio/tienda/:url", usuariosController.enterUsuario);
+
   routes.get(
-    "/inicio/tienda/:url",    
-    usuariosController.enterUsuario
-  )
-  
+    "/producto/agregar_carrito/:url",
+    authController.usuarioAutenticado,
+    authController.usuarioNoAdmin,
+    carritoController.nuevoCarrito
+  );
+
+  routes.get(
+    "/mi_carrito",
+    authController.usuarioAutenticado,
+    authController.usuarioNoAdmin,
+    carritoController.mostrarCarrito
+  );
+
+  routes.get(
+    "/mi_carrito/eliminar/:url",
+    authController.usuarioAutenticado,
+    authController.usuarioNoAdmin,
+    carritoController.eliminarproductoCarrito
+  );
+
+  routes.post(
+    "/pago/stripe",
+    authController.usuarioAutenticado,
+    authController.usuarioNoAdmin,
+    productosController.stripe
+  );
 
   return routes;
 };
