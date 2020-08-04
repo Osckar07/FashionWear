@@ -8,6 +8,8 @@ const Factura = require("./Factura");
 //importar modelo Producto
 const Producto = require("./Producto");
 
+const Carrito = require("./Carrito");
+
 //importamos bcrypt-nodejs
 const bcrypt = require("bcrypt-nodejs");
 
@@ -115,6 +117,8 @@ const Usuario = db.define(
 Usuario.hasMany(Producto);
 //Definir que el usuario tiene muchas facturas
 Usuario.hasMany(Factura);
+
+Usuario.hasMany(Carrito);
 
 //Metodo personalizado
 //Verificar si el password enviado (sin hash) es igual al almacenado(hash)
