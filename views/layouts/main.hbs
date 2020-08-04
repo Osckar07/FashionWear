@@ -19,6 +19,8 @@
   {{!-- Título de la página --}}
   <title>Fashion Wear</title>
 
+  <script src="/JS/carrito.js"></script>
+
   {{!-- Este pequeño script servirá para indicar al header qué elemento del nav está activo --}}
   <script>
     $(document).ready(function () {
@@ -32,6 +34,10 @@
       });
     });
   </script>
+
+
+  {{!-- script para el carrito --}}
+  <script src="/JS/carrito.js"></script>
 
 </head>
 
@@ -91,6 +97,7 @@
             {{!-- <a class="dropdown-item dropM" href="#"><i class="far fa-user"></i> &nbsp; Mi Perfil</a> --}}
             {{else}}
             <a class="dropdown-item dropM" href="/perfil/usuario"><i class="far fa-user"></i> &nbsp; Mi Perfil</a>
+            <a class="dropdown-item dropM" href="/mi_carrito"><i class="fa fa-shopping-cart"></i>&nbsp; Mi Carrito</a>
             {{/if}}
             <a class="dropdown-item dropM" href="/cerrar_sesion"> &nbsp; &nbsp; &nbsp; Cerrar Sesión &nbsp; &nbsp;<i
                 class="fas fa-sign-out-alt"></i> </a>
@@ -135,7 +142,8 @@
 
   {{#if user}}
   {{#if infoIncompletaMensaje }}
-  <div class=" btn container fixed-bottom" style="height:13%; background-color: hsla(0, 0%, 8%, 0.918); display: flex; flex-direction: row; align-items: center;">
+  <div class=" btn container fixed-bottom"
+    style="height:13%; background-color: hsla(0, 0%, 8%, 0.918); display: flex; flex-direction: row; align-items: center;">
     <div class="container mx-auto" style="display: flex; flex-direction: row; justify-content:center; ">
       <p class="my-auto pr-3">Tienes alguna información incompleta, revisa tu perfil</p>
       <a class="btn" style="background-color: #78e08f; color:black;" href="/perfil/usuario">Ir a mi perfil</a>

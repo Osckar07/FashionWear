@@ -34,7 +34,8 @@
                     <input type="email" readonly class="form-control-plaintext p-0 enterUsuarioDatos py-2" id="email"
                         value="{{tienda.email}}">
                 </div>
-                <label for="apellido" class="col-lg-2 col-form-label p-0 py-2 ml-4"><strong>Envios Nacionales:</strong></label>
+                <label for="apellido" class="col-lg-2 col-form-label p-0 py-2 ml-4"><strong>Envios
+                        Nacionales:</strong></label>
                 <div class="col-lg-3 ">
                     <input type="text" readonly class="form-control-plaintext p-0 enterUsuarioDatos py-2" id="apellido"
                         value="Si">
@@ -58,11 +59,11 @@
 <h3 style="margin-top: 17%;">Más productos de {{tienda.nombre}} {{tienda.apellido}}</h3>
 
 <div class="container contenedor-inicioProductos ">
-    
+
     {{#each productos}}
     <div class="row">
         {{!-- col-md-3 col-sm-6 --}}
-        <div class="cont-prod" >
+        <div class="cont-prod">
             {{!-- <h3>{{dataValues.usuarioId}}</h3> --}}
             <div class="product-grid7">
                 <div class="product-image7">
@@ -87,7 +88,7 @@
                         <li class="fa fa-star"></li>
                         <li class="fa fa-star"></li>
                     </ul>
-                    <div class="price">Lps.{{precio}}.00
+                    <div class="price">L. {{precio}}.00
                         {{!-- <span>$20.00</span> --}}
                     </div>
                 </div>
@@ -98,8 +99,7 @@
     </div>
     {{/each}}
     {{/if}}
-<hr>
+    <hr>
 
 
-{{/if}}
-
+    {{/if}}
