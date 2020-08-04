@@ -9,7 +9,7 @@ const path = require("path");
 const cloudinary = require("cloudinary");
 const fs = require("fs-extra");
 const { fips } = require("crypto");
-const stripe = require('stripe')(process.env.STRIPE_API_SECRET);
+const stripe = require("stripe")(process.env.STRIPE_API_SECRET);
 
 // Configuración para cloudinary
 cloudinary.config({
@@ -516,19 +516,19 @@ exports.buscarProducto = async (req, res, next) => {
   }
 };
 
-exports.stripe = async(req, res, next) =>{
+exports.stripe = async (req, res, next) => {
   console.log(req.body);
- 
+
   const cliente = await stripe.customers.create({
     email: req.body.stripeEmail,
-    source: req.body.stripeToken
+    source: req.body.stripeToken,
   });
   const factura = await stripe.charges.create({
     amount: "3000",
     currency: "usd",
     customer: cliente.id,
-    description: "Zapatos"
+    description: "Zapatos",
   });
-   console.log(cliente, factura, factura.id)
+  console.log(cliente, factura, factura.id);
   res.render("productos");
- }
+};

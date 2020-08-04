@@ -1,0 +1,106 @@
+
+{{>ourMessages}}
+
+{{!-- {{#if productos}}
+{{#each productos}}
+
+<p>{{nombre}}</p>
+<a href="/mi_carrito/eliminar/{{url}}"> Eliminar</a> --}}
+
+
+
+{{#if productos}}
+<div class="cart-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="main-heading">Mi Carrito</div>
+                <div class="table-cart">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        {{#each productos}}
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="display-flex align-center">
+                                        <div class="img-product">
+                                            <img src="{{imagen}}"
+                                                alt="" class="mCS_img_loaded">
+                                        </div>
+                                        <div class="name-product">
+                                            {{nombre}}
+                                        </div>
+                                        <div class="price">
+                                           L.&nbsp;{{precio}}.00
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="product-count">
+                                    <form action="#" class="count-inlineflex">
+                                        <div id="qtyminus" class="qtyminus" onclick="bajarCantidad()">-</div>
+                                        <input type="text" name="quantity" id="cantidad" min="1" value="1" class="qty">
+                                        <div id="qtyplus" class="qtyplus" onclick="subirCantidad()">+</div>
+                                    </form>
+                                </td>
+                                <td>
+                                    <div class="total">
+                                        L.&nbsp;{{precio}}.00
+                                    </div>
+                                </td>
+                                <td>
+                                    <a class="text-muted" href="/mi_carrito/eliminar/{{url}}" style="text-decoration: none;"><i class="fas fa-trash-alt "></i></a>
+                                </td>                            
+                            </tr>                                                     
+                        </tbody>                        
+                        {{/each}}
+                    </table>                    
+                </div>
+                <!-- /.table-cart -->
+            </div>
+            <!-- /.col-lg-8 -->
+            <div class="col-lg-4">
+                <div class="cart-totals">
+                    <h3>Totales</h3>
+                    <form action="#" method="get" accept-charset="utf-8">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>Subtotal</td>
+                                    <td class="subtotal">L. {{total}}.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Envío</td>
+                                    <td class="free-shipping">Envío gratis</td>
+                                </tr>
+                                <tr class="total-row">
+                                    <td>Total</td>
+                                    <td class="price-total">L. {{total}}.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="btn-cart-totals">
+                            <a href="/productos" class="update round-black-btn" title="">Seguir comprando</a>
+                            <a href="#" class="checkout round-black-btn" title="">Realizar compra</a>
+                        </div>
+                        <!-- /.btn-cart-totals -->
+                    </form>
+                    <!-- /form -->
+                </div>
+                <!-- /.cart-totals -->
+            </div>
+            <!-- /.col-lg-4 -->
+        </div>
+    </div>
+</div>
+
+
+{{else}}
+<h2>Aún no tienes productos en el carrito. <a href="/productos">Agrega uno</a></h2>
+{{/if}}
