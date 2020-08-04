@@ -16,7 +16,7 @@
                     <ul class="social">
                         <li><a href="" class="fa fa-search"></a></li>
                         <li><a href="" class="fa fa-shopping-bag"></a></li>
-                        <li><a href="" class="fa fa-shopping-cart"></a></li>
+                        <li><a href="/producto/agregar_carrito/{{dataValues.url}}" class="fa fa-shopping-cart"></a></li>
                     </ul>
                     {{!-- <span class="product-new-label">{{dataValues.tipoProducto}}</span> --}}
                     {{!-- <span class="product-new-label">{{dataValues.usuarioId}}</span> --}}
@@ -35,19 +35,7 @@
                     </div>
                 </div>
             </div>
-            <form action="/pago/stripe" method="POST">
-                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                    data-key="pk_test_51HAs8tLntSoRQvoLFq2hkbmQVcuFo1w7nf8Yr9MlEOi5dQYpKEHMG9a7nQ3RFA4a1Oi6KDLR3MmEOURLLNBzesk000LylTBhpe"
-                    data-name="FashionWear" data-image="/img/Logo_Oficial.png" data-locale="auto"
-                    data-amount="{{ORDER_AMOUNT}}" data-currency="usd">
-                </script>
-                <script>
-                    document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
-                </script>
-                <button type="submit" class="btn btn-dark btn-block">
-                    Comprar <i class="fas fa-shopping-cart"></i>
-                </button>
-            </form>
+            <p class="text-center mt-3"><a class="btn " href="/producto/{{dataValues.url}}">Comprar</a></p>
         </div>
 
     </div>
