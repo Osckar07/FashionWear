@@ -60,6 +60,20 @@ exports.usuarioAdmin = (req, res, next) => {
   return res.redirect("/iniciar_sesion");
 };
 
+exports.usuarioNoAdmin = (req, res, next) => {
+  const mensajes = [];
+  // Si el usuario es admin
+  if (req.user.tipoUsuario == 1) {
+    return next();
+  }
+  mensajes.push({
+    error: "No puedes acceder a este sitio",
+    type: "alert-warning",
+  });
+  // Si el usuario no es admin
+  return res.render("productos", mensajes);
+};
+
 // Genera un token para restablecer la contraseña
 exports.enviarToken = async (req, res, next) => {
   // Verificar si existe el usuario
@@ -169,8 +183,7 @@ exports.actualizarPassword = async (req, res, next) => {
     // Redireccionar al inicio de sesión
     req.flash("success", "Tu contraseña se ha actualizado correctamente");
     res.redirect("/iniciar_sesion");
-  }
-  else{
+  } else {
     console.log(req.body.password, req.body.cpassword);
   }
 };
@@ -184,16 +197,12 @@ exports.cambiarContrasenaUsuario = async (req, res, next) => {
     confirmar_contrasena,
   } = req.body;
 
-  // if(contrasena_actual_encyp != usuario.password){
-  //   console.log("no pasa");
-  // }
   if (contrasena_nueva != confirmar_contrasena) {
     req.flash("error", "Las contraseñas no coinciden");
     res.redirect("/perfil/usuario/cambiar_contrasena");
   }
   if (contrasena_nueva == confirmar_contrasena) {
     try {
-      console.log("antes de guardar");
       const contrasena_nueva_hash = bcrypt.hashSync(
         contrasena_nueva,
         bcrypt.genSaltSync(10)
@@ -212,7 +221,6 @@ exports.cambiarContrasenaUsuario = async (req, res, next) => {
       req.flash("success", "¡Contraseña actualizada exitosamente!");
 
       // Swal.fire("¡Éxito!", "¡Contraseña actualizada exitosamente!", "success");
-      // console.log("despues de swal");
 
       setTimeout(() => {
         res.redirect("/cerrar_sesion");
