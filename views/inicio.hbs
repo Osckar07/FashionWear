@@ -24,7 +24,7 @@
     <div class="imgs row mx-0">
 
         <div class="col-lg-6 p-0 img1">
-            <a href="">
+            <a href="/productos/caballeros">
                 <figure class=" imghvr-shutter-in-out-diag-1" style=>
                     <img src="/img/img1.jpg">
                     <figcaption class="row">
@@ -36,7 +36,7 @@
             </a>
         </div>
         <div class="col-lg-6 p-0 img2">
-            <a href="">
+            <a href="/productos/damas">
                 <figure class="imghvr-shutter-in-out-diag-1">
                     <img src="/img/img2.jpg">
                     <figcaption class="row">
@@ -115,7 +115,7 @@
                     <div class="product-image7">
                         <a href="#">
                             <img class="pic-1" src="{{dataValues.imagen}}">
-                            <img class="pic-2" src="http://bestjquery.com/tutorial/product-grid/demo8/images/img-2.jpg">
+                            <img class="pic-2" src="{{dataValues.imagen2}}">
                         </a>
                         <ul class="social">
                             <li><a href="" class="fa fa-search"></a></li>
@@ -148,7 +148,7 @@
 
             {{/each}}
             {{else}}
-            <h4>No has ingresado productos aún.</h4>
+            <h4>Ha ocurrido un error</h4>
             {{/if}}
 
 

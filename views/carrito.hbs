@@ -1,4 +1,3 @@
-
 {{>ourMessages}}
 
 {{!-- {{#if productos}}
@@ -31,14 +30,13 @@
                                 <td>
                                     <div class="display-flex align-center">
                                         <div class="img-product">
-                                            <img src="{{imagen}}"
-                                                alt="" class="mCS_img_loaded">
+                                            <img src="{{imagen}}" alt="" class="mCS_img_loaded">
                                         </div>
                                         <div class="name-product">
                                             {{nombre}}
                                         </div>
                                         <div class="price">
-                                           L.&nbsp;{{precio}}.00
+                                            L.&nbsp;{{precio}}.00
                                         </div>
                                     </div>
                                 </td>
@@ -55,12 +53,13 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <a class="text-muted" href="/mi_carrito/eliminar/{{url}}" style="text-decoration: none;"><i class="fas fa-trash-alt "></i></a>
-                                </td>                            
-                            </tr>                                                     
-                        </tbody>                        
+                                    <a class="text-muted" href="/mi_carrito/eliminar/{{url}}"
+                                        style="text-decoration: none;"><i class="fas fa-trash-alt "></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
                         {{/each}}
-                    </table>                    
+                    </table>
                 </div>
                 <!-- /.table-cart -->
             </div>
@@ -68,7 +67,7 @@
             <div class="col-lg-4">
                 <div class="cart-totals">
                     <h3>Totales</h3>
-                    <form action="#" method="get" accept-charset="utf-8">
+                    <form action="/pago/stripe/" method="post" accept-charset="utf-8">
                         <table>
                             <tbody>
                                 <tr>
@@ -87,7 +86,22 @@
                         </table>
                         <div class="btn-cart-totals">
                             <a href="/productos" class="update round-black-btn" title="">Seguir comprando</a>
-                            <a href="#" class="checkout round-black-btn" title="">Realizar compra</a>
+                            {{!-- <form action="/pago/stripe/" method="POST"> --}}
+                                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                    data-key="pk_test_51HAs8tLntSoRQvoLFq2hkbmQVcuFo1w7nf8Yr9MlEOi5dQYpKEHMG9a7nQ3RFA4a1Oi6KDLR3MmEOURLLNBzesk000LylTBhpe"
+                                    data-name="FashionWear" data-image="/img/Logo_Oficial.png" data-locale="auto"
+                                    data-amount="" data-currency="HNL">
+                                    </script>
+                                <script>
+                                    document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
+                                </script>                                
+                                <input type="text" hidden value="{{total}}" name="total">
+                                <input type="text" hidden value="Compra" name="producto">
+                                <button type="submit" class="checkout round-black-btn">
+                                    Comprar
+                                </button>
+                            {{!-- </form> --}}
+
                         </div>
                         <!-- /.btn-cart-totals -->
                     </form>
@@ -102,5 +116,5 @@
 
 
 {{else}}
-<h2>Aún no tienes productos en el carrito. <a href="/productos">Agrega uno</a></h2>
+<h2 class="mt-4">Aún no tienes productos en el carrito. <a href="/productos">Agrega uno</a></h2>
 {{/if}}

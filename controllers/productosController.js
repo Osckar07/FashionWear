@@ -2,6 +2,7 @@
 const Producto = require("../models/Producto");
 const Categoria = require("../models/Categoria");
 const Usuario = require("../models/Usuario");
+const Carrito = require("../models/Carrito");
 const { userEnter } = require("./usuariosController");
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
@@ -33,6 +34,8 @@ exports.inicioProductos = async (req, res, next) => {
     });
   }
 
+  const productos = await Producto.findAll();
+
   if (usuario.id != null) {
     const us = await Usuario.findOne({
       where: {
@@ -43,6 +46,7 @@ exports.inicioProductos = async (req, res, next) => {
     // Hará la verificación respectiva si el usuario es admin o no, para su posterior uso
     res.render("inicio", {
       layout: "main",
+      productos,
       us: us.dataValues,
       admin: us.tipoUsuario == 0 ? true : false,
       infoIncompletaMensaje:
@@ -51,6 +55,7 @@ exports.inicioProductos = async (req, res, next) => {
   } else {
     // Hará la verificación respectiva si el usuario es admin o no, para su posterior uso
     res.render("inicio", {
+      productos,
       admin: usuario.tipoUsuario == 0 ? true : false,
       infoIncompletaMensaje:
         usuario.telefono == null || usuario.direccion == null ? true : false,
@@ -517,6 +522,10 @@ exports.buscarProducto = async (req, res, next) => {
 };
 
 exports.stripe = async (req, res, next) => {
+  const usuario = res.locals.usuario;
+  const mensajes = [];
+
+  // const {total} = req.body;
   console.log(req.body);
 
   const cliente = await stripe.customers.create({
@@ -524,11 +533,107 @@ exports.stripe = async (req, res, next) => {
     source: req.body.stripeToken,
   });
   const factura = await stripe.charges.create({
-    amount: "3000",
-    currency: "usd",
+    amount: req.body.total * 100,
+    currency: "HNL",
     customer: cliente.id,
-    description: "Zapatos",
+    description: req.body.producto + " de FashionWear",
   });
+  if (req.body.producto == "Compra") {
+    await Carrito.destroy({
+      where: {
+        usuarioId: usuario.id,
+      },
+    });
+  }
   console.log(cliente, factura, factura.id);
-  res.render("productos");
+  res.redirect("/productos");
+};
+
+// mostrar productos damas
+exports.productosDama = async (req, res, next) => {
+  // Obtener el usuario actual
+  const usuario = res.locals.usuario;
+  const mensajes = [];
+  const categoria = 1;
+
+  try {
+    // const us = await Usuario.findOne({
+    //   where: {
+    //     id: usuario.id,
+    //   },
+    // });
+    await Producto.findAll({
+      where: {
+        categoriumId: categoria,
+      },
+    }).then(function (productos) {
+      productos = productos.map(function (producto) {
+        return producto;
+      });
+
+      // Renderizar solo si la promesa se cumple
+      res.render("productos", {
+        productos,
+        // us: us.dataValues,        
+        admin: usuario.tipoUsuario == 0 ? true : false,
+      });
+    });
+  } catch (error) {
+    // Crear el mensaje de error
+    mensajes.push({
+      error: "Error al obtener los productos. Favor reintentar.",
+      type: "alert-warning",
+    });
+    res.render("productos", mensajes);
+  }
+};
+
+// buscar productos
+exports.productosCaballero = async (req, res, next) => {
+  // Obtener el usuario actual
+  const usuario = res.locals.usuario;
+  const mensajes = [];
+  const categoria = 2;
+
+  // const us = await Usuario.findOne({
+  //   where: {
+  //     id: usuario.id,
+  //   },
+  // });
+
+  try {    
+      
+    await Producto.findAll({
+      where: {
+        categoriumId: categoria,
+      },
+    }).then(function (productos) {
+      productos = productos.map(function (producto) {
+        return producto;
+      });
+
+      if (usuario.id != null) {
+            
+      // Renderizar solo si la promesa se cumple
+      res.render("productos", {
+        productos,
+        // us: us.dataValues,        
+        admin: usuario.tipoUsuario == 0 ? true : false,
+      });
+    }else{
+        res.render("productos", {
+          productos,                  
+          // admin: usuario.tipoUsuario == 0 ? true : false,
+        });
+      }
+    }); 
+  } catch (error) {
+    // Crear el mensaje de error
+    mensajes.push({
+      error: "Error al obtener los productos. Favor reintentar.",
+      type: "alert-warning",
+    });
+    console.log(error);
+    res.render("productos", mensajes);
+  }
 };
