@@ -1,0 +1,105 @@
+
+{{#if tienda}}
+<div class="row enterUsuario mb-5">
+    <div class="card row ml-auto">
+        <div class="box mt-5">
+            <div class="img">
+                <div class="d-flex justify-content-center h-100">
+                    <div class="image_outer_container">
+                        <div class="image_inner_container">
+                            <img src="{{tienda.imagen}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2>{{tienda.nombre}} {{tienda.apellido}}<br><br><span>Ropa</span></h2>
+            <div class="form-group row pt-4">
+
+                <label for="apellido" class="col-lg-2 col-form-label p-0 ml-0 py-3"><strong>Contacto:</strong></label>
+                <div class="col-lg-3">
+                    <input type="text" readonly class="form-control-plaintext p-0 enterUsuarioDatos py-3" id="apellido"
+                        value="+504 {{tienda.telefono}}">
+                </div>
+                <label for="apellido" class="col-lg-2 col-form-label p-0 py-3"><strong>Ubicación:</strong></label>
+                <div class="col-lg-5 ">
+                    <input type="text" readonly class="form-control-plaintext p-0 enterUsuarioDatos py-3" id="apellido"
+                        value="{{tienda.direccion}}">
+                </div>
+            </div>
+
+
+            <div class="form-group row enterUsuarioDatos">
+                <label for="email" class="col-lg-2 col-form-label p-0 py-2"><strong>Correo Electronico:</strong></label>
+                <div class="col-lg-3 ">
+                    <input type="email" readonly class="form-control-plaintext p-0 enterUsuarioDatos py-2" id="email"
+                        value="{{tienda.email}}">
+                </div>
+                <label for="apellido" class="col-lg-2 col-form-label p-0 py-2 ml-4"><strong>Envios Nacionales:</strong></label>
+                <div class="col-lg-3 ">
+                    <input type="text" readonly class="form-control-plaintext p-0 enterUsuarioDatos py-2" id="apellido"
+                        value="Si">
+                </div>
+            </div>
+            <span class="pt-4">
+                <ul>
+                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                </ul>
+            </span>
+        </div>
+    </div>
+</div>
+
+{{#if productos}}
+
+<h3 style="margin-top: 17%;">Más productos de {{tienda.nombre}} {{tienda.apellido}}</h3>
+
+<div class="container contenedor-inicioProductos ">
+    
+    {{#each productos}}
+    <div class="row">
+        {{!-- col-md-3 col-sm-6 --}}
+        <div class="cont-prod" >
+            {{!-- <h3>{{dataValues.usuarioId}}</h3> --}}
+            <div class="product-grid7">
+                <div class="product-image7">
+                    <a href="#">
+                        <img class="pic-1" src="{{imagen}}">
+                        <img class="pic-2" src="{{imagen2}}">
+                    </a>
+                    <ul class="social">
+                        <li><a href="" class="fa fa-search"></a></li>
+                        <li><a href="" class="fa fa-shopping-bag"></a></li>
+                        <li><a href="" class="fa fa-shopping-cart"></a></li>
+                    </ul>
+                    {{!-- <span class="product-new-label">{{dataValues.tipoProducto}}</span> --}}
+                    {{!-- <span class="product-new-label">{{tienda.nombre}} {{tienda.apellido}}</span> --}}
+                </div>
+                <div class="product-content">
+                    <h3 class="title"><a href="/producto/{{url}}">{{nombre}}</a></h3>
+                    <ul class="rating">
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                    </ul>
+                    <div class="price">Lps.{{precio}}.00
+                        {{!-- <span>$20.00</span> --}}
+                    </div>
+                </div>
+            </div>
+            <p class="text-center mt-3"><a class="btn " href="/producto/{{url}}">Comprar</a></p>
+        </div>
+
+    </div>
+    {{/each}}
+    {{/if}}
+<hr>
+
+
+{{/if}}
+

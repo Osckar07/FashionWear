@@ -1,65 +1,101 @@
-{{!--Parte superior del login--}}
+<style>
+    .container {
+        margin: 0%;
+        margin-left: 0%;
+        padding: 0%;
+        max-width: 100%;
+    }
 
-<div class="row header-inicio-sesion mb-3">
-    <div class="m-0 mx-auto col-6">
-        <br>
-        {{!-- <img src="/img/Logo_Oficial.png" alt="Logo FashionWear" width="30%"> --}}
-    </div>
-    <div class="col-6 text-right m-0 mt-3">
-        <p>¿Aún no tiene cuenta? <a href="/registro">Regístrese</a></p>
-    </div>
-</div>
+    .row {
+        margin-right: 0%;
+    }
 
+    .footer {
+        display: none;
+    }
+</style>
 
-<div class="row">
-    <div class="cuadroLogin mx-auto mb-2">
-        <div class="cuadroContent text-center">
-            <h1 class="mt-4 mb-2">Iniciar sesión</h1>
-            <p>¡Bienvenido!</p>
-        </div>
+<div class="hero_Login">
+    <div class="content_HeroLogin">
+        {{!--Parte superior del login--}}
 
-    <div>
-        <form class="form-signin formlogin" action="" method="POST">
+        <div class=" row conten_header-inicio-sesion  bg-dark">
 
-            <div class="formdatos mt-3">
-            <input type="email" name="email" id="email" required>
-            <label class="lbl-nombre">
-                <span class="text-nomb">
-                    Correo electrónico
-                </span>
-            </label>
+            <div class="icono_Login mt-1">
+                <a href="/"><i class="fas fa-home"></i> Inicio</a>
             </div>
 
-            <div class="formdatos mt-4">
-            <input type="password" name="password" id="password" required>
-            <label class="lbl-nombre">
-                <span class="text-nomb">
-                    Contraseña
-                </span>
-            </label>
+            <div class="ml-auto mt-1">
+                <p class="mr-5 animate__animated animate__backInDown">¿Aún no tiene cuenta? <a
+                        href="/registro">Regístrese</a></p>
             </div>
-
-            <p class="text-center"> <button class="btn btn-block" style="width: 90%; margin:auto; margin-bottom:8%; margin-top:9%" type="submit">Iniciar Sesion</button></p>                
-        </form>        
-
-        
-
-        <div class="lineaDividir">
-            {{!-- <hr class="hr1"> --}}
-            <p style="font-size: 12px;">O inicia sesión con:</p>
         </div>
 
-            <div class="BotonesInicioSesion row">
-                <div class="mx-auto">
-                <button class="btn btnfacebook facebook"> <a style="text-decoration: none; color:white;" href="/registro/facebook"><i class="fab fa-facebook-f  mr-2"></i>  Facebook</a></button>
-                <button class="btn btngoogle "><img src="img/google.png" style="width:18px; margin-bottom:4px; margin-right:4px;" alt=""> Google</button>
-            </div>  
-            </div>
-        
-        <div class="lineaDividir mt-3">
-            <p style="font-size: 15px;"><a href="#">¿Olvidó su contraseña?</a></p>
-        </div>
-    </div>
-    </div>
 
+        <div class="row">
+            <div class="cuadroLogin mx-auto mb-2 ">
+                <div class="cuadroContent text-center">
+                    <h1 class="mt-4 mb-2">Iniciar sesión</h1>
+                    <p>¡Bienvenido!</p>
+                </div>
+
+                <div>
+                    <form class="form-signin formlogin" action="" method="POST">
+                        {{!--Alertas
+                            {{>messages}}--}}
+                        <div class="formdatos mt-3">
+                            <input type="email" name="email" id="email" required>
+                            <label class="lbl-nombre">
+                                <span class="text-nomb">
+                                    Correo electrónico
+                                </span>
+                            </label>
+                        </div>
+
+                        <div class="formdatos mt-4">
+                            <input type="password" name="password" id="password" required>
+                            <label class="lbl-nombre">
+                                <span class="text-nomb">
+                                    Contraseña
+                                </span>
+                            </label>
+                        </div>
+
+                        <p class="text-center"> <button class="btn btn-block"
+                                style="width: 90%; margin:auto; margin-bottom:8%; margin-top:9%" type="submit">Iniciar
+                                Sesion</button></p>
+                    </form>
+
+
+
+                    <div class="lineaDividir">
+                        {{!-- <hr class="hr1"> --}}
+                        <p style="font-size: 12px;">O inicia sesión con:</p>
+                    </div>
+
+                    <div class="BotonesInicioSesion row">
+                        <div class="mx-auto">
+                            <button class="btn btnfacebook facebook"> <a style="text-decoration: none; color:white;"
+                                    href="/registro/facebook"><i class="fab fa-facebook-f  mr-2"></i>
+                                    Facebook</a></button>
+                            <button class="btn btngoogle "><img src="img/google.png"
+                                    style="width:18px; margin-bottom:4px; margin-right:4px;" alt=""> Google</button>
+                        </div>
+                    </div>
+
+                    <div class="lineaDividir mt-3">
+                        <p style="font-size: 15px;"><a href="/form_resetear_contrasena">¿Olvidó su contraseña?</a></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        {{!-- Pie de página --}}
+        <footer class="mt-5 py-3 text-center">
+            <div class="container">
+                <span class="text-white">© Fashion Wear - Invictus Development 2020</span>
+            </div>
+        </footer>
+    </div>
 </div>
