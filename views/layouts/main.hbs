@@ -39,6 +39,20 @@
   {{!-- script para el carrito --}}
   <script src="/JS/carrito.js"></script>
 
+  <style>
+    /* Set the border color */
+
+    .custom-toggler.navbar-toggler {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Setting the stroke to green using rgb values (0, 128, 0) */
+
+    .custom-toggler .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(187, 126, 23, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+    }
+  </style>
+
 </head>
 
 <body class="d-flex flex-column h-100 ">
@@ -54,8 +68,9 @@
 
   <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-lightshadow shadow-lg"
     style="border-bottom: #333333; background: hsla(0, 0%, 8%, 0.918);">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
-      aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse"
+      data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
+      aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
