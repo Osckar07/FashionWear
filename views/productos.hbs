@@ -35,7 +35,19 @@
                     </div>
                 </div>
             </div>
-            <p class="text-center mt-3"><a class="btn " href="/producto/{{dataValues.url}}">Comprar</a></p>
+            <form action="/pago/stripe" method="POST">
+                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="pk_test_51HAs8tLntSoRQvoLFq2hkbmQVcuFo1w7nf8Yr9MlEOi5dQYpKEHMG9a7nQ3RFA4a1Oi6KDLR3MmEOURLLNBzesk000LylTBhpe"
+                    data-name="FashionWear" data-image="/img/Logo_Oficial.png" data-locale="auto"
+                    data-amount="{{ORDER_AMOUNT}}" data-currency="usd">
+                </script>
+                <script>
+                    document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
+                </script>
+                <button type="submit" class="btn btn-dark btn-block">
+                    Comprar <i class="fas fa-shopping-cart"></i>
+                </button>
+            </form>
         </div>
 
     </div>
