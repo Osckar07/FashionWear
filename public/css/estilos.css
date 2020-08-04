@@ -314,90 +314,104 @@ div.vertical-line {
 }
 
 /* Página de Inicio */
-.frase-hero {
-  font-family: "satisfy";
-}
-.usuario-info {
+.dropT:hover{
+  text-decoration:none;	    text-decoration:none;
+  color: #555454;	    color: #555454;
+} 	
+
+
+/* Página de Inicio */
+.usuario-info{
   padding: 5px;
 }
 
-.usuario-info p {
+.usuario-info p{
   margin-top: 5px;
   margin-left: 200px;
   font-size: 12px;
   color: white;
 }
 
-.usuario-info-icon {
+.usuario-info-icon{
   margin-right: 200px;
 }
 
-@media (max-width: 770px) {
-  .usuario-info p {
-    margin-left: 15px;
+@media (max-width:770px){
+  .usuario-info p{
+     margin-left: 15px;
   }
 
-  .usuario-info-icon {
-    margin-right: 15px;
+  .usuario-info-icon{
+     margin-right: 15px; 
   }
 }
 
-.usuario-info-icon a {
+.usuario-info-icon a{
   font-size: 14px;
   margin: 0px 10px 0px 10px;
   color: white;
 }
 
-.site-hero {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    url("../img/hero_1.jpg");
-  height: 70vh;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-  padding-top: 5vh;
-  padding-bottom: 30vh;
+
+.imgs  img{
+  width: 100%;
 }
 
-.site-hero::after {
-  content: "";
-  background-color: rgba(255, 255, 255, 0.1);
-  display: block;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  position: absolute;
+.imgs .img1 .img2{
+  padding: 0px;
 }
 
-.site-hero h2 {
+ .imgs p{
+  font-size: 30px;
+  font-family: "fuente3";
+}
+
+.swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+
+.swiper-slide {
   text-align: center;
-  /* position: absolute; */
-  font-family: "satisfy";
-  /* font-size: 2.5em; */
-  font-size: 7vh;
-  margin: auto;
-  margin-top: 20%;
-  color: rgba(255, 255, 255, 0.85);
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
 }
 
-.text-description p {
+
+.text-description p{
   font-size: 15px;
   margin: 0px 20px 0px 80px;
 }
 
-.site-info h2 {
+.site-info h2{
   font-size: 20px;
 }
 
-.site-info h2 p {
+.site-info h2 p{
   font-family: "funte3";
+
 }
 
-.fontinfo i {
+.fontinfo i{
   font-size: 45px;
 }
+
+
 
 /*Fin de inicio*/
 
