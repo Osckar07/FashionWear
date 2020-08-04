@@ -46,6 +46,7 @@ require("./models/Producto");
 require("./models/Categoria");
 require("./models/Usuario");
 require("./models/Factura");
+require("./models/Carrito");
 
 //Realizar la conexión a la base de datos
 db.sync()

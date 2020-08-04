@@ -1,6 +1,6 @@
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-  <h1 class="display-5">Resultados de tu búsqueda con "{{parametroBusqueda}}" </h1>
-  {{!-- <p class="lead">Buscaste productos que contengan <strong>{{parametroBusqueda}}</strong></p> --}}
+    <h1 class="display-5">Resultados de tu búsqueda con "{{parametroBusqueda}}" </h1>
+    {{!-- <p class="lead">Buscaste productos que contengan <strong>{{parametroBusqueda}}</strong></p> --}}
 </div>
 
 {{#if productos}}
@@ -9,7 +9,7 @@
     {{#each productos}}
     <div class="row">
         {{!-- col-md-3 col-sm-6 --}}
-        <div class="cont-prod" >
+        <div class="cont-prod">
             {{!-- <h3>{{dataValues.usuarioId}}</h3> --}}
             <div class="product-grid7">
                 <div class="product-image7">
@@ -45,8 +45,8 @@
     {{/each}}
 </div>
 {{else}}
-    <div class="container">
-        <h4 class="text-center">¡No se han encontrado productos que coincidan con tu búsqueda!</h4>
-    </div>
+<div class="container">
+    <h4 class="text-center">¡No se han encontrado productos que coincidan con tu búsqueda!</h4>
+</div>
 {{/if}}
 <hr>
