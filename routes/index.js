@@ -195,5 +195,9 @@ module.exports = function () {
     productosController.stripe
   );
 
+  routes.get(
+    "/sobrenosotros",
+    usuariosController.sobrenosotros
+  )
   return routes;
 };
