@@ -13,6 +13,8 @@
   <link rel="icon" href="/img/favicon.png">
   {{!--Estilos de imagehover--}}
   <link rel="stylesheet" href="/css/imagehover.min.css">
+   {{!--Estilos de Swiper--}}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/css/swiper.min.css">
   {{!--Cargar fontawesome--}}
   <script src="https://kit.fontawesome.com/732f53e469.js" crossorigin="anonymous"></script>
 
@@ -39,6 +41,20 @@
   {{!-- script para el carrito --}}
   <script src="/JS/carrito.js"></script>
 
+  <style>
+    /* Set the border color */
+
+    .custom-toggler.navbar-toggler {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Setting the stroke to green using rgb values (0, 128, 0) */
+
+    .custom-toggler .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(187, 126, 23, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+    }
+  </style>
+
 </head>
 
 <body class="d-flex flex-column h-100 ">
@@ -54,8 +70,9 @@
 
   <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-lightshadow shadow-lg"
     style="border-bottom: #333333; background: hsla(0, 0%, 8%, 0.918);">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
-      aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse"
+      data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
+      aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
@@ -71,7 +88,7 @@
           <a class="nav-link align-self-center mx-3" style="color: white;" href="/productos">Productos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link align-self-center mx-3" style="color: white;" href="#">Sobre nosotros</a>
+          <a class="nav-link align-self-center mx-3" style="color: white;" href="/sobrenosotros">Sobre nosotros</a>
         </li>
 
         {{!-- Si el usuario existe en la autenticación mostrará un drop down menu--}}
@@ -182,12 +199,103 @@
 
   {{!-- Script bundle con webpack --}}
   <script src="/dist/bundle.js"></script>
+    {{!--Scrips Swiper--}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/js/swiper.esm.browser.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.4.5/js/swiper.min.js"></script>
 
   <script>
     document.getElementById('inputGroupFile01').onchange = function () {
       console.log(this.value);
       document.getElementById('archivo').innerHTML = document.getElementById('inputGroupFile01').files[0].name;
     }
+  </script>
+
+  {{!--Inicializar Swiper--}}
+  <script>
+   
+          var swiper = new Swiper('.swiper-container', {
+      slidesPerView: 5,
+      spaceBetween: 15,
+      slidesPerGroup: 4,
+      loop: false,
+      loopFillGroupWithBlank: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+
+    $(window).resize(function() {
+    if (window.matchMedia('(max-width: 511px)').matches) {
+       var swiper = new Swiper('.swiper-container', {
+      slidesPerView: 1,
+      spaceBetween: 15,
+      slidesPerGroup: 1,
+      loop: false,
+      loopFillGroupWithBlank: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+    }
+});
+
+   $(window).resize(function() {
+    if (window.matchMedia('(min-width: 700px)').matches) {
+       var swiper = new Swiper('.swiper-container', {
+      slidesPerView: 3,
+      spaceBetween: 15,
+      slidesPerGroup: 3,
+      loop: false,
+      loopFillGroupWithBlank: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+    }
+});
+
+
+
+    $(window).resize(function() {
+    if (window.matchMedia('(min-width: 1174px)').matches) {
+       var swiper = new Swiper('.swiper-container', {
+      slidesPerView: 5,
+      spaceBetween: 15,
+      slidesPerGroup: 4,
+      loop: false,
+      loopFillGroupWithBlank: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+    }
+});
+
+
+
+
+
+    
   </script>
 
 </body>

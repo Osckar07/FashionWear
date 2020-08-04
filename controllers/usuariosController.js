@@ -258,3 +258,7 @@ exports.enterUsuario = async (req, res, next) => {
     // res.redirect("/productos");
   }
 };
+
+exports.sobrenosotros= ( req,res,next) =>{
+  res.render("sobrenosotros", {layout:"main"});
+}

@@ -69,6 +69,10 @@ module.exports = function () {
 
   routes.get("/producto/:url", productosController.obtenerProductoPorUrl);
 
+  routes.get("/productos/damas", productosController.productosDama);
+
+  routes.get("/productos/caballeros", productosController.productosCaballero);
+
   routes.get(
     "/producto/actualizar_producto/:url",
     authController.usuarioAutenticado,
@@ -184,10 +188,16 @@ module.exports = function () {
     carritoController.eliminarproductoCarrito
   );
 
-  routes.post("/pago/stripe",
-  authController.usuarioAutenticado,
-  productosController.stripe);
+  routes.post(
+    "/pago/stripe",
+    authController.usuarioAutenticado,
+    authController.usuarioNoAdmin,
+    productosController.stripe
+  );
 
-
+  routes.get(
+    "/sobrenosotros",
+    usuariosController.sobrenosotros
+  )
   return routes;
 };
