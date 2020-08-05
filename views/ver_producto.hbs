@@ -1,0 +1,75 @@
+{{!-- Mostrar los mensajes en caso de existir --}}
+{{>ourMessages}}
+
+<h1 class="text-center mt-5">{{producto.nombre}}</h1>
+<div class="container row mx-auto" style="padding-right: 0; padding-left: 0;">
+    {{!-- <a {{verificacion user.tipoUsuario}} href="/producto/actualizar_producto/{{producto.url}}"></i> &nbsp; Actualizar
+        Producto</a> --}}
+
+
+
+    <div class="col-lg-5 mr-5 ml-5 mb-5" style="padding-right: 0; padding-left: 0; margin-top: 0;">
+
+        <div class="cont-prod">
+            {{!-- <h3>{{dataValues.usuarioId}}</h3> --}}
+            <div class="product-grid7 ">
+                <div class="product-image7 mx-auto" style="width: 100%;">
+                    <a href="#">
+                        <img class="pic-1" src="{{producto.imagen}}">
+                        <img class="pic-2" src="{{producto.imagen2}}">
+                    </a>
+                    {{!-- <span class="product-new-label">{{dataValues.tipoProducto}}</span> --}}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-5 ml-5" style="margin-top: 5%;">
+        <p class="mb-4"><strong class="mr-2">Descripción: </strong> {{producto.descripcion}}</p>
+        <p class="mb-4"><strong class="mr-2">Tipo de producto: </strong> {{producto.tipoProducto}}</p>
+        <p class="mb-4"><strong class="mr-2">Categoría: </strong> {{cat.nombre}}</p>
+        <p class="mb-4"><strong class="mr-2">Talla: </strong> {{producto.talla}}</p>
+        <p class="mb-4"><strong class="mr-2">Precio: </strong>L. {{producto.precio}}.00</p>
+        <p class="mb-4"><strong class="mr-2">Vendedor: </strong> <a href="/inicio/tienda/{{tienda.url}}">
+                {{tienda.nombre}} {{tienda.apellido}}</a></p>
+        <div class="text-center row pl-3">
+            <p class="mb-4"><strong class="mr-1">Valoración: </strong> </p>
+            <ul class="rating pl-2">
+                <li class="fa fa-star"></li>
+                <li class="fa fa-star"></li>
+                <li class="fa fa-star"></li>
+                <li class="fa fa-star"></li>
+                <li class="fa fa-star"></li>
+            </ul>
+        </div>
+        {{#if admin}}
+        {{#if prodPer}}
+        <p class="text-center mt-4 mr-5"><a class="btn" href="/producto/actualizar_producto/{{producto.url}}"><i
+                    class="fas fa-edit"></i>&nbsp; Editar</a></p>
+        {{/if}}
+        {{else}}
+        <p class="text-center mt-4 mr-5"><a class="btn" href="/producto/agregar_carrito/{{producto.url}}"><i
+                    class="fa fa-shopping-cart"></i> &nbsp; Agregar al carrito</a></p>
+
+        <form action="/pago/stripe/" method="POST">
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="pk_test_51HAs8tLntSoRQvoLFq2hkbmQVcuFo1w7nf8Yr9MlEOi5dQYpKEHMG9a7nQ3RFA4a1Oi6KDLR3MmEOURLLNBzesk000LylTBhpe"
+                data-name="FashionWear" data-image="/img/Logo_Oficial.png" data-locale="auto"
+                data-amount="" data-currency="HNL">
+                </script>
+            <script>
+                document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
+            </script>
+            <input type="text" hidden value="{{producto.precio}}" name="total">
+            <input type="text" hidden value="{{producto.nombre}}" name="producto">
+            <p class="text-center mt-4 mr-5"><button type="submit" class="btn text-center">
+                 <i class="fas fa-shopping-bag"></i> &nbsp; Comprar &nbsp;
+            </button></p>
+        </form>
+        {{!-- <p class="text-center mt-4 mr-5"><a class="btn" href="#"> <i class="fas fa-shopping-bag"></i> &nbsp; Comprar</a> --}}
+        </p>
+        {{/if}}
+    </div>
+
+</div>

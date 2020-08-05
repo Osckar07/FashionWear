@@ -1,0 +1,72 @@
+{{!--Formulario de registro--}}
+
+{{#if error}}
+    <p>{{error}}</p>
+{{/if}}
+
+    
+    <div class="text-center mt-4">
+        <h1>Registrarse</h1>
+        <p>Compra de manera rápida y segura con nosotros</p>
+        <p><hr></p>
+    </div>
+
+    <div class="formUser row">
+        <div class="col-lg-5 m-5">
+            <form class="form-signin" action="/registro" method="POST">
+
+                {{!--Nombre Usuario--}}
+                <div class="UserFullName row ml-1 ">
+                    <div class="UserName mr-1">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" id="nombre" placeholder="Juan" required autofocus>
+                </div>
+                <div class="LastName">
+                <label for="apellido">Apellido</label>
+                <input type="text" name="apellido" id="apellido" placeholder="Martinez" required>
+                </div>
+                </div>
+               
+                {{!--Correo--}}
+                <label for="correo">Correo electronico</label>
+                <input type="email" name="email" id="email" placeholder="juanmartinez@gmail.com" required>
+                <br>
+                {{!--Contraseña--}}
+                <label for="contraseña">Contraseña</label>
+                <input type="password" name="password" id="password" placeholder="*********" required>                
+               
+               <p class="text-center text-muted">Al crear una cuenta, aceptas nuestras <a href="https://drive.google.com/file/d/19tqh19Koa06pYscQ6bR9ZuOyS8p8RDit/view?usp=sharing" target="_blank">Condiciones de  Uso</a> 
+                                        y admites haber leído nuestro <a href="https://drive.google.com/file/d/1tI430wSpTqDUHxC6bn7XXe0bGI79K8ii/view?usp=sharing" target="_blank">Aviso de Privacidad.</a></p>
+                <p class="text-center text-muted">¿Ya tienes cuenta? <a href="/iniciar_sesion">Inicia sesión</a> </p>
+                
+                <button class="btn btn-lg btn-block  mt-4" type="submit">Registrarse</button>
+            </form>
+            
+
+            </div>
+
+            {{!--https://www.it-swarm.dev/es/html/como-hacer-una-linea-vertical-en-html/969310959/ hacer linea vertical--}}
+         
+            <div><div class=" vertical-line"></div></div>
+                 
+
+             <div class="FacebookGoogle col-lg-5">
+            <div class="row UserLogo">
+                <a href="/"><img src="img/Logo_Oficial.png" alt="logoFashionWear" class="img-ts rounded mx-auto d-block"></a>
+            
+            </div>
+            <p class="text-center text-muted">O puedes registrarte usando: </p>
+            <div class="BotonesCrearUsuario row">
+                <div class="mx-auto">
+                <button class="btn btnfacebook facebook"> <a style="text-decoration: none; color:white;" href="/registro/facebook"><i class="fab fa-facebook-f  mr-2"></i>  Facebook</a></button>
+                <button class="btn btngoogle "><img src="img/google.png" style="width:18px; margin-bottom:4px; margin-right:4px;" alt=""> Google</button>
+                </div>
+            </div>
+            </div>
+
+    </div>
+
+
+</div>
+
+</form>

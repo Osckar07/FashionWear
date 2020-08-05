@@ -1,0 +1,51 @@
+{{>ourMessages}}
+
+<div class="pricing-header mx-auto text-center">
+    <h3 class="display-5">Mis productos</h3>
+</div>
+
+<a href="/nuevo_producto">
+    <div class="row">
+        <div class="btn btn-crearProducto bg-dark col-lg-12">
+            <div class="contenido-btn text-center row">
+                <div class="pl-5 pr-5 mx-auto">
+                    <div class="row">
+                        <i class="fas fa-plus-circle"></i>
+                        <p>Nuevo producto</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</a>
+
+<div class="card-deck mb-3 text-center">
+    {{!-- Mostrar los productos (si existen) --}}
+    {{#if productos}}
+    {{#each productos}}
+    <div class="col-md-3 col-sm-6">
+        <div class="product-grid6">
+            <div class="product-image6">
+                <a href="#">
+                    <img class="pic-1" src="{{dataValues.imagen}}">
+                </a>
+            </div>
+            <div class="product-content">
+                <h3 class="title"><a href="#">{{dataValues.nombre}}</a></h3>
+                <div class="price">L. {{dataValues.precio}}.00
+                    {{!-- <span>$14.00</span> --}}
+                </div>
+            </div>
+            <ul class="social">
+                <li><a href="/producto/actualizar_producto/{{dataValues.url}}" data-tip="Editar"><i
+                            class="fas fa-edit"></i></a></li>
+                <li> <button name="eliminar-producto" data-producto-url={{dataValues.url}} type="button"
+                        data-tip="Eliminar"><i class="fas fa-trash-alt "></i></button></li>
+            </ul>
+        </div>
+    </div>
+
+    {{/each}}
+    {{else}}
+    <h4>No has ingresado productos aún.</h4>
+    {{/if}}

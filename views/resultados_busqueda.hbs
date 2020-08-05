@@ -1,0 +1,52 @@
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-5">Resultados de tu búsqueda con "{{parametroBusqueda}}" </h1>
+    {{!-- <p class="lead">Buscaste productos que contengan <strong>{{parametroBusqueda}}</strong></p> --}}
+</div>
+
+{{#if productos}}
+
+<div class="container contenedor-inicioProductos">
+    {{#each productos}}
+    <div class="row">
+        {{!-- col-md-3 col-sm-6 --}}
+        <div class="cont-prod">
+            {{!-- <h3>{{dataValues.usuarioId}}</h3> --}}
+            <div class="product-grid7">
+                <div class="product-image7">
+                    <a href="#">
+                        <img class="pic-1" src="{{dataValues.imagen}}">
+                        <img class="pic-2" src="{{dataValues.imagen}}">
+                    </a>
+                    <ul class="social">
+                        <li><a href="" class="fa fa-search"></a></li>
+                        <li><a href="" class="fa fa-shopping-bag"></a></li>
+                        <li><a href="" class="fa fa-shopping-cart"></a></li>
+                    </ul>
+                    {{!-- <span class="product-new-label">{{dataValues.tipoProducto}}</span> --}}
+                    {{!-- <span class="product-new-label">{{dataValues.usuarioId}}</span> --}}
+                </div>
+                <div class="product-content">
+                    <h3 class="title"><a href="/producto/{{dataValues.url}}">{{dataValues.nombre}}</a></h3>
+                    <ul class="rating">
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                        <li class="fa fa-star"></li>
+                    </ul>
+                    <div class="price">Lps.{{dataValues.precio}}.00
+                        {{!-- <span>$20.00</span> --}}
+                    </div>
+                </div>
+            </div>
+            <p class="text-center mt-3"><a class="btn " href="/producto/{{dataValues.url}}">Comprar</a></p>
+        </div>
+    </div>
+    {{/each}}
+</div>
+{{else}}
+<div class="container">
+    <h4 class="text-center">¡No se han encontrado productos que coincidan con tu búsqueda!</h4>
+</div>
+{{/if}}
+<hr>
