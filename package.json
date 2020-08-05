@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./index.js",
-    "start": "concurrently \"npm run dev\" \"npm run watch\"",
-    "watch": "webpack --w --mode development"
+    "develop": "concurrently \"npm run dev\" \"npm run watch\"",
+    "watch": "webpack --w --mode development",
+    "start": "node ./index.js"
   },
   "repository": {
     "type": "git",
@@ -38,8 +39,6 @@
     "express-session": "^1.17.1",
     "express-validator": "^6.6.0",
     "fs-extra": "^9.0.1",
-    "html-to-text": "^5.1.1",
-    "juice": "^7.0.0",
     "multer": "^1.4.2",
     "mysql2": "^2.1.0",
     "nodemailer": "^6.4.10",
@@ -60,5 +59,8 @@
     "nodemon": "^2.0.4",
     "webpack": "^4.44.0",
     "webpack-cli": "^3.3.12"
+  },
+  "engines": {
+    "node": "12.18.4"
   }
 }
